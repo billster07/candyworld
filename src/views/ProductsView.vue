@@ -35,6 +35,8 @@ fetchProducts();
           <b-dropdown-item>Turkiet</b-dropdown-item>
           <b-dropdown-item>USA</b-dropdown-item>
           <b-dropdown-item>Storbritannien</b-dropdown-item>
+          <BDropdownDivider />
+          <b-dropdown-item>Alla</b-dropdown-item>
         </b-dropdown>
       </b-col>
     </b-row>
