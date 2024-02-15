@@ -8,6 +8,7 @@ import ProductView from './views/ProductView.vue'
 
 
 
+
 export default createRouter ({
   history: createWebHashHistory(),
   routes: [
