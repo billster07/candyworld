@@ -5,4 +5,9 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue-next/dist/bootstrap-vue-next.css";
 import "./style.css";
 
-createApp(App).use(router).mount("#app");
+import { createPinia } from "pinia";
+
+const pinia = createPinia();
+
+
+createApp(App).use(pinia).use(router).mount("#app");

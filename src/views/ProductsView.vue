@@ -1,29 +1,21 @@
 <script setup>
-import { ref } from 'vue'
-import axios from 'axios'
-import 'bootstrap-icons/font/bootstrap-icons.css'
+import { ref } from "vue";
+import axios from "axios";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import { useCandyStore } from "/src/store.js";
 
-const products = ref([])
-
-const fetchProducts = async () => {
-  try {
-    const response = await axios.get("https://pb.nopatan.com/api/collections/produkter/records");
-    products.value = response.data.items
-    console.log(products.value)
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-fetchProducts();
+const store = useCandyStore();
+store.fetchProducts();
 </script>
 
 <template>
   <b-container>
     <b-row align-h="center">
       <b-col cols="8">
-        <p class="pageDescription">Här finner du alla våra produkter.
-          Välj land i menyn för att hitta ditt godis.</p>
+        <p class="pageDescription">
+          Här finner du alla våra produkter. Välj land i menyn för att hitta
+          ditt godis.
+        </p>
       </b-col>
     </b-row>
     <b-row>
@@ -41,18 +33,26 @@ fetchProducts();
       </b-col>
     </b-row>
   </b-container>
-  <b-container class="productCard" v-for="product in products">
+  <b-container class="productCard" v-for="product in store.products">
     <b-row align-v="center">
       <b-col class="image">
-        <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' + product.id + '/' + product.image">
+        <img
+          :src="
+            'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
+            product.id +
+            '/' +
+            product.image
+          "
+        />
       </b-col>
       <b-col cols="8">
-        <h3> {{ product.productName }}</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </p>
+        <h3>{{ product.productName }}</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
         <div class="priceButtonDesign">
-          <p> {{ product.price }}:-</p>
-          <b-button class="button" size="sm">KÖP <i class="bi bi-cart"></i></b-button>
+          <p>{{ product.price }}:-</p>
+          <b-button class="button" size="sm"
+            >KÖP <i class="bi bi-cart"></i
+          ></b-button>
         </div>
       </b-col>
     </b-row>
@@ -71,11 +71,11 @@ fetchProducts();
 }
 
 .productCard:nth-child(odd) {
-  background-color: #FDEBFB;
+  background-color: #fdebfb;
 }
 
 .button {
-  background-color: #E7B6E2;
+  background-color: #e7b6e2;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 0.75rem;
   border: 0;
