@@ -2,7 +2,7 @@
  import {ref} from 'vue'
     const candyPicture1 = ref ("candyPhoto1.png"),
      candyPicture2 = ref ("candyPhoto2.png")
-
+import myfooter from '../components/Footer.vue'
     
 </script>
 <template>
@@ -21,6 +21,7 @@ Candyworld tar dig med på en global smakupplevelse, ett exotiskt godis i taget.
 </div>
 <img class="candyPhoto" alt="Candy Photo" v-bind:src="candyPicture2">
 </div>
+<myfooter/>
 </template>
 
 <style scoped>
