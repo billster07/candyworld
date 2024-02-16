@@ -7,9 +7,12 @@ const store = useCandyStore();
 store.fetchProducts();
 const props = defineProps({filterCategory: {type: String}})
 
+
+
 </script>
 
 <template>
+
     <b-container v-if="props.filterCategory === 'alla'" class="productCard" v-for="product in store.products">
     <b-row align-v="center">
       <b-col class="image">

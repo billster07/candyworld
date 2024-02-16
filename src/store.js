@@ -17,3 +17,5 @@ export const useCandyStore = defineStore("candy", {
   },
   state: () => ({ products: [] }),
 });
+
+
