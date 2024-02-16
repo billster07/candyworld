@@ -40,62 +40,89 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 <style scoped>
 
-     footer {
-        position: relative;
-    }
+footer {
+    position: relative;
+}
 
-    svg {
-        bottom: 0;
-        left: 0;
-        width: 100%;
-    }
+svg {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
 
-    .logo {
-        position: absolute;
-        bottom: 1em;
-        right: 1em;
-        max-width: 120px;
-        max-height: 120px;
-    }
+.logo {
+    position: absolute;
+    bottom: 1em;
+    right: 0.5em;
+    max-width: 115px;
+    max-height: 120px;
+}
 
-    .contactInfoDiv {
-        position: absolute;
-        bottom: 1em;
-        left: 3.5em;
-        width: 100%;
-       
-        font-size: 10px;
-    }
+.contactInfoDiv {
+    position: absolute;
+    bottom: 4px;
+    left: 1em;
+    width: 100%;
+    font-size: 10px;
+}
 
-    .contactInfoDiv p {
-        margin: 0;
-        
-    } 
-    .bi-telephone-inbound-fill {
-        margin-right: 8px;
-    }
+.contactInfoDiv p {
+    margin: 0;
+}
 
-    .bi-mailbox {
-        margin-right: 8px;
-    }
+.bi-telephone-inbound-fill {
+    margin-right: 8px;
+}
 
-    .socialIcons {
+.bi-mailbox {
+    margin-right: 8px;
+}
+
+.socialIcons {
     display: flex;
     justify-content: center;
     gap: 5px; 
     position: absolute;
-    bottom: 2em;
+    bottom: 18px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 12px; 
 }
 
-    @media screen and (min-width: 630px) {
+@media screen and (min-width: 450px) {
     .contactInfoDiv {
         text-align: left;
-        padding-left: 20px; 
+        padding-left: 2px; 
+        font-size: 12px; 
+        margin-bottom: 8px;
+    }
+
+    .logo {
+        position: absolute;
+        bottom: 1.5em;
+        right: 0.5em;
+        max-width: 150px;
+        max-height: 120px;
+    }
+
+    .socialIcons {
+        display: flex;
+        justify-content: center;
+        gap: 7px; 
+        position: absolute;
+        bottom: 1.5em;
+        left: 50%;
+        transform: translateX(-50%);
         font-size: 14px; 
-        margin-bottom: 15px;
+    }
+}
+
+@media screen and (min-width: 630px) {
+    .contactInfoDiv {
+        text-align: left;
+        padding-left: 13px; 
+        font-size: 13px; 
+        margin-bottom: 12px;
     }
 
     .logo {
@@ -107,19 +134,18 @@ import "bootstrap-icons/font/bootstrap-icons.css";
     }
 
     .socialIcons {
-    display: flex;
-    justify-content: center;
-    gap: 7px; 
-    position: absolute;
-    bottom: 2.5em;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 15px; 
+        display: flex;
+        justify-content: center;
+        gap: 7px; 
+        position: absolute;
+        bottom: 1.5em;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 15px; 
+    }
 }
 
-
-
-    @media screen and (min-width: 800px) {
+@media screen and (min-width: 800px) {
     .contactInfoDiv {
         text-align: left;
         padding-left: 20px; 
@@ -135,9 +161,20 @@ import "bootstrap-icons/font/bootstrap-icons.css";
         max-height: 120px;
         margin-bottom: 15px;
     }
- }
 
- @media screen and (min-width: 960px) {
+    .socialIcons {
+        display: flex;
+        justify-content: center;
+        gap: 15px; 
+        position: absolute;
+        bottom: 2em;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 20px; 
+    }
+}
+
+@media screen and (min-width: 960px) {
     .contactInfoDiv {
         text-align: left;
         padding-left: 25px; 
@@ -153,17 +190,17 @@ import "bootstrap-icons/font/bootstrap-icons.css";
         max-height: 140px;
     }
 
-  }
-  .socialIcons {
-    display: flex;
-    justify-content: center;
-    gap: 15px; 
-    position: absolute;
-    bottom: 2.2em;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 19px;
-}
+    .socialIcons {
+        display: flex;
+        justify-content: center;
+        gap: 15px; 
+        position: absolute;
+        bottom: 2.2em;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 19px;
+    }
 }
 
 </style>
+
