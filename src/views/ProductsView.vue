@@ -106,7 +106,7 @@ countryFlags();
   <div class="d-flex justify-content-center align-items-center">
     <h2 class="text-center countryName">{{ countryFlags().countryName }}</h2>
     <img
-      v-if="filterCategory !== 'alla' && filterCategory !== ''"
+      v-if="filterCategory !== 'Alla' && filterCategory !== ''"
       :src="countryFlags().imagePath"
       alt=""
       class="flagImage"
