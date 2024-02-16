@@ -17,7 +17,7 @@ export default createRouter ({
     },
     {
       component: ProductsView,
-      path: '/products'
+      path: '/products/:category'
     },
     {
       component: ProductView,
