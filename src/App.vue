@@ -1,5 +1,5 @@
 <script setup>
-
+import myfooter from './components/Footer.vue'
 </script>
 
 <template>
@@ -15,6 +15,7 @@
   <main>
     <RouterView />
   </main>
+  <myfooter />
 </template>
 
 <style scoped>

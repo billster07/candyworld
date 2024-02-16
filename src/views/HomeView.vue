@@ -2,7 +2,7 @@
  import {ref} from 'vue'
     const candyPicture1 = ref ("candyPhoto1.png"),
      candyPicture2 = ref ("candyPhoto2.png")
-
+import myfooter from '../components/Footer.vue'
     
 </script>
 <template>
