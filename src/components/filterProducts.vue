@@ -24,7 +24,7 @@ const props = defineProps({filterCategory: {type: String}})
       </b-col>
       <b-col cols="8">
         <h3>{{ product.productName }}</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <p> {{ product.description_sum }}</p>
         <div class="priceButtonDesign">
           <p>{{ product.price }}:-</p>
           <b-button class="button" size="sm"
