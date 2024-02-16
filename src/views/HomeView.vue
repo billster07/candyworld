@@ -21,7 +21,6 @@ Candyworld tar dig med på en global smakupplevelse, ett exotiskt godis i taget.
 </div>
 <img class="candyPhoto" alt="Candy Photo" v-bind:src="candyPicture2">
 </div>
-<myfooter/>
 </template>
 
 <style scoped>
