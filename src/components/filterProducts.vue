@@ -49,7 +49,8 @@ const props = defineProps({filterCategory: {type: String}})
         />
       </b-col>
       <b-col cols="8">
-        <h3>{{ product.productName }}</h3>
+        <!-- Jag har problem med att jag inte kan ändra från h3 till h4? -->
+        <h4>{{ product.productName }}</h4>
         <p> {{ product.description_sum }}</p>
         <div class="priceButtonDesign">
           <p>{{ product.price }}:-</p>
@@ -67,7 +68,9 @@ const props = defineProps({filterCategory: {type: String}})
   margin-top: 15px;
   padding-top: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-size: 14px;
 }
+
 
 .productCard:nth-child(odd) {
   background-color: #fdebfb;
@@ -89,6 +92,8 @@ const props = defineProps({filterCategory: {type: String}})
 
 img {
   width: 100px;
+  max-height: 100px;
+  margin-left: 7px;
 }
 
 .image {
@@ -105,5 +110,22 @@ img {
 
 .priceButtonDesign p {
   margin-right: 25px;
+}
+
+@media (min-width: 500px) {
+  .productCard {
+  margin-top: 15px;
+  padding-top: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-size: 15px;
+  font-style: italic;
+  }
+
+  img {
+  max-width: 100px;
+  max-height: 100px;
+  margin-left: 15px;
+  }
+
 }
 </style>
