@@ -98,28 +98,6 @@ countryFlags();
           <b-dropdown-item @click="filterCategory = 'Alla'"
             >Alla produkter</b-dropdown-item
           >
-          =======
-          <b-dropdown-item @click="filterCategory = 'Balkan'"
-            >Balkan</b-dropdown-item
-          >
-          <b-dropdown-item @click="filterCategory = 'Japan'"
-            >Japan</b-dropdown-item
-          >
-          <b-dropdown-item @click="filterCategory = 'Mexico'"
-            >Mexico</b-dropdown-item
-          >
-          <b-dropdown-item @click="filterCategory = 'Turkiet'"
-            >Turkiet</b-dropdown-item
-          >
-          <b-dropdown-item @click="filterCategory = 'USA'">USA</b-dropdown-item>
-          <b-dropdown-item @click="filterCategory = 'Storbritannien'"
-            >Storbritannien</b-dropdown-item
-          >
-          <BDropdownDivider />
-          <b-dropdown-item @click="filterCategory = 'alla'"
-            >Alla produkter</b-dropdown-item
-          >
-          >>>>>>> flags
         </b-dropdown>
       </b-col>
     </b-row>
