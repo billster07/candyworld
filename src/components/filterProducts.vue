@@ -6,12 +6,9 @@ import { useCandyStore } from "/src/store.js";
 const store = useCandyStore();
 store.fetchProducts();
 const props = defineProps({filterCategory: {type: String}})
-
-
-
 </script>
 
-<template>
+<template><div>
     <b-container v-if="props.filterCategory === 'Alla'" class="productCard" v-for="product in store.products">
     <b-row align-v="center">
       <b-col class="image">
@@ -30,8 +27,7 @@ const props = defineProps({filterCategory: {type: String}})
         <div class="priceButtonDesign">
           <p>{{ product.price }}:-</p>
           <b-button class="button" size="sm"
-            >KÖP <i class="bi bi-cart"></i
-          ></b-button>
+            >KÖP <i class="bi bi-cart"></i></b-button>
         </div>
       </b-col>
     </b-row>
@@ -49,18 +45,18 @@ const props = defineProps({filterCategory: {type: String}})
         />
       </b-col>
       <b-col cols="8">
-        <!-- Jag har problem med att jag inte kan ändra från h3 till h4? -->
-        <h4>{{ product.productName }}</h4>
+        <h3>{{ product.productName }}</h3>
         <p> {{ product.description_sum }}</p>
         <div class="priceButtonDesign">
           <p>{{ product.price }}:-</p>
           <b-button class="button" size="sm"
-            >KÖP <i class="bi bi-cart"></i
+            >KÖP<i class="bi bi-cart"></i
           ></b-button>
         </div>
       </b-col>
     </b-row>
   </b-container>
+</div>
 </template>
 
 <style scoped>
@@ -93,7 +89,6 @@ const props = defineProps({filterCategory: {type: String}})
 img {
   width: 100px;
   max-height: 100px;
-  margin-left: 7px;
 }
 
 .image {
@@ -114,6 +109,9 @@ img {
 
 @media (min-width: 500px) {
   .productCard {
+  /* width: 50%;
+  float: left;
+  height: 300px; */
   margin-top: 15px;
   padding-top: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -126,6 +124,26 @@ img {
   max-height: 100px;
   margin-left: 15px;
   }
+
+}
+
+@media (min-width: 700px) {
+  .productCard {
+    /* display: flex; */
+    /* fattar inte hur det skulle kunna ändra värdet på innehållet om kortet är container */
+  width: 40%;
+  float: left;
+  height: 200px;
+  /* width: 381.86px;
+  height: 154px;
+  flex-shrink: 0; */
+  margin-top: 15px;
+  padding-top: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-size: 15px;
+  font-style: italic;
+  }
+
 
 }
 </style>
