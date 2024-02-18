@@ -8,7 +8,8 @@ store.fetchProducts();
 const props = defineProps({filterCategory: {type: String}})
 </script>
 
-<template><div>
+<template>
+  <div class="productContainer">
     <b-container v-if="props.filterCategory === 'Alla'" class="productCard" v-for="product in store.products">
     <b-row align-v="center">
       <b-col class="image">
@@ -107,42 +108,45 @@ img {
   margin-right: 25px;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 500px) and (max-width: 699px) {
+
   .productCard {
-  /* width: 50%;
-  float: left;
-  height: 300px; */
   margin-top: 15px;
   padding-top: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  font-size: 15px;
-  font-style: italic;
+  font-size: 16px;
   }
 
   img {
-  max-width: 100px;
-  max-height: 100px;
+  max-width: 120px;
+  max-height: 120px;
   margin-left: 15px;
   }
 
 }
 
 @media (min-width: 700px) {
+
+  /* .productContainer {
+    display: flex;
+    flex-wrap: wrap;
+  } */
+  /* testade att lägga en <div class= "productContainer"> runt hela innehållet och göra det till en flexbox, men verkar som att bootstrap? overridar det på nåt sätt? */
+
   .productCard {
-    /* display: flex; */
-    /* fattar inte hur det skulle kunna ändra värdet på innehållet om kortet är container */
-  width: 40%;
-  float: left;
-  height: 200px;
-  /* width: 381.86px;
-  height: 154px;
-  flex-shrink: 0; */
+  /* width: 50%; */
+   /* detta borde vara det som krävs för att 2 kort läggs sida vid sida i flexboxen. funkar ej?  */
   margin-top: 15px;
-  padding-top: 10px;
+  padding-top: 30px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  font-size: 15px;
-  font-style: italic;
+  font-size: 17px;
   }
+  img {
+  width: 120px;
+  height: 120px;
+  margin-left: 20px;
+  }
+
 
 
 }
