@@ -24,7 +24,7 @@ const candyPicture1 = ref("candyPicture500.png"),
       <p class="yellowBoxDescription">Utforska en värld av läckerheter, där varje tugga är en resa.
         Candyworld tar dig med på en global smakupplevelse, ett exotiskt godis i taget. Gör din smakresa komplett och låt
         Candyworld vara din guide till spännande smaker från alla hörn av världen. </p>
-      <b-button @click="$router.push('/products')" class="button" size="lg">Se produkter</b-button>
+      <b-button @click="$router.push('/products/:category')" class="button" size="lg">Se produkter</b-button>
     </div>
     <b-img fluid-grow class="candyPhoto" alt="Candy Photo" :src="candyPicture2"></b-img>
   </div>
