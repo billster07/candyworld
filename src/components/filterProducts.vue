@@ -9,7 +9,7 @@ const props = defineProps({filterCategory: {type: String}})
 </script>
 
 <template>
-  <div class="productContainer">
+    <!-- <div class="productContainer">
     <b-container v-if="props.filterCategory === 'Alla'" class="productCard" v-for="product in store.products">
     <b-row align-v="center">
       <b-col class="image">
@@ -57,7 +57,48 @@ const props = defineProps({filterCategory: {type: String}})
       </b-col>
     </b-row>
   </b-container>
+</div> -->
+
+
+<!-- Nu förlorar vi dock den snygga detaljen att varannat kort ska vara vit/rosa -->
+<div class="productContainer">
+  <div v-if="props.filterCategory === 'Alla'" class="flex-item">
+    <div v-for="product in store.products" class="productCard">
+      <div class="image">
+        <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' + product.id + '/' + product.image" />
+      </div>
+      <div>
+        <h3>{{ product.productName }}</h3>
+        <p>{{ product.description_sum }}</p>
+        <div class="priceButtonDesign">
+          <p>{{ product.price }}:-</p>
+          <button class="button">KÖP
+            <!-- <i class="bi bi-cart"></i> låter denna ligga kvar, påminnelse att vi behöver lägga till ikon -->
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div v-else class="productCard">
+    <div v-for="product in store.products.filter(product => product.category === props.filterCategory)" class="productCard">
+      <div class="image">
+        <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' + product.id + '/' + product.image" />
+      </div>
+      <div>
+        <h3>{{ product.productName }}</h3>
+        <p>{{ product.description_sum }}</p>
+        <div class="priceButtonDesign">
+          <p>{{ product.price }}:-</p>
+          <button class="button">KÖP
+            <!-- <i class="bi bi-cart"></i> låter denna ligga kvar, påminnelse att vi behöver lägga till ikon -->
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
 </template>
 
 <style scoped>
@@ -68,10 +109,15 @@ const props = defineProps({filterCategory: {type: String}})
   font-size: 14px;
 }
 
+.productCard:nth-child(even) {
+  background-color: #FFF;;
+}
 
 .productCard:nth-child(odd) {
-  background-color: #fdebfb;
+  background-color: #FDEBFB;;
 }
+
+
 
 .button {
   background-color: #e7b6e2;
