@@ -1,8 +1,9 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, onMounted, onUnmounted } from "vue";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import filterProducts from "../components/filterProducts.vue";
 import { useRouter, useRoute } from "vue-router";
+import flagLinks from "../components/FlagLinks.vue";
 
 const filterCategory = ref("Alla"),
   router = useRouter(),
@@ -19,6 +20,22 @@ watch(
     filterCategory.value = newValue;
   }
 );
+
+//Här kontrolleras fönsterstorleken för att visa eller inte visa flagLinks
+const showFlagNav = ref();
+const updateVisibility = () => {
+  showFlagNav.value = window.innerWidth >= 768;
+};
+
+onMounted(() => {
+  updateVisibility();
+  window.addEventListener('resize', updateVisibility);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateVisibility);
+});
+//
 
 function countryFlags() {
   let imagePath = "";
@@ -70,10 +87,12 @@ countryFlags();
         </p>
       </b-col>
     </b-row>
+
+    <flagLinks v-if="showFlagNav"/>
+
     <b-row>
       <b-col>
         <b-dropdown id="dropdown-1" text="Välj Land" variant="" class="button">
-          
           <b-dropdown-item @click="(filterCategory = 'Balkan'), navigateToRoute"
             >Balkan</b-dropdown-item
           >
