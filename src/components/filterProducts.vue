@@ -70,7 +70,7 @@ const props = defineProps({filterCategory: {type: String}})
         <p>{{ product.description_sum }}</p>
         <div class="priceButtonDesign">
           <p>{{ product.price }}:-</p>
-          <button class="button">KÖP
+          <button class="buyButton">KÖP
             <!-- <i class="bi bi-cart"></i> låter denna ligga kvar, påminnelse att vi behöver lägga till ikon -->
           </button>
         </div>
@@ -87,7 +87,7 @@ const props = defineProps({filterCategory: {type: String}})
         <p>{{ product.description_sum }}</p>
         <div class="priceButtonDesign">
           <p>{{ product.price }}:-</p>
-          <button class="button">KÖP
+          <button class="buyButton">KÖP
             <!-- <i class="bi bi-cart"></i> låter denna ligga kvar, påminnelse att vi behöver lägga till ikon -->
           </button>
         </div>
@@ -102,6 +102,7 @@ const props = defineProps({filterCategory: {type: String}})
 <style scoped>
 .productCard {
   display: flex;
+  justify-content: space-between;
   margin-top: 15px;
   padding-top: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -118,13 +119,30 @@ const props = defineProps({filterCategory: {type: String}})
 
 
 
-.button {
+.buyButton {
   background-color: #e7b6e2;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 0.75rem;
   border: 0;
   padding: 5px 15px 5px 15px;
+  margin-left: auto;
 }
+
+.priceButtonDesign {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  margin-right: 20px;
+}
+
+.priceButtonDesign p {
+  /* margin-left:auto; */
+  padding-left: 55%;
+
+
+ /* denna fanns här från början. Men fyller ingen funktioN? */
+}
+
 
 /* .dropdown-item-button {
   background-color: #E7B6E2;
@@ -143,16 +161,6 @@ img {
   align-items: center;
 }
 
-.priceButtonDesign {
-  display: flex;
-  justify-content: flex-end;
-  align-items: baseline;
-  margin-right: 20px;
-}
-
-.priceButtonDesign p {
-  margin-right: 25px;
-}
 
 @media (min-width: 500px) and (max-width: 699px) {
 
