@@ -117,7 +117,19 @@ const props = defineProps({filterCategory: {type: String}})
   background-color: #FDEBFB;;
 }
 
+.priceButtonDesign {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  margin-right: 20px;
+  /* Jag blir inte klok på detta. Detta är flexboxen som styr och jag säger att det ska ligga flex-end. Varför vill då inte p-elementet, dvs priset inte ligga till höger? Jag har löst det med att lägga padding och annat men det är ju inte optimalt och verkligen responsivt. Tänker att det är en "för nu-lösning". */
+}
 
+.priceButtonDesign p {
+  /* margin-left:auto; */
+  padding-left: 55%;
+  /* alltså denna. så vitt jag kan se är detta den som styr placeringen på produktens pris.  */
+}
 
 .buyButton {
   background-color: #e7b6e2;
@@ -126,21 +138,6 @@ const props = defineProps({filterCategory: {type: String}})
   border: 0;
   padding: 5px 15px 5px 15px;
   margin-left: auto;
-}
-
-.priceButtonDesign {
-  display: flex;
-  justify-content: flex-end;
-  align-items: baseline;
-  margin-right: 20px;
-}
-
-.priceButtonDesign p {
-  /* margin-left:auto; */
-  padding-left: 55%;
-
-
- /* denna fanns här från början. Men fyller ingen funktioN? */
 }
 
 
@@ -177,31 +174,40 @@ img {
   margin-left: 15px;
   }
 
+  .priceButtonDesign p {
+  /* margin-left:auto; */
+  padding-left: 65%;
+}
+
 }
 
 @media (min-width: 700px) {
 
-  /* .productContainer {
+  .productContainer {
     display: flex;
     flex-wrap: wrap;
-  } */
-  /* testade att lägga en <div class= "productContainer"> runt hela innehållet och göra det till en flexbox, men verkar som att bootstrap? overridar det på nåt sätt? */
+    justify-content: space-around;
+    margin: 0 -5px;
+  }
 
   .productCard {
-  /* width: 50%; */
-   /* detta borde vara det som krävs för att 2 kort läggs sida vid sida i flexboxen. funkar ej?  */
+  width: calc(45% - 10px);
+  margin: 10px;
   margin-top: 15px;
   padding-top: 30px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  font-size: 17px;
+  font-size: 14px;
   }
+
   img {
-  width: 120px;
-  height: 120px;
+  max-width: 110px;
+  height: auto;
   margin-left: 20px;
   }
 
-
+  .priceButtonDesign p {
+  padding-left: 25%;
+  }
 
 }
 </style>
