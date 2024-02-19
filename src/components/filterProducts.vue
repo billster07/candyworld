@@ -59,7 +59,6 @@ const props = defineProps({filterCategory: {type: String}})
   </b-container>
 </div> -->
 
-
 <div class="productContainer">
   <div v-if="props.filterCategory === 'Alla'" class="flex-item">
     <div v-for="product in store.products" class="productCard">
@@ -102,6 +101,7 @@ const props = defineProps({filterCategory: {type: String}})
 
 <style scoped>
 .productCard {
+  display: flex;
   margin-top: 15px;
   padding-top: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -135,6 +135,7 @@ const props = defineProps({filterCategory: {type: String}})
 img {
   width: 100px;
   max-height: 100px;
+  margin: 10px;
 }
 
 .image {
