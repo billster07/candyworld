@@ -60,7 +60,6 @@ const props = defineProps({filterCategory: {type: String}})
 </div> -->
 
 
-<!-- Nu förlorar vi dock den snygga detaljen att varannat kort ska vara vit/rosa -->
 <div class="productContainer">
   <div v-if="props.filterCategory === 'Alla'" class="flex-item">
     <div v-for="product in store.products" class="productCard">
