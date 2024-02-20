@@ -29,11 +29,11 @@ const updateVisibility = () => {
 
 onMounted(() => {
   updateVisibility();
-  window.addEventListener('resize', updateVisibility);
+  window.addEventListener("resize", updateVisibility);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', updateVisibility);
+  window.removeEventListener("resize", updateVisibility);
 });
 //
 
@@ -47,7 +47,7 @@ function countryFlags() {
       break;
 
     case "Japan":
-      imagePath = "japan.png";
+      imagePath = "Japan.png";
       countryName = "Japan";
       break;
 
@@ -56,11 +56,11 @@ function countryFlags() {
       countryName = "Mexico";
       break;
     case "Turkiet":
-      imagePath = "Turkey.png";
+      imagePath = "Turkiet.png";
       countryName = "Turkiet";
       break;
     case "Storbritannien":
-      imagePath = "UK.png";
+      imagePath = "Storbritannien.png";
       countryName = "Storbritannien";
       break;
     case "USA":
@@ -88,9 +88,10 @@ countryFlags();
       </b-col>
     </b-row>
 
-    <flagLinks v-if="showFlagNav"/>
+    <flagLinks v-if="showFlagNav" />
 
-    <b-row>
+<div v-else>
+    <b-row >
       <b-col>
         <b-dropdown id="dropdown-1" text="Välj Land" variant="" class="button">
           <b-dropdown-item @click="(filterCategory = 'Balkan'), navigateToRoute"
@@ -120,10 +121,11 @@ countryFlags();
         </b-dropdown>
       </b-col>
     </b-row>
-  </b-container>
+
 
   <div class="d-flex justify-content-center align-items-center">
     <h2 class="text-center countryName">{{ countryFlags().countryName }}</h2>
+
     <img
       v-if="filterCategory !== 'Alla' && filterCategory !== ''"
       :src="countryFlags().imagePath"
@@ -131,6 +133,9 @@ countryFlags();
       class="flagImage"
     />
   </div>
+</div>
+ </b-container>
+
   <filter-products :filter-category="filterCategory" />
 </template>
 

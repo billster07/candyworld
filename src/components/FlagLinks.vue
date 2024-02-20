@@ -3,36 +3,79 @@ import filterProducts from "../components/filterProducts.vue";
 import { useRouter, useRoute } from "vue-router";
 import { ref, watch } from "vue";
 
-
-
 const router = useRouter();
+let zoomedImage = ref(null);
 
-const navigateToCountry = (category) => {
+const countries = [
+  "Balkan",
+  "Japan",
+  "Mexico",
+  "Turkiet",
+  "USA",
+  "Storbritannien",
+];
+
+function navigateToCountry(category) {
   router.push({ params: { category } });
+}
+
+const toggleZoom = (country) => {
+  if (zoomedImage.value === country) {
+    zoomedImage.value = null;
+  } else {
+    zoomedImage.value = country;
+  }
 };
-
-
-
-
 </script>
+
 <template>
   <div class="flag-container">
-    <img src="/Balkan.png" alt="" @click="navigateToCountry('Balkan')" />
-    <img src="/japan.png" alt=""  @click="navigateToCountry('Japan')"/>
-    <img src="/Mexico.png" alt=""  @click="navigateToCountry('Mexico')"/>
-    <img src="/Turkey.png" alt="" @click="navigateToCountry('Turkiet')"/>
-    <img src="/USA.png" alt="" @click="navigateToCountry('USA')"/>
-    <img src="/UK.png" alt="" @click="navigateToCountry('Storbritannien')"/>
+    <div class="country-container" v-for="country in countries" :key="country">
+      <img
+        :src="`/${country}.png`"
+        :alt="country"
+        @click="
+          () => {
+            navigateToCountry(country);
+            toggleZoom(country);
+          }
+        "
+        :class="{
+          'image-effect': true,
+          zoomed: zoomedImage === country,
+          nohover: zoomedImage === country,
+        }"
+      />
+      <h3>{{ country }}</h3>
+    </div>
   </div>
-
-
 </template>
 
-<style>
+<style scoped>
 .flag-container {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  margin-bottom: 10px;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.image-effect {
+  margin-bottom: 1.5rem;
+}
+
+.image-effect:hover {
+  transform: scale(1.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+.zoomed {
+  transform: scale(1.3);
+  filter: drop-shadow(4px 4px 5px #dbd96b);
+}
+
+.nohover {
+  pointer-events: none;
 }
 </style>

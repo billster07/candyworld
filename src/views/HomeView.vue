@@ -2,12 +2,16 @@
 import { ref } from 'vue'
 import "bootstrap-icons/font/bootstrap-icons.css";
 import myfooter from '../components/Footer.vue'
+import flagLinks from "../components/FlagLinks.vue";
 
 const candyPicture1 = ref("candyPicture500.png"),
   candyPicture2 = ref("candyPicture2-500.png")
 
 </script>
 <template>
+  <div class="flaglinks-container">
+   <flagLinks />
+  </div>
   <div class="wrapPAndImage1">
     <div class="yellowBox">
       <p class="yellowBoxDescription">Här har vi samlat godis och läckerheter från olika delar av världen.
@@ -33,6 +37,9 @@ const candyPicture1 = ref("candyPicture500.png"),
 </template>
 
 <style scoped>
+
+
+
 .wrapPAndImage1 {
   background-color: #FFE67B;
 
