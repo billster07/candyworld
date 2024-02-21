@@ -99,7 +99,7 @@ const props = defineProps({ filterCategory: { type: String } })
   border-radius: 0.75rem;
   border: 0;
   padding: 5px 15px 5px 15px;
-  margin-left: auto;
+  margin-left: 30px;
 }
 
 img {
