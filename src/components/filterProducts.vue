@@ -141,6 +141,11 @@ img {
     justify-content: flex-start;
   }
 
+  .priceButtonDesign {
+    margin-top: auto;
+    margin-bottom: 20px;
+  }
+
   h3 {
     font-size: large;
   }
