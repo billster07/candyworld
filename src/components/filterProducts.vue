@@ -6,11 +6,12 @@ import { useCandyStore } from "/src/store.js";
 const store = useCandyStore();
 store.fetchProducts();
 const props = defineProps({ filterCategory: { type: String } })
+
 </script>
 
 <template>
   <div class="productContainer">
-    <b-container @click="store.matchProduct(product.id), $router.push('/product')" v-if="props.filterCategory === 'Alla'"
+    <b-container @click="store.matchProduct(product.id), $router.push(`/products/${filterCategory}/${store.selectedProduct.productName}`)" v-if="props.filterCategory === 'Alla'"
       class="productCard" v-for="product in store.products">
       <b-row align-v="center">
         <b-col class="image">
@@ -30,7 +31,7 @@ const props = defineProps({ filterCategory: { type: String } })
         </b-col>
       </b-row>
     </b-container>
-    <b-container @click="store.matchProduct(product.id), $router.push('/product')" v-else class="productCard"
+    <b-container @click="store.matchProduct(product.id), $router.push(`/products/${filterCategory}/${store.selectedProduct.productName}`)" v-else class="productCard"
       v-for="product in store.products.filter(product => product.category === props.filterCategory)">
       <b-row align-v="center">
         <b-col class="image">

@@ -8,17 +8,17 @@ const filterCategory = ref("Alla"),
   router = useRouter(),
   route = useRoute();
 
-router.push({ params: { category: filterCategory.value } });
-watch(filterCategory, (choosenCategory) => {
-  router.push({ params: { category: choosenCategory } });
-});
-
-watch(
+  watch(
   () => route.params.category,
   (newValue) => {
     filterCategory.value = newValue;
   }
 );
+
+  router.push({ params: { category: filterCategory.value } });
+watch(filterCategory, (choosenCategory) => {
+  router.push({ params: { category: choosenCategory } });
+});
 
 function countryFlags() {
   let imagePath = "";

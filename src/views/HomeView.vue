@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 import "bootstrap-icons/font/bootstrap-icons.css";
-import myfooter from '../components/Footer.vue'
 
 const candyPicture1 = ref("candyPicture500.png"),
   candyPicture2 = ref("candyPicture2-500.png")
