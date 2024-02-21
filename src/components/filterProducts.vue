@@ -9,54 +9,6 @@ const props = defineProps({ filterCategory: { type: String } })
 
 </script>
 
-<!-- <template>
-  <div class="d-flex p-2 flex-wrap">
-    <b-container
-      @click="store.matchProduct(product.id), $router.push(`/products/${filterCategory}/${store.selectedProduct.productName}`)"
-      v-if="props.filterCategory === 'Alla'" class="productCard" v-for="product in store.products">
-      <b-row align-v="center">
-        <b-col class="image">
-          <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
-            product.id +
-            '/' +
-            product.image
-            " />
-        </b-col>
-        <b-col cols="8">
-          <h3>{{ product.productName }}</h3>
-          <p> {{ product.description_sum }}</p>
-          <div class="priceButtonDesign">
-            <p>{{ product.price }}:-</p>
-            <b-button class="button" size="sm">KÖP <i class="bi bi-cart"></i></b-button>
-          </div>
-        </b-col>
-      </b-row>
-    </b-container>
-    <b-container
-      @click="store.matchProduct(product.id), $router.push(`/products/${filterCategory}/${store.selectedProduct.productName}`)"
-      v-else class="productCard"
-      v-for="product in store.products.filter(product => product.category === props.filterCategory)">
-      <b-row align-v="center">
-        <b-col class="image">
-          <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
-            product.id +
-            '/' +
-            product.image
-            " />
-        </b-col>
-        <b-col cols="8">
-          <h3>{{ product.productName }}</h3>
-          <p> {{ product.description_sum }}</p>
-          <div class="priceButtonDesign">
-            <p>{{ product.price }}:-</p>
-            <b-button class="button" size="sm">KÖP<i class="bi bi-cart"></i></b-button>
-          </div>
-        </b-col>
-      </b-row>
-    </b-container>
-  </div>
-</template> -->
-
 <template>
   <div class="productContainer">
     <div
@@ -72,7 +24,8 @@ const props = defineProps({ filterCategory: { type: String } })
       </div>
       <div class="productInformation">
         <h3>{{ product.productName }}</h3>
-        <p> {{ product.description_sum }}</p>
+        <p> {{ product.description_sum.slice(0, 50) }}...</p>
+
         <div class="priceButtonDesign">
           <p>{{ product.price }}:-</p>
           <b-button class="button" size="sm">KÖP <i class="bi bi-cart"></i></b-button>
@@ -94,7 +47,7 @@ const props = defineProps({ filterCategory: { type: String } })
       </div>
       <div class="productInformation">
         <h3>{{ product.productName }}</h3>
-        <p> {{ product.description_sum }}</p>
+        <p> {{ product.description_sum.slice(0, 50) }}...</p>
         <div class="priceButtonDesign">
           <p>{{ product.price }}:-</p>
           <b-button class="button" size="sm">KÖP<i class="bi bi-cart"></i></b-button>
@@ -115,21 +68,20 @@ const props = defineProps({ filterCategory: { type: String } })
   display: flex;
   justify-content: center;
   margin-top: 15px;
-
   padding-top: 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   font-size: 14px;
   width: 90%;
 }
 
-
 .productCard:nth-child(odd) {
   background-color: #fdebfb;
 }
 
 .productInformation {
-  max-width: 350px;
+  width: 100%;
   margin-right: 10px;
+  height: 100%;
 }
 
 .button {
@@ -139,12 +91,6 @@ const props = defineProps({ filterCategory: { type: String } })
   border: 0;
   padding: 5px 15px 5px 15px;
 }
-
-/* .dropdown-item-button {
-  background-color: #E7B6E2;
-  color: #fff;
-  padding: 5px 15px;
-} */
 
 img {
   width: 100px;
@@ -172,58 +118,32 @@ img {
   margin-right: 25px;
 }
 
-/* @media (min-width: 500px) and (max-width: 699px) {
-
-  .productCard {
-    margin-top: 15px;
-    padding-top: 10px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    font-size: 16px;
-  }
-
-  img {
-    max-width: 120px;
-    max-height: 120px;
-    margin-left: 15px;
-  }
-
-} */
-
 @media (min-width: 700px) {
 
   .productContainer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
   }
 
   .productCard {
-    width: 40%
+    background-color: #fdebfb;
+    max-width: 320px;
+    height: 200px;
+    margin: 15px 10px 0 10px;
   }
 
-  img {
-    width: auto
+  .productInformation {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 
-  /* testade att lägga en <div class= "productContainer"> runt hela innehållet och göra det till en flexbox, men verkar som att bootstrap? overridar det på nåt sätt? */
-
-  /* .productCard { */
-  /* width: 50%; */
-  /* detta borde vara det som krävs för att 2 kort läggs sida vid sida i flexboxen. funkar ej?  */
-  /* margin-top: 15px;
-    padding-top: 30px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    font-size: 17px;
+  h3 {
+    font-size: large;
   }
-
-  img {
-    width: 120px;
-    height: 120px;
-    margin-left: 20px;
-  } */
-
-
 
 }
 </style>
