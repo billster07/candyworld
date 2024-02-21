@@ -1,33 +1,30 @@
-import {
-  createRouter, createWebHashHistory
-} from 'vue-router'
+import { createRouter, createWebHashHistory } from "vue-router";
 
-import HomeView from './views/HomeView.vue'
-import ProductsView from './views/ProductsView.vue'
-import ProductView from './views/ProductView.vue'
+import HomeView from "./views/HomeView.vue";
+import ProductsView from "./views/ProductsView.vue";
+import ProductView from "./views/ProductView.vue";
+import FlagLinks from "./components/FlagLinks.vue";
 
-
-
-export default createRouter ({
+export default createRouter({
   history: createWebHashHistory(),
   routes: [
     {
       component: HomeView,
-      path: '/'
+      path: "/",
     },
     {
       component: ProductsView,
-      path: '/products/:category'
+      name: "products",
+      path: "/products/:category",
     },
     {
       component: ProductView,
-      path: '/product'
+      path: "/product",
       // adressparameter
     },
     // {
     //   component: ShoppingcartView,
     //   path: '/shoppingcart'
     // },
-
-  ]
-})
+  ],
+});
