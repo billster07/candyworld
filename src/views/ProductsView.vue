@@ -5,10 +5,16 @@ import filterProducts from "../components/filterProducts.vue";
 import { useRouter, useRoute } from "vue-router";
 import flagLinks from "../components/FlagLinks.vue";
 
+
+
+//OBS! Kan det vara denna delen som ställer till navigationen på flaggorna från "HomeView"?
 const filterCategory = ref("Alla"),
   router = useRouter(),
   route = useRoute();
 
+
+//OBS! Om denna koden tas bort så löser detta problemet med att "FlagLinks.vue" komponenten
+//- ger fel adressparametervärden när man navigerar från "HomeView"
 router.push({ params: { category: filterCategory.value } });
 watch(filterCategory, (choosenCategory) => {
   router.push({ params: { category: choosenCategory } });
@@ -24,19 +30,20 @@ watch(
 //Här kontrolleras fönsterstorleken för att visa eller inte visa flagLinks
 const showFlagNav = ref();
 const updateVisibility = () => {
-  showFlagNav.value = window.innerWidth >= 768;
+  showFlagNav.value = window.innerWidth >= 820;
 };
 
 onMounted(() => {
   updateVisibility();
-  window.addEventListener('resize', updateVisibility);
+  window.addEventListener("resize", updateVisibility);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', updateVisibility);
+  window.removeEventListener("resize", updateVisibility);
 });
 //
 
+//Funktion som hanterar länderna/flaggorna i mobilvy
 function countryFlags() {
   let imagePath = "";
   let countryName = "";
@@ -47,7 +54,7 @@ function countryFlags() {
       break;
 
     case "Japan":
-      imagePath = "japan.png";
+      imagePath = "Japan.png";
       countryName = "Japan";
       break;
 
@@ -56,11 +63,11 @@ function countryFlags() {
       countryName = "Mexico";
       break;
     case "Turkiet":
-      imagePath = "Turkey.png";
+      imagePath = "Turkiet.png";
       countryName = "Turkiet";
       break;
     case "Storbritannien":
-      imagePath = "UK.png";
+      imagePath = "Storbritannien.png";
       countryName = "Storbritannien";
       break;
     case "USA":
@@ -88,49 +95,63 @@ countryFlags();
       </b-col>
     </b-row>
 
-    <flagLinks v-if="showFlagNav"/>
+    <flagLinks v-if="showFlagNav" />
 
-    <b-row>
-      <b-col>
-        <b-dropdown id="dropdown-1" text="Välj Land" variant="" class="button">
-          <b-dropdown-item @click="(filterCategory = 'Balkan'), navigateToRoute"
-            >Balkan</b-dropdown-item
+    <div v-else>
+      <b-row>
+        <b-col>
+          <b-dropdown
+            id="dropdown-1"
+            text="Välj Land"
+            variant=""
+            class="button"
           >
-          <b-dropdown-item @click="(filterCategory = 'Japan'), navigateToRoute"
-            >Japan</b-dropdown-item
-          >
-          <b-dropdown-item @click="(filterCategory = 'Mexico'), navigateToRoute"
-            >Mexico</b-dropdown-item
-          >
-          <b-dropdown-item
-            @click="(filterCategory = 'Turkiet'), navigateToRoute"
-            >Turkiet</b-dropdown-item
-          >
-          <b-dropdown-item @click="(filterCategory = 'USA'), navigateToRoute"
-            >USA</b-dropdown-item
-          >
-          <b-dropdown-item
-            @click="(filterCategory = 'Storbritannien'), navigateToRoute"
-            >Storbritannien</b-dropdown-item
-          >
-          <BDropdownDivider />
-          <b-dropdown-item @click="filterCategory = 'Alla'"
-            >Alla produkter</b-dropdown-item
-          >
-        </b-dropdown>
-      </b-col>
-    </b-row>
+            <b-dropdown-item
+              @click="(filterCategory = 'Balkan'), navigateToRoute"
+              >Balkan</b-dropdown-item
+            >
+            <b-dropdown-item
+              @click="(filterCategory = 'Japan'), navigateToRoute"
+              >Japan</b-dropdown-item
+            >
+            <b-dropdown-item
+              @click="(filterCategory = 'Mexico'), navigateToRoute"
+              >Mexico</b-dropdown-item
+            >
+            <b-dropdown-item
+              @click="(filterCategory = 'Turkiet'), navigateToRoute"
+              >Turkiet</b-dropdown-item
+            >
+            <b-dropdown-item @click="(filterCategory = 'USA'), navigateToRoute"
+              >USA</b-dropdown-item
+            >
+            <b-dropdown-item
+              @click="(filterCategory = 'Storbritannien'), navigateToRoute"
+              >Storbritannien</b-dropdown-item
+            >
+            <BDropdownDivider />
+            <b-dropdown-item @click="filterCategory = 'Alla'"
+              >Alla produkter</b-dropdown-item
+            >
+          </b-dropdown>
+        </b-col>
+      </b-row>
+
+      <div class="d-flex justify-content-center align-items-center">
+        <h2 class="text-center countryName">
+          {{ countryFlags().countryName }}
+        </h2>
+
+        <img
+          v-if="filterCategory !== 'Alla' && filterCategory !== ''"
+          :src="countryFlags().imagePath"
+          alt=""
+          class="flagImage"
+        />
+      </div>
+    </div>
   </b-container>
 
-  <div class="d-flex justify-content-center align-items-center">
-    <h2 class="text-center countryName">{{ countryFlags().countryName }}</h2>
-    <img
-      v-if="filterCategory !== 'Alla' && filterCategory !== ''"
-      :src="countryFlags().imagePath"
-      alt=""
-      class="flagImage"
-    />
-  </div>
   <filter-products :filter-category="filterCategory" />
 </template>
 

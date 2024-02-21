@@ -6,6 +6,9 @@ import { useCandyStore } from "/src/store.js";
 const store = useCandyStore();
 store.fetchProducts();
 const props = defineProps({filterCategory: {type: String}})
+
+
+
 </script>
 
 <template>
