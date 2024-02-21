@@ -84,6 +84,15 @@ const props = defineProps({ filterCategory: { type: String } })
   height: 100%;
 }
 
+.priceButtonDesign {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  margin-right: 20px;
+}
+
+
+
 .button {
   background-color: #e7b6e2;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);

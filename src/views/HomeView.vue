@@ -2,12 +2,9 @@
 import { ref, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import "bootstrap-icons/font/bootstrap-icons.css";
-<<<<<<< HEAD
-import myfooter from "../components/Footer.vue";
+
 import flagLinks from "../components/FlagLinks.vue";
-import ProductsView from "./ProductView.vue";
-=======
->>>>>>> enkskild-produktsida
+
 
 const candyPicture1 = ref("candyPicture500.png"),
   candyPicture2 = ref("candyPicture2-500.png");
@@ -24,12 +21,7 @@ const candyPicture1 = ref("candyPicture500.png"),
         vi har något för alla!
       </p>
     </div>
-    <b-img
-      fluid-grow
-      class="candyPhoto"
-      alt="Candy Photo"
-      :src="candyPicture1"
-    ></b-img>
+    <b-img fluid-grow class="candyPhoto" alt="Candy Photo" :src="candyPicture1"></b-img>
   </div>
 
   <!-- karusell med bilder läggs in här -->
@@ -42,27 +34,15 @@ const candyPicture1 = ref("candyPicture500.png"),
         din smakresa komplett och låt Candyworld vara din guide till spännande
         smaker från alla hörn av världen.
       </p>
-      <b-button
-        @click="$router.push('/products/:category')"
-        class="button"
-        size="lg"
-        >Se produkter</b-button
-      >
+      <b-button @click="$router.push('/products/:category')" class="button" size="lg">Se produkter</b-button>
     </div>
-    <b-img
-      fluid-grow
-      class="candyPhoto"
-      alt="Candy Photo"
-      :src="candyPicture2"
-    ></b-img>
+    <b-img fluid-grow class="candyPhoto" alt="Candy Photo" :src="candyPicture2"></b-img>
   </div>
 
   <!-- karusell med bilder läggs in här -->
 </template>
 
 <style scoped>
-
-
 .wrapPAndImage1 {
   background-color: #ffe67b;
 }
