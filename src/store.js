@@ -9,13 +9,17 @@ export const useCandyStore = defineStore("candy", {
           "https://pb.nopatan.com/api/collections/produkter/records"
         );
         this.products = response.data.items;
-        console.log(this.products);
       } catch (error) {
         console.error(error);
       }
     },
+    matchProduct(key) {
+      this.products.forEach((product) => {
+        if (key === product.id) {
+          this.selectedProduct = product;
+        }
+      });
+    },
   },
-  state: () => ({ products: [] }),
+  state: () => ({ products: [], selectedProduct: {} }),
 });
-
-

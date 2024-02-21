@@ -2,9 +2,12 @@
 import { ref, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import "bootstrap-icons/font/bootstrap-icons.css";
+<<<<<<< HEAD
 import myfooter from "../components/Footer.vue";
 import flagLinks from "../components/FlagLinks.vue";
 import ProductsView from "./ProductView.vue";
+=======
+>>>>>>> enkskild-produktsida
 
 const candyPicture1 = ref("candyPicture500.png"),
   candyPicture2 = ref("candyPicture2-500.png");

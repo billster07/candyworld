@@ -20,6 +20,7 @@ watch(filterCategory, (choosenCategory) => {
   router.push({ params: { category: choosenCategory } });
 });
 
+
 watch(
   () => route.params.category,
   (newValue) => {
@@ -100,39 +101,16 @@ countryFlags();
     <div v-else>
       <b-row>
         <b-col>
-          <b-dropdown
-            id="dropdown-1"
-            text="Välj Land"
-            variant=""
-            class="button"
-          >
+          <b-dropdown id="dropdown-1" text="Välj Land" variant="" class="button">
+            <b-dropdown-item @click="(filterCategory = 'Balkan'), navigateToRoute">Balkan</b-dropdown-item>
+            <b-dropdown-item @click="(filterCategory = 'Japan'), navigateToRoute">Japan</b-dropdown-item>
+            <b-dropdown-item @click="(filterCategory = 'Mexico'), navigateToRoute">Mexico</b-dropdown-item>
+            <b-dropdown-item @click="(filterCategory = 'Turkiet'), navigateToRoute">Turkiet</b-dropdown-item>
+            <b-dropdown-item @click="(filterCategory = 'USA'), navigateToRoute">USA</b-dropdown-item>
             <b-dropdown-item
-              @click="(filterCategory = 'Balkan'), navigateToRoute"
-              >Balkan</b-dropdown-item
-            >
-            <b-dropdown-item
-              @click="(filterCategory = 'Japan'), navigateToRoute"
-              >Japan</b-dropdown-item
-            >
-            <b-dropdown-item
-              @click="(filterCategory = 'Mexico'), navigateToRoute"
-              >Mexico</b-dropdown-item
-            >
-            <b-dropdown-item
-              @click="(filterCategory = 'Turkiet'), navigateToRoute"
-              >Turkiet</b-dropdown-item
-            >
-            <b-dropdown-item @click="(filterCategory = 'USA'), navigateToRoute"
-              >USA</b-dropdown-item
-            >
-            <b-dropdown-item
-              @click="(filterCategory = 'Storbritannien'), navigateToRoute"
-              >Storbritannien</b-dropdown-item
-            >
+              @click="(filterCategory = 'Storbritannien'), navigateToRoute">Storbritannien</b-dropdown-item>
             <BDropdownDivider />
-            <b-dropdown-item @click="filterCategory = 'Alla'"
-              >Alla produkter</b-dropdown-item
-            >
+            <b-dropdown-item @click="filterCategory = 'Alla'">Alla produkter</b-dropdown-item>
           </b-dropdown>
         </b-col>
       </b-row>
@@ -142,12 +120,8 @@ countryFlags();
           {{ countryFlags().countryName }}
         </h2>
 
-        <img
-          v-if="filterCategory !== 'Alla' && filterCategory !== ''"
-          :src="countryFlags().imagePath"
-          alt=""
-          class="flagImage"
-        />
+        <img v-if="filterCategory !== 'Alla' && filterCategory !== ''" :src="countryFlags().imagePath" alt=""
+          class="flagImage" />
       </div>
     </div>
   </b-container>
@@ -159,6 +133,7 @@ countryFlags();
 .pageDescription {
   text-align: center;
 }
+
 .button {
   background-color: #e7b6e2;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);

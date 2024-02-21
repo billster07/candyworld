@@ -1,2 +1,10 @@
-<script setup></script>
-<template></template>
+<script setup>
+import ProductContent from '../components/ProductContent.vue'
+</script>
+
+<template>
+    <ProductContent />
+</template>
+
+<style scoped>
+</style>
