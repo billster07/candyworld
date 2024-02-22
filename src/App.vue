@@ -3,7 +3,7 @@ import myfooter from './components/Footer.vue'
 import dropDownMenu from './components/dropDownMenu.vue';
 
 const menuIsClicked = (isOpen) => {
-  console.log ('User clicked on menu!', isOpen);
+  console.log('User clicked on menu!', isOpen);
 };
 
 const props = defineProps(['menuFirst']);
@@ -11,8 +11,11 @@ const props = defineProps(['menuFirst']);
 
 <template>
   <nav>
-  <dropDownMenu :menu-first="menuFirst" @menuIsClicked="menuIsClicked"></dropDownMenu>
+    <dropDownMenu :menu-first="menuFirst" @menuIsClicked="menuIsClicked"></dropDownMenu>
   </nav>
+
+
+
   <main>
     <RouterView />
   </main>

@@ -79,7 +79,7 @@ const props = defineProps({ filterCategory: { type: String } })
 }
 
 .productInformation {
-  width: 100%;
+  width: 100vh;
   margin-right: 10px;
   height: 100%;
 }

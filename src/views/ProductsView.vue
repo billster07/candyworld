@@ -5,9 +5,10 @@ import filterProducts from "../components/filterProducts.vue";
 import { useRouter, useRoute } from "vue-router";
 import flagLinks from "../components/FlagLinks.vue";
 import myFooter from "../components/Footer.vue"
+import myHeader from "../components/Header.vue"
 
 
-
+// const headline = 'PRODUKTER'
 
 //OBS! Kan det vara denna delen som ställer till navigationen på flaggorna från "HomeView"?
 const filterCategory = ref("Alla"),
@@ -88,6 +89,15 @@ countryFlags();
 </script>
 
 <template>
+  <!-- <div class="header">
+    <div class="iconArrow">
+      <i @click="$router.go(-1)" class="bi bi-arrow-left-short" scale="1.5"></i>
+    </div>
+    <div class="headline">
+      <h1>PRODUKTER</h1>
+    </div>
+  </div> -->
+  <myHeader headline="PRODUKTER" />
   <b-container>
     <b-row align-h="center">
       <b-col cols="8">
@@ -135,6 +145,34 @@ countryFlags();
 </template>
 
 <style scoped>
+/* .header {
+  border-bottom: thin inset;
+  border-bottom-color: #F0F2F5;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.iconArrow {
+  left: 0;
+  margin-left: 1em;
+  position: absolute;
+  transform: translate(0, -50%);
+  top: 35%;
+}
+
+.iconArrow i {
+  font-size: xx-large;
+}
+
+.headline h1 {
+  font-size: medium;
+  font-weight: 600;
+  margin-bottom: 0;
+  text-align: center;
+  width: 100%;
+} */
+
 .pageDescription {
   text-align: center;
 }
