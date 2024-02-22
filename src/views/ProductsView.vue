@@ -4,6 +4,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import filterProducts from "../components/filterProducts.vue";
 import { useRouter, useRoute } from "vue-router";
 import flagLinks from "../components/FlagLinks.vue";
+import myFooter from "../components/Footer.vue"
+
 
 
 
@@ -127,6 +129,9 @@ countryFlags();
   </b-container>
 
   <filter-products :filter-category="filterCategory" />
+  <div class="footerContainer">
+    <myFooter />
+  </div>
 </template>
 
 <style scoped>
@@ -151,6 +156,8 @@ countryFlags();
   width: 5rem;
   height: 5rem;
 }
+
+
 
 @media (min-width: 800px) {
   .flagImage {

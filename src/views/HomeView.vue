@@ -2,6 +2,7 @@
 import { ref, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import myFooter from "../components/Footer.vue"
 
 import flagLinks from "../components/FlagLinks.vue";
 
@@ -21,7 +22,9 @@ const candyPicture1 = ref("candyPicture500.png"),
         vi har något för alla!
       </p>
     </div>
-    <b-img fluid-grow class="candyPhoto" alt="Candy Photo" :src="candyPicture1"></b-img>
+    <div class="photoContainer">
+      <img class="candyPhoto" alt="Candy Photo" :src="candyPicture1">
+    </div>
   </div>
 
   <!-- karusell med bilder läggs in här -->
@@ -36,9 +39,13 @@ const candyPicture1 = ref("candyPicture500.png"),
       </p>
       <b-button @click="$router.push('/products/:category')" class="button" size="lg">Se produkter</b-button>
     </div>
-    <b-img fluid-grow class="candyPhoto" alt="Candy Photo" :src="candyPicture2"></b-img>
+    <div class="photoContainer">
+      <img class="candyPhoto" alt="Candy Photo" :src="candyPicture2">
+    </div>
   </div>
-
+  <div class="footerContainer">
+    <myFooter />
+  </div>
   <!-- karusell med bilder läggs in här -->
 </template>
 
@@ -77,6 +84,20 @@ const candyPicture1 = ref("candyPicture500.png"),
   margin-bottom: 2em;
   padding: 5px 15px 5px 15px;
   width: 8em;
+}
+
+.photoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.candyPhoto {
+  width: 300px;
+}
+
+.footerContainer {
+  background-color: #ffe67b;
 }
 
 @media (min-width: 670px) {
