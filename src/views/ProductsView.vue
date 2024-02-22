@@ -5,13 +5,15 @@ import filterProducts from "../components/filterProducts.vue";
 import { useRouter, useRoute } from "vue-router";
 import flagLinks from "../components/FlagLinks.vue";
 
-
-
 //OBS! Kan det vara denna delen som ställer till navigationen på flaggorna från "HomeView"?
+
 const filterCategory = ref("Alla"),
   router = useRouter(),
   route = useRoute();
 
+  if (route.params.category) {
+    filterCategory.value = route.params.category
+}
 
 //OBS! Om denna koden tas bort så löser detta problemet med att "FlagLinks.vue" komponenten
 //- ger fel adressparametervärden när man navigerar från "HomeView"
