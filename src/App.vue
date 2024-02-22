@@ -1,16 +1,18 @@
 <script setup>
 import myfooter from './components/Footer.vue'
+import dropDownMenu from './components/dropDownMenu.vue';
+
+const menuIsClicked = (isOpen) => {
+  console.log ('User clicked on menu!', isOpen);
+};
+
+const props = defineProps(['menuFirst']);
 </script>
 
 <template>
   <nav>
-    <ul>
-      <li><router-link to="/">Hem</router-link></li>
-      <li><router-link :to="'/products/' + $route.params.category">Produkter</router-link></li>
-      <li><router-link to="/product">Produkt</router-link></li>
-
-
-    </ul>
+  <dropDownMenu :menu-first="menuFirst" @menuIsClicked="menuIsClicked"></dropDownMenu>
+  <RouterView />
   </nav>
   <main>
     <RouterView />
