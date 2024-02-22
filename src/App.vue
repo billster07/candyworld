@@ -1,4 +1,5 @@
 <script setup>
+
 </script>
 
 <template>
@@ -8,6 +9,9 @@
       <li><router-link :to="'/products/' + $route.params.category">Produkter</router-link></li>
     </ul>
   </nav>
+
+
+
   <main>
     <RouterView />
   </main>
