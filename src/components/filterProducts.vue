@@ -10,7 +10,8 @@ const props = defineProps({ filterCategory: { type: String } })
 </script>
 
 <template>
-  <div class="productContainer">
+    <div class="mainContainer">
+        <div class="productContainer">
     <div
       @click="store.matchProduct(product.id), $router.push(`/products/${filterCategory}/${store.selectedProduct.productName}`)"
       v-if="props.filterCategory === 'Alla'" class="productCard" v-for="product in store.products">
@@ -56,6 +57,7 @@ const props = defineProps({ filterCategory: { type: String } })
 
     </div>
   </div>
+    </div>
 </template>
 <style scoped>
 .productContainer {
@@ -102,6 +104,10 @@ const props = defineProps({ filterCategory: { type: String } })
   margin-left: 30px;
 }
 
+.button:hover {
+    background-color: rgba(255, 164, 85, 0.8);
+}
+
 img {
   width: 100px;
   max-height: 100px;
@@ -120,18 +126,23 @@ img {
 
 @media (min-width: 700px) {
 
-  .productContainer {
+    .mainContainer {
+    display: flex;
+    justify-content: center;
+}
+    .productContainer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: 850px;
   }
 
   .productCard {
     background-color: #fdebfb;
     max-width: 320px;
     height: 200px;
-    margin: 15px 10px 0 10px;
+    margin: 15px 20px 0 20px;
   }
 
   .productInformation {

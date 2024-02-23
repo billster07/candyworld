@@ -5,6 +5,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 const store = useCandyStore();
 const productQuanity = ref(1);
+
 </script>
 
 <template>
@@ -133,6 +134,10 @@ details p {
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   opacity: 1;
+}
+
+.bi-circle-fill {
+    color: rgb(5, 171, 5);
 }
 
 .buyButton:hover {

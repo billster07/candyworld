@@ -37,7 +37,7 @@ const candyPicture1 = ref("candyPicture500.png"),
         din smakresa komplett och låt Candyworld vara din guide till spännande
         smaker från alla hörn av världen.
       </p>
-      <b-button @click="$router.push('/products/:category')" class="button" size="lg">Se produkter</b-button>
+      <b-button @click="$router.push('/products/Alla')" class="button" size="lg">Se produkter</b-button>
     </div>
     <div class="photoContainer">
       <img class="candyPhoto" alt="Candy Photo" :src="candyPicture2">
