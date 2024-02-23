@@ -23,7 +23,7 @@ const productQuanity = ref(1);
       <h1>{{ store.selectedProduct.productName }}</h1>
       <div class="price-status">
         <p>{{ store.selectedProduct.price }}:-</p>
-        <p><i class="bi bi-circle-fill" variant="success"></i> I lager</p>
+        <p><i class="bi bi-circle-fill"></i> I lager</p>
       </div>
       <div class="buttons">
         <input
@@ -55,6 +55,10 @@ const productQuanity = ref(1);
 </template>
 
 <style scoped>
+
+.bi-circle-fill {
+  color: rgb(3, 190, 3);
+}
 .product {
   display: flex;
   flex-direction: column;
