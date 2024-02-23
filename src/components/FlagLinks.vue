@@ -34,7 +34,8 @@ const toggleZoom = (country) => {
 </script>
 
 <template>
-  <router-link :to="{ name: 'products', params: { category: 'Alla' } }">
+  <!-- Lägg in så den bara visas när man är på "produktsidan" v-if="route-produktsida" något åt det hållet. -->
+  <!-- <router-link class="link" :to="{ name: 'products', params: { category: 'Alla' } }">
     <h3
       class="all-products"
       @click="
@@ -44,9 +45,10 @@ const toggleZoom = (country) => {
     >
       Alla produkter
     </h3>
-  </router-link>
+  </router-link> -->
   <div class="flag-container">
     <router-link
+      class="link"
       v-for="country in countries"
       :to="{ name: 'products', params: { category: country } }"
     >
@@ -90,6 +92,11 @@ const toggleZoom = (country) => {
   margin-bottom: 3rem;
   margin-top: 3rem;
   text-align: center;
+}
+
+.link {
+  text-decoration: none;
+  color: #000;
 }
 
 .image-effect {

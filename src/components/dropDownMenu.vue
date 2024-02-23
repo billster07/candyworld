@@ -190,7 +190,7 @@ a:hover::before {
       <div class="menuLinks">
         <ul>
             <li><router-link @click="toggleMenu" to="/">Hem</router-link></li>
-            <li><router-link @click="toggleMenu" :to="'/products/' + $route.params.category"
+            <li><router-link @click="toggleMenu" to="/products/Alla"
             >Produkter</router-link
           ></li>
         </ul>
@@ -200,7 +200,7 @@ a:hover::before {
     <div class="menuLinks">
         <ul>
             <li><router-link @click="toggleMenu" to="/">Hem</router-link></li>
-            <li><router-link @click="toggleMenu" :to="'/products/' + $route.params.category"
+            <li><router-link @click="toggleMenu" to="/products/Alla"
             >Produkter</router-link
           ></li>
         </ul>
