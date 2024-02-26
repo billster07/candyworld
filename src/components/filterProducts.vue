@@ -10,54 +10,51 @@ const props = defineProps({ filterCategory: { type: String } })
 </script>
 
 <template>
-    <div class="mainContainer">
-        <div class="productContainer">
-    <div
-      @click="store.matchProduct(product.id), $router.push(`/products/${filterCategory}/${store.selectedProduct.productName}`)"
-      v-if="props.filterCategory === 'Alla'" class="productCard" v-for="product in store.products">
+  <div class="mainContainer">
+    <div class="productContainer">
+      <div @click="$router.push(`/products/${filterCategory}/${product.id}`)" v-if="props.filterCategory === 'Alla'"
+        class="productCard" v-for="product in store.products">
 
-      <div class="image">
-        <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
-          product.id +
-          '/' +
-          product.image
-          " />
-      </div>
-      <div class="productInformation">
-        <h3>{{ product.productName }}</h3>
-        <p> {{ product.description_sum.slice(0, 50) }}...</p>
-
-        <div class="priceButtonDesign">
-          <p>{{ product.price }}:-</p>
-          <b-button class="button" size="sm">KÖP <i class="bi bi-cart"></i></b-button>
+        <div class="image">
+          <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
+            product.id +
+            '/' +
+            product.image
+            " />
         </div>
-      </div>
-    </div>
+        <div class="productInformation">
+          <h3>{{ product.productName }}</h3>
+          <p> {{ product.description_sum.slice(0, 50) }}...</p>
 
-    <div
-      @click="store.matchProduct(product.id), $router.push(`/products/${filterCategory}/${store.selectedProduct.productName}`)"
-      v-else class="productCard"
-      v-for="product in store.products.filter(product => product.category === props.filterCategory)">
-
-      <div class="image">
-        <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
-          product.id +
-          '/' +
-          product.image
-          " />
-      </div>
-      <div class="productInformation">
-        <h3>{{ product.productName }}</h3>
-        <p> {{ product.description_sum.slice(0, 50) }}...</p>
-        <div class="priceButtonDesign">
-          <p>{{ product.price }}:-</p>
-          <b-button class="button" size="sm">KÖP<i class="bi bi-cart"></i></b-button>
+          <div class="priceButtonDesign">
+            <p>{{ product.price }}:-</p>
+            <b-button class="button" size="sm">KÖP <i class="bi bi-cart"></i></b-button>
+          </div>
         </div>
       </div>
 
+      <div @click="$router.push(`/products/${filterCategory}/${product.id}`)" v-else class="productCard"
+        v-for="product in store.products.filter(product => product.category === props.filterCategory)">
+
+        <div class="image">
+          <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
+            product.id +
+            '/' +
+            product.image
+            " />
+        </div>
+        <div class="productInformation">
+          <h3>{{ product.productName }}</h3>
+          <p> {{ product.description_sum.slice(0, 50) }}...</p>
+          <div class="priceButtonDesign">
+            <p>{{ product.price }}:-</p>
+            <b-button class="button" size="sm">KÖP<i class="bi bi-cart"></i></b-button>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
-    </div>
 </template>
 <style scoped>
 .productContainer {
@@ -105,7 +102,7 @@ const props = defineProps({ filterCategory: { type: String } })
 }
 
 .button:hover {
-    background-color: rgba(255, 164, 85, 0.8);
+  background-color: rgba(255, 164, 85, 0.8);
 }
 
 img {
@@ -126,11 +123,12 @@ img {
 
 @media (min-width: 700px) {
 
-    .mainContainer {
+  .mainContainer {
     display: flex;
     justify-content: center;
-}
-    .productContainer {
+  }
+
+  .productContainer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

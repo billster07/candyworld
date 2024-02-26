@@ -19,7 +19,7 @@ export default createRouter({
     },
     {
       component: ProductView,
-      path: '/products/:category/:productName'
+      path: "/products/:category/:productId",
       // adressparameter
     },
     // {

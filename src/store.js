@@ -13,13 +13,6 @@ export const useCandyStore = defineStore("candy", {
         console.error(error);
       }
     },
-    matchProduct(key) {
-      this.products.forEach((product) => {
-        if (key === product.id) {
-          this.selectedProduct = product;
-        }
-      });
-    },
   },
-  state: () => ({ products: [], selectedProduct: {} }),
+  state: () => ({ products: [] }),
 });
