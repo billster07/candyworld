@@ -4,6 +4,7 @@ import HomeView from "./views/HomeView.vue";
 import ProductsView from "./views/ProductsView.vue";
 import ProductView from "./views/ProductView.vue";
 import FlagLinks from "./components/FlagLinks.vue";
+import PaymentView from "./views/PaymentView.vue";
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -21,6 +22,10 @@ export default createRouter({
       component: ProductView,
       path: "/products/:category/:productId",
       // adressparameter
+    },
+    {
+      component: PaymentView,
+      path: "/payment",
     },
     // {
     //   component: ShoppingcartView,

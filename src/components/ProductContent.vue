@@ -6,36 +6,38 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 const store = useCandyStore();
 const productQuanity = ref(1);
-const selectedProduct = ref([])
-const route = useRoute()
+const selectedProduct = ref([]);
+const route = useRoute();
 
 const matchProduct = (key) => {
   store.products.forEach((product) => {
     if (key === product.id) {
-      selectedProduct.value = product
+      selectedProduct.value = product;
     }
-  })
-}
-store.fetchProducts().then((respone) => matchProduct(route.params.productId))
+  });
+};
+store.fetchProducts().then((respone) => matchProduct(route.params.productId));
 
 watch(
   () => route.params.productId,
   (newValue) => {
     store.fetchProducts();
-    matchProduct(newValue)
+    matchProduct(newValue);
   }
 );
-
 </script>
 
 <template>
   <div class="product">
     <div class="image">
-      <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
-        selectedProduct.id +
-        '/' +
-        selectedProduct.image
-        " />
+      <img
+        :src="
+          'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
+          selectedProduct.id +
+          '/' +
+          selectedProduct.image
+        "
+      />
     </div>
     <div class="productContent">
       <h1>{{ selectedProduct.productName }}</h1>
@@ -44,8 +46,16 @@ watch(
         <p><i class="bi bi-circle-fill" variant="success"></i> I lager</p>
       </div>
       <div class="buttons">
-        <input class="quantityCounter" min="1" type="number" v-model="productQuanity" />
-        <b-button class="buyButton" size="lg">Lägg i varukorgen <i class="bi bi-cart"></i></b-button>
+        <input
+          class="quantityCounter"
+          min="1"
+          type="number"
+          v-model="productQuanity"
+        />
+        <b-button class="buyButton" size="lg"
+          >Lägg i varukorgen <i class="bi bi-cart"></i
+        ></b-button>
+        <router-link to="/payment"><button>Kassa-sidan</button></router-link>
       </div>
       <div class="productDetails">
         <details>
