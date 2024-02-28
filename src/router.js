@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "./views/HomeView.vue";
 import ProductsView from "./views/ProductsView.vue";
 import ProductView from "./views/ProductView.vue";
+import ShoppingCartView from "./views/ShoppingCartView.vue";
 import FlagLinks from "./components/FlagLinks.vue";
 
 export default createRouter({
@@ -22,9 +23,9 @@ export default createRouter({
       path: "/products/:category/:productId",
       // adressparameter
     },
-    // {
-    //   component: ShoppingcartView,
-    //   path: '/shoppingcart'
-    // },
+    {
+      component: ShoppingCartView,
+      path: "/shoppingCart",
+    },
   ],
 });

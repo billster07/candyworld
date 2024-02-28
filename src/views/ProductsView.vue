@@ -6,6 +6,7 @@ import { useRouter, useRoute } from "vue-router";
 import flagLinks from "../components/FlagLinks.vue";
 import myFooter from "../components/Footer.vue"
 import myHeader from "../components/Header.vue"
+import ShoppingCartButton from '../components/ShoppingCartButton.vue'
 
 
 // const headline = 'PRODUKTER'
@@ -16,8 +17,8 @@ const filterCategory = ref("Alla"),
   router = useRouter(),
   route = useRoute();
 
-  if (route.params.category) {
-    filterCategory.value = route.params.category
+if (route.params.category) {
+  filterCategory.value = route.params.category
 }
 
 //OBS! Om denna koden tas bort så löser detta problemet med att "FlagLinks.vue" komponenten
@@ -143,6 +144,7 @@ countryFlags();
   </b-container>
 
   <filter-products :filter-category="filterCategory" />
+  <ShoppingCartButton @click="$router.push(`/shoppingCart`)" />
   <div class="footerContainer">
     <myFooter />
   </div>
