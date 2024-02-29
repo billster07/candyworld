@@ -34,6 +34,7 @@ export default createRouter({
       path: "/ConfirmationView",
     },
 
+
     // {
     //   component: ShoppingcartView,
     //   path: '/shoppingcart'
