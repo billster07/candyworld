@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import "bootstrap-icons/font/bootstrap-icons.css";
 //Skapa egen funktion för visible
 let visibleAdress = ref(false);
 let visibleShipping = ref(false);
@@ -10,11 +11,11 @@ const selectedPayment = ref("");
 const nameList = [
   "Förnamn",
   "Efternamn",
-  "telefonnummer",
-  "email",
-  "adress",
-  "postkod",
-  "stad",
+  "Telefonnummer",
+  "Email",
+  "Adress",
+  "Postkod",
+  "Stad",
 ];
 
 const styleList = ["text", "text", "tel", "email", "text", "tel", "text"];
@@ -23,6 +24,11 @@ let type = ref("");
 function onSubmit(event) {
   event.preventDefault();
 }
+
+function navigateToNewPage() {
+  this.$router.push('')
+}
+
 </script>
 
 <template>
@@ -35,7 +41,7 @@ function onSubmit(event) {
       aria-controls="collapse-1"
       @click="visibleAdress = !visibleAdress"
     >
-      Leveransadress
+    <i class="bi bi-geo-alt"></i> Leveransadress
     </b-button>
     <b-collapse id="collapse-1" v-model="visibleAdress" class="mt-2">
       <b-container fluid class="adress-info card">
@@ -69,7 +75,7 @@ function onSubmit(event) {
         aria-controls="collapse-2"
         @click="visibleShipping = !visibleShipping"
       >
-        Leveransmetod
+      <i class="bi bi-truck"></i> Leveransmetod
         <div class="mt-3">
           {{ selected }}
         </div>
@@ -119,7 +125,7 @@ function onSubmit(event) {
         aria-controls="collapse-3"
         @click="visiblePayment = !visiblePayment"
       >
-        Betalsätt
+      <i class="bi bi-credit-card"></i> Betalsätt
         <div class="mt-3">
           {{ selectedPayment }}
         </div>
@@ -157,8 +163,7 @@ function onSubmit(event) {
         </b-card>
       </b-collapse>
     </div>
-    <b-button type="submit" variant="primary" class="submit-shipping"
-      >Submit</b-button
+    <b-button type="submit" variant="primary" class="submit-shipping" v-on:click="navigateToNewPage">Genomför Köp</b-button
     >
   </b-form>
 </template>
@@ -167,7 +172,7 @@ function onSubmit(event) {
 .collapsebutton {
   width: 80%;
   height: 9rem;
-  background-color: white;
+  background-color: #e7b6e269;
   color: black;
   font-size: 1.2rem;
   max-width: 800px;
@@ -175,8 +180,16 @@ function onSubmit(event) {
   margin-bottom: 0.5rem;
 }
 
+.form-control{}
+
 .submit-shipping {
   margin-top: 3rem;
+  background-color: #e7b6e269;
+  color: #000;
+  border-color: #000;
+}
+.submit-shipping:hover, .collapsebutton:hover{
+  background-color:rgba(255, 164, 85, 0.8);
 }
 
 .adress-info {

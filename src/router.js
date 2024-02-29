@@ -27,6 +27,13 @@ export default createRouter({
       component: PaymentView,
       path: "/payment",
     },
+
+    // {
+    //   component: PaymentConfirmation // routersökväg till den nya sidan efter klick?
+    //   path: "/ConfirmationView/,
+    //   name: 'confirmation',
+    // },
+
     // {
     //   component: ShoppingcartView,
     //   path: '/shoppingcart'
