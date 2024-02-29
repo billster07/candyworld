@@ -29,7 +29,7 @@ function onSubmit(event) {
 }
 
 function navigateToNewPage() {
-  router.push('/ConfirmationView')
+  router.push('/Confirmation')
 }
 
 </script>
