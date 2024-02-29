@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from "vue";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 //Skapa egen funktion för visible
 let visibleAdress = ref(false);
 let visibleShipping = ref(false);
@@ -26,7 +29,7 @@ function onSubmit(event) {
 }
 
 function navigateToNewPage() {
-  this.$router.push('')
+  router.push('/ConfirmationView')
 }
 
 </script>
@@ -180,10 +183,11 @@ function navigateToNewPage() {
   margin-bottom: 0.5rem;
 }
 
-.form-control{}
+/* .form-control{} */
 
 .submit-shipping {
   margin-top: 3rem;
+  margin-bottom: 3rem;
   background-color: #e7b6e269;
   color: #000;
   border-color: #000;

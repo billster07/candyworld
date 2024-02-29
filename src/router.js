@@ -5,6 +5,7 @@ import ProductsView from "./views/ProductsView.vue";
 import ProductView from "./views/ProductView.vue";
 import FlagLinks from "./components/FlagLinks.vue";
 import PaymentView from "./views/PaymentView.vue";
+import ConfirmationView from "./components/ConfirmationView.vue"
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -28,11 +29,10 @@ export default createRouter({
       path: "/payment",
     },
 
-    // {
-    //   component: PaymentConfirmation // routersökväg till den nya sidan efter klick?
-    //   path: "/ConfirmationView/,
-    //   name: 'confirmation',
-    // },
+    {
+      component: ConfirmationView, // routersökväg till den nya sidan efter klick?
+      path: "/ConfirmationView",
+    },
 
     // {
     //   component: ShoppingcartView,
