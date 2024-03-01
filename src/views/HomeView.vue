@@ -2,7 +2,7 @@
 import { ref, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import myFooter from "../components/Footer.vue"
+import myFooter from "../components/Footer.vue";
 
 import flagLinks from "../components/FlagLinks.vue";
 

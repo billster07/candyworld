@@ -3,9 +3,9 @@
 import { useRouter } from "vue-router";
 const router = useRouter();
 
-function navigateToHome() {
-  router.push('./views/HomeView')
-}
+// function navigateToHome() {
+//   router.push('./views/HomeView')
+// } gjorde med router-link istället? Detta är onödigt komplicerat?
 
 
 </script>
@@ -21,8 +21,9 @@ function navigateToHome() {
     <p>Din orderbekräftelse skickas till <b>sara@gmail.com</b> textinterpolering</p>
     <p>För att ändra i din order, följ instruktionerna i orderbekräftelse.</p>
   </div>
-  <b-button type="text" variant="primary" class="homeButton" v-on:click="navigateToHome">Till Startsidan</b-button>
+  <router-link to="/"><b-button type="text" variant="primary" class="homeButton">Till Startsidan</b-button></router-link>
 </div>
+
 </template>
 
 <style scoped>
