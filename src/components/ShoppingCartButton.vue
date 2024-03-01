@@ -8,7 +8,7 @@ const counter = ref(0)
 // const amountOfProducts = ref(store.shoppingCart.length)
 const amountOfProducts = computed(() => {
   counter.value = 0;
-  store.shoppingCart.map((product) => counter.value = counter.value + product.quantity)
+  store.shoppingCart.map((product) => counter.value = counter.value + product.quantity) 
   return counter.value
 })
 // watch(
@@ -32,8 +32,8 @@ const amountOfProducts = computed(() => {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 100%;
   display: flex;
   justify-content: center;
@@ -47,8 +47,8 @@ const amountOfProducts = computed(() => {
   border-radius: 100%;
   position: fixed;
   background-color: #e7b6e2;
-  top: 20px;
-  right: 20px;
+  top: 13px;
+  right: 13px;
   text-align: center;
   font-size: small;
 }

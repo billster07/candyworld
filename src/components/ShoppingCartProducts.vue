@@ -1,11 +1,18 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useCandyStore } from "/src/store.js";
 const store = useCandyStore();
+
+watch(
+  store.shoppingCart, (shoppingCart) => {
+    sessionStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
+  }
+)
+
 </script>
 
 <template>
-  <div v-for="product in store.shoppingCart" class="productCard">
+  <div v-for="(product, key) in store.shoppingCart" class="productCard">
     <div class="image" @click="$router.push(`/products/${product.category}/${product.id}`)">
       <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
         product.id +
@@ -17,10 +24,10 @@ const store = useCandyStore();
       <h3 @click="$router.push(`/products/${product.category}/${product.id}`)">{{ product.productName }}</h3>
 
       <div class="priceButtonDesign">
-        <i class="bi bi-dash-circle"></i>
-        <p>{{ product.quantity }}</p>
-        <i class="bi bi-plus-circle"></i>
-        <p class="price">{{ product.price }}:-</p>
+        <i @click="store.onClickSubtract(product, key)" class="bi bi-dash-circle"></i>
+        <p class="productQuantity">{{ product.quantity }}</p>
+        <i @click="store.onClickPlus(product)" class="bi bi-plus-circle"></i>
+        <p class="price">{{ (Math.round((product.price * product.quantity) * 100) / 100) }}:-</p>
       </div>
     </div>
   </div>
@@ -35,12 +42,15 @@ const store = useCandyStore();
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   font-size: 14px;
   width: 90%;
+  height: 130px;
 }
 
 .productInformation {
   width: 100vw;
   margin-right: 10px;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .priceButtonDesign {
@@ -64,8 +74,16 @@ img {
   margin-right: 10px;
   width: 30%;
 }
-
+.priceButtonDesign i {
+  font-size: medium;
+}
+.productQuantity {
+  font-size: medium;
+  margin: 0 5px 0 5px;
+}
 .price {
   font-size: large;
+  width: 70px; 
+  text-align: end;
 }
 </style>

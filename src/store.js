@@ -19,7 +19,6 @@ export const useCandyStore = defineStore("candy", {
         if (product_.id === product.id) {
           this.checkIfIncluded = true;
           product_.quantity++;
-          console.log(this.shoppingCart);
           sessionStorage.setItem(
             "shoppingCart",
             JSON.stringify(this.shoppingCart)
@@ -29,32 +28,42 @@ export const useCandyStore = defineStore("candy", {
       if (this.checkIfIncluded === false) {
         product.quantity = 1;
         this.shoppingCart.push(product);
-        console.log(this.shoppingCart);
         sessionStorage.setItem(
           "shoppingCart",
           JSON.stringify(this.shoppingCart)
         );
       }
     },
+    updateShoppingCart() {
+      if (sessionStorage.getItem("shoppingCart")) {
+        this.shoppingCart = JSON.parse(sessionStorage.getItem("shoppingCart"))
+      }
+    },
+    onClickPlus(product) {
+      this.shoppingCart.forEach((product_) => {
+        if(product_.id === product.id) {
+          product_.quantity++
+        }
+      })
+    },
+    onClickSubtract(product, key) {
+      if (key === 0 && product.quantity === 1) {
+        this.shoppingCart.shift()
+      } else if (product.quantity === 1) {
+        this.shoppingCart.splice(key, key)
+      } else {
+        this.shoppingCart.forEach((product_) => {
+          if(product_.id === product.id) {
+            product_.quantity--
+          }
+        })
+      }
+    }
   },
   state: () => ({
     products: [],
     shoppingCart: [],
     checkIfIncluded: false,
-    // counter: 0,
   }),
-  getters: {
-    getShoppingCart(state) {
-      return (state.shoppingCart = JSON.parse(
-        sessionStorage.getItem("shoppingCart")
-      ));
-    },
-    // amountOfProducts() {
-    //   this.counter = 0;
-    //   this.shoppingCart.map(
-    //     (product) => (this.counter = this.counter + product.quantity)
-    //   );
-    //   return this.counter;
-    // },
   },
-});
+);
