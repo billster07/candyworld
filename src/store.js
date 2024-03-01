@@ -21,17 +21,48 @@ export const useCandyStore = defineStore("candy", {
       });
     },
     matchStoredProduct(storedId) {
-      console.log('bbb', this.products)
-      const alreadyAdded = this.favouriteProduct.some(product => product.id === storedId )
-      if(!alreadyAdded) {
+      console.log("bbb", this.products);
+      const alreadyAdded = this.favouriteProduct.some(
+        (product) => product.id === storedId
+      );
+      if (!alreadyAdded) {
         this.products.forEach((product) => {
-        if(storedId === product.id ) {
-          this.favouriteProduct.push(product)
-        console.log('hej', this.favouriteProduct)
-      }
-        })
+          if (storedId === product.id) {
+            this.favouriteProduct.push(product);
+            console.log("hej", this.favouriteProduct);
+          }
+        });
       }
     },
   },
-  state: () => ({ products: [], selectedProduct: {}, favouriteProduct: [] }),
+  addProduct(product) {
+    this.checkIfIncluded = false;
+    this.shoppingCart.forEach((product_) => {
+      if (product_.id === product.id) {
+        this.checkIfIncluded = true;
+        product_.quantity++;
+        sessionStorage.setItem(
+          "shoppingCart",
+          JSON.stringify(this.shoppingCart)
+        );
+      }
+    });
+    if (this.checkIfIncluded === false) {
+      product.quantity = 1;
+      this.shoppingCart.push(product);
+      sessionStorage.setItem("shoppingCart", JSON.stringify(this.shoppingCart));
+    }
+  },
+  updateShoppingCart() {
+    if (sessionStorage.getItem("shoppingCart")) {
+      this.shoppingCart = JSON.parse(sessionStorage.getItem("shoppingCart"));
+    }
+  },
+  state: () => ({
+    products: [],
+    selectedProduct: {},
+    favouriteProduct: [],
+    shoppingCart: [],
+    checkIfIncluded: false,
+  }),
 });

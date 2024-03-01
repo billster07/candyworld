@@ -3,6 +3,7 @@ import { ref, watch } from "vue";
 import { useCandyStore } from "/src/store.js";
 import { useRouter, useRoute } from "vue-router";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import BuyButton from "./BuyButton.vue";
 
 const store = useCandyStore();
 const productQuanity = ref(1);
@@ -83,6 +84,21 @@ watch(
     matchProduct(newValue);
   }
 );
+
+const onAddToShoppingCart = (product) => {
+  const checkIfincluded = false
+  store.shoppingCart.forEach((product_) => {
+    if (product_.id === product.id) {
+      if (product_.quantity) {
+        product_.quantity += productQuanity.value
+      } else {
+        product_.quantity = productQuanity.value
+      }
+      sessionStorage.setItem("shoppingCart", JSON.stringify(store.shoppingCart))
+    }
+  })
+}
+
 </script>
 
 <template>
@@ -108,8 +124,9 @@ watch(
       </div>
       <div class="buttons">
         <input class="quantityCounter" min="1" type="number" v-model="productQuanity" />
-        <b-button class="buyButton" size="lg">Lägg i varukorgen <i class="bi bi-cart"></i></b-button>
         <router-link to="/payment"><button>Kassa-sidan</button></router-link>
+        <BuyButton @click="onAddToShoppingCart(selectedProduct)" class="buyButton" button-size="lg"
+          button-text="Lägg i varukorgen" />
       </div>
       <div class="productDetails">
         <details>
@@ -211,11 +228,6 @@ details p {
 
 .buyButton {
   width: 85%;
-  background-color: #e7b6e2;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 0.75rem;
-  border: 0;
-  padding: 5px 15px 5px 15px;
   margin: 0 20px 0 10px;
   height: 40px;
   font-size: medium;

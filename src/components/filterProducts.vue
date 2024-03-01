@@ -2,6 +2,7 @@
 import { ref, defineProps } from "vue";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useCandyStore } from "/src/store.js";
+import BuyButton from "./BuyButton.vue";
 
 const store = useCandyStore();
 // store.fetchProducts();
@@ -121,7 +122,7 @@ function getStoredValue() {
         <div class="productInformation">
           <div class="headlineHeartContainer">
             <h3
-              @click="store.matchProduct(product.id), $router.push(`/products/${filterCategory}/${store.selectedProduct.productName}`)">
+              @click="store.matchProduct(product.id), $router.push(`/products/${product.category}/${store.selectedProduct.productName}`)">
               {{ product.productName }}</h3>
             <i @click="storeProduct(product.id), toggleHeart(product)"
               :class="{ 'bi bi-heart': !product.isHeartClicked, 'bi bi-heart-fill': product.isHeartClicked }"></i>
@@ -131,7 +132,7 @@ function getStoredValue() {
 
           <div class="priceButtonDesign">
             <p>{{ product.price }}:-</p>
-            <b-button class="button" size="sm">KÖP <i class="bi bi-cart"></i></b-button>
+            <BuyButton @click="store.addProduct(product)" button-text="Köp" button-size="sm" />
           </div>
         </div>
       </div>
@@ -141,7 +142,7 @@ function getStoredValue() {
         v-else class="productCard"
         v-for="product in store.products.filter(product => product.category === props.filterCategory)">
 
-        <div class="image">
+        <div class="image" @click="$router.push(`/products/${product.category}/${product.id}`)">
           <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
             product.id +
             '/' +
@@ -149,13 +150,14 @@ function getStoredValue() {
             " />
         </div>
         <div class="productInformation">
-          <h3>{{ product.productName }}</h3>
+          <h3 @click="$router.push(`/products/${product.category}/${product.id}`)">{{ product.productName }}</h3>
           <p> {{ product.description_sum.slice(0, 50) }}...</p>
           <div class="priceButtonDesign">
             <p>{{ product.price }}:-</p>
-            <b-button class="button" size="sm">KÖP<i class="bi bi-cart"></i></b-button>
+            <BuyButton @click="store.addProduct(product)" button-text="Köp" button-size="sm" />
           </div>
         </div>
+
 
       </div>
     </div>
@@ -201,7 +203,7 @@ h3 {
 }
 
 .productInformation {
-  width: 100vh;
+  width: 100vw;
   margin-right: 10px;
   height: 100%;
 }
@@ -211,21 +213,6 @@ h3 {
   justify-content: flex-end;
   align-items: baseline;
   margin-right: 20px;
-}
-
-
-
-.button {
-  background-color: #e7b6e2;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 0.75rem;
-  border: 0;
-  padding: 5px 15px 5px 15px;
-  margin-left: 30px;
-}
-
-.button:hover {
-  background-color: rgba(255, 164, 85, 0.8);
 }
 
 img {
