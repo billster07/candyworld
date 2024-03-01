@@ -9,6 +9,26 @@ watch(
   }
 )
 
+const onClickPlus = (product) => {
+  store.shoppingCart.forEach((product_) => {
+    if (product_.id === product.id) {
+      product_.quantity++
+    }
+  })
+}
+const onClickSubtract = (product, key) => {
+  if (key === 0 && product.quantity === 1) {
+    store.shoppingCart.shift()
+  } else if (product.quantity === 1) {
+    store.shoppingCart.splice(key, key)
+  } else {
+    store.shoppingCart.forEach((product_) => {
+      if (product_.id === product.id) {
+        product_.quantity--
+      }
+    })
+  }
+}
 </script>
 
 <template>
@@ -24,9 +44,9 @@ watch(
       <h3 @click="$router.push(`/products/${product.category}/${product.id}`)">{{ product.productName }}</h3>
 
       <div class="priceButtonDesign">
-        <i @click="store.onClickSubtract(product, key)" class="bi bi-dash-circle"></i>
+        <i @click="onClickSubtract(product, key)" class="bi bi-dash-circle"></i>
         <p class="productQuantity">{{ product.quantity }}</p>
-        <i @click="store.onClickPlus(product)" class="bi bi-plus-circle"></i>
+        <i @click="onClickPlus(product)" class="bi bi-plus-circle"></i>
         <p class="price">{{ (Math.round((product.price * product.quantity) * 100) / 100) }}:-</p>
       </div>
     </div>
@@ -74,16 +94,19 @@ img {
   margin-right: 10px;
   width: 30%;
 }
+
 .priceButtonDesign i {
   font-size: medium;
 }
+
 .productQuantity {
   font-size: medium;
   margin: 0 5px 0 5px;
 }
+
 .price {
   font-size: large;
-  width: 70px; 
+  width: 70px;
   text-align: end;
 }
 </style>

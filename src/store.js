@@ -36,34 +36,13 @@ export const useCandyStore = defineStore("candy", {
     },
     updateShoppingCart() {
       if (sessionStorage.getItem("shoppingCart")) {
-        this.shoppingCart = JSON.parse(sessionStorage.getItem("shoppingCart"))
+        this.shoppingCart = JSON.parse(sessionStorage.getItem("shoppingCart"));
       }
     },
-    onClickPlus(product) {
-      this.shoppingCart.forEach((product_) => {
-        if(product_.id === product.id) {
-          product_.quantity++
-        }
-      })
-    },
-    onClickSubtract(product, key) {
-      if (key === 0 && product.quantity === 1) {
-        this.shoppingCart.shift()
-      } else if (product.quantity === 1) {
-        this.shoppingCart.splice(key, key)
-      } else {
-        this.shoppingCart.forEach((product_) => {
-          if(product_.id === product.id) {
-            product_.quantity--
-          }
-        })
-      }
-    }
   },
   state: () => ({
     products: [],
     shoppingCart: [],
     checkIfIncluded: false,
   }),
-  },
-);
+});

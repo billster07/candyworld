@@ -27,6 +27,20 @@ watch(
   }
 );
 
+const onAddToShoppingCart = (product) => {
+  const checkIfincluded = false
+  store.shoppingCart.forEach((product_) => {
+    if (product_.id === product.id) {
+      if (product_.quantity) {
+        product_.quantity += productQuanity.value
+      } else {
+        product_.quantity = productQuanity.value
+      }
+      sessionStorage.setItem("shoppingCart", JSON.stringify(store.shoppingCart))
+    }
+  })
+}
+
 </script>
 
 <template>
@@ -46,7 +60,8 @@ watch(
       </div>
       <div class="buttons">
         <input class="quantityCounter" min="1" type="number" v-model="productQuanity" />
-        <BuyButton class="buyButton" button-size="lg" button-text="Lägg i varukorgen" />
+        <BuyButton @click="onAddToShoppingCart(selectedProduct)" class="buyButton" button-size="lg"
+          button-text="Lägg i varukorgen" />
       </div>
       <div class="productDetails">
         <details>
