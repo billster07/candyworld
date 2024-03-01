@@ -13,6 +13,25 @@ export const useCandyStore = defineStore("candy", {
         console.error(error);
       }
     },
+    matchProduct(key) {
+      this.products.forEach((product) => {
+        if (key === product.id) {
+          this.selectedProduct = product;
+        }
+      });
+    },
+    matchStoredProduct(storedId) {
+      console.log('bbb', this.products)
+      const alreadyAdded = this.favouriteProduct.some(product => product.id === storedId )
+      if(!alreadyAdded) {
+        this.products.forEach((product) => {
+        if(storedId === product.id ) {
+          this.favouriteProduct.push(product)
+        console.log('hej', this.favouriteProduct)
+      }
+        })
+      }
+    },
   },
-  state: () => ({ products: [] }),
+  state: () => ({ products: [], selectedProduct: {}, favouriteProduct: [] }),
 });

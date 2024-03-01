@@ -5,6 +5,8 @@ import ProductsView from "./views/ProductsView.vue";
 import ProductView from "./views/ProductView.vue";
 import FlagLinks from "./components/FlagLinks.vue";
 import PaymentView from "./views/PaymentView.vue";
+import FavouritesView from "./views/FavouritesView.vue"
+// import FlagLinks from "./components/FlagLinks.vue";
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -27,6 +29,10 @@ export default createRouter({
       component: PaymentView,
       path: "/payment",
     },
+    {
+      component: FavouritesView,
+      path: '/favourites'
+    }
     // {
     //   component: ShoppingcartView,
     //   path: '/shoppingcart'

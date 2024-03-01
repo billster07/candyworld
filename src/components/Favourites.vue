@@ -3,10 +3,9 @@ import { ref, defineProps } from "vue";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useCandyStore } from "/src/store.js";
 
-const store = useCandyStore();
-// store.fetchProducts();
-// getStoredValue()
 
+const store = useCandyStore();
+// const props = defineProps({ filterCategory: { type: String } })
 fetchData()
 
 async function fetchData() {
@@ -15,29 +14,22 @@ async function fetchData() {
   checkHeartStatus()
 }
 
-
-// checkProducts()
-const props = defineProps({ filterCategory: { type: String } })
-
-// const isHeartClicked = ref({})
-
 const toggleHeart = (product) => {
-  product.isHeartClicked = !product.isHeartClicked
+  !product.isHeartClicked
   saveHeartStatus(product);
 
 }
 const saveHeartStatus = (product) => {
-  localStorage.setItem(`heartClicked_${product.id}`, product.isHeartClicked);
+  localStorage.setItem(`heartClicked_${product.id}`, !product.isHeartClicked);
 };
 
 const loadHeartStatus = (product) => {
   const heartClicked = localStorage.getItem(`heartClicked_${product.id}`);
   if (heartClicked !== null) {
     product.isHeartClicked = JSON.parse(heartClicked);
-  } else {
-    console.log('tom array')
   }
 };
+
 
 function checkHeartStatus() {
   store.products.forEach((product) => {
@@ -45,14 +37,13 @@ function checkHeartStatus() {
   })
 }
 
-
-
 function storeProduct(productId) {
   if (localStorage.getItem('storeId') === null) {
     localStorage.setItem('storeId', '[]')
     let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
     favouriteProducts.push(productId)
     localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
+
   } else {
     let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
 
@@ -61,9 +52,6 @@ function storeProduct(productId) {
       store.favouriteProduct = store.favouriteProduct.filter((product) => product.id !== productId)
     } else {
       favouriteProducts.push(productId)
-
-
-
     }
     localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
 
@@ -74,13 +62,11 @@ function storeProduct(productId) {
 function getStoredValue() {
   let storedFavouriteProducts = localStorage.getItem('storeId')
   if (storedFavouriteProducts) {
-
     const getFavouriteProducts = JSON.parse(storedFavouriteProducts)
     console.log(getFavouriteProducts)
     if (Array.isArray(getFavouriteProducts)) {
       getFavouriteProducts.forEach(product => {
         store.matchStoredProduct(product)
-
       })
 
     } else {
@@ -92,26 +78,15 @@ function getStoredValue() {
   }
 }
 
-
-
-
-
-// onMounted(() => {
-//   store.products.forEach((product) => {
-//     loadHeartStatus(product);
-//   });
-// });
-
-
 </script>
-
 <template>
   <div class="mainContainer">
     <div class="productContainer">
-      <div v-if="props.filterCategory === 'Alla'" class="productCard" v-for="product in store.products" :key="product.id">
+      <div class="productCard" v-for="product in store.favouriteProduct">
 
         <div class="image"
           @click="store.matchProduct(product.id), $router.push(`/products/${filterCategory}/${store.selectedProduct.productName}`)">
+
           <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
             product.id +
             '/' +
@@ -125,7 +100,6 @@ function getStoredValue() {
               {{ product.productName }}</h3>
             <i @click="storeProduct(product.id), toggleHeart(product)"
               :class="{ 'bi bi-heart': !product.isHeartClicked, 'bi bi-heart-fill': product.isHeartClicked }"></i>
-            <!--  -->
           </div>
           <p> {{ product.description_sum.slice(0, 50) }}...</p>
 
@@ -134,29 +108,6 @@ function getStoredValue() {
             <b-button class="button" size="sm">KÖP <i class="bi bi-cart"></i></b-button>
           </div>
         </div>
-      </div>
-
-      <div
-        @click="store.matchProduct(product.id), $router.push(`/products/${filterCategory}/${store.selectedProduct.productName}`)"
-        v-else class="productCard"
-        v-for="product in store.products.filter(product => product.category === props.filterCategory)">
-
-        <div class="image">
-          <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
-            product.id +
-            '/' +
-            product.image
-            " />
-        </div>
-        <div class="productInformation">
-          <h3>{{ product.productName }}</h3>
-          <p> {{ product.description_sum.slice(0, 50) }}...</p>
-          <div class="priceButtonDesign">
-            <p>{{ product.price }}:-</p>
-            <b-button class="button" size="sm">KÖP<i class="bi bi-cart"></i></b-button>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -183,10 +134,6 @@ function getStoredValue() {
 }
 
 h3 {
-  cursor: pointer;
-}
-
-.bi-heart {
   cursor: pointer;
 }
 
@@ -229,6 +176,7 @@ h3 {
 }
 
 img {
+
   cursor: pointer;
   width: 100px;
   max-height: 100px;
@@ -285,3 +233,13 @@ img {
 
 }
 </style>
+<!--
+  skapa en view - klar
+  imporetra component -klar
+  lägga in header -klar
+  skapa länkar -klar
+  lägg in hjärta på alla produktkort -klar
+  lägga in footer -klar
+  ändra så man klickar på h3 eller bild för att komma till produkt - klar
+  @click på hjärta gör hjärtat ifyllt och tvärtom
+ -->

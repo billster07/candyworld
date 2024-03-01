@@ -8,6 +8,64 @@ const store = useCandyStore();
 const productQuanity = ref(1);
 const selectedProduct = ref([]);
 const route = useRoute();
+const isHeartClicked = ref('false')
+fetchData()
+
+async function fetchData() {
+  await store.fetchProducts();
+  getStoredValue();
+
+}
+
+// const toggleHeart = (selectedProduct) => {
+//   selectedProduct.isHeartClicked = !selectedProduct.isHeartClicked
+
+// }
+
+function storeProduct(productId) {
+  if (localStorage.getItem('storeId') === null) {
+    localStorage.setItem('storeId', '[]')
+    let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
+    favouriteProducts.push(productId)
+    localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
+  } else {
+    let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
+
+    if (favouriteProducts.includes(productId)) {
+      favouriteProducts = favouriteProducts.filter((id) => id !== productId)
+      store.favouriteProduct = store.favouriteProduct.filter((product) => product.id !== productId)
+    } else {
+      favouriteProducts.push(productId)
+
+
+
+    }
+    localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
+
+  }
+  getStoredValue()
+
+}
+function getStoredValue() {
+  let storedFavouriteProducts = localStorage.getItem('storeId')
+  if (storedFavouriteProducts) {
+
+    const getFavouriteProducts = JSON.parse(storedFavouriteProducts)
+    console.log(getFavouriteProducts)
+    if (Array.isArray(getFavouriteProducts)) {
+      getFavouriteProducts.forEach(product => {
+        store.matchStoredProduct(product)
+
+      })
+
+    } else {
+      console.error('inte en array')
+    }
+
+  } else {
+    console.warn('inga produkter hittades')
+  }
+}
 
 const matchProduct = (key) => {
   store.products.forEach((product) => {
@@ -30,31 +88,27 @@ watch(
 <template>
   <div class="product">
     <div class="image">
-      <img
-        :src="
-          'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
-          selectedProduct.id +
-          '/' +
-          selectedProduct.image
-        "
-      />
+      <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
+        store.selectedProduct.id +
+        '/' +
+        store.selectedProduct.image
+        " />
     </div>
     <div class="productContent">
-      <h1>{{ selectedProduct.productName }}</h1>
+      <div class="headlineHeartContainer">
+        <h1>{{ store.selectedProduct.productName }}</h1>
+        <i @click="storeProduct(store.selectedProduct.id), isHeartClicked = !isHeartClicked"
+          :class="{ 'bi bi-heart': isHeartClicked, 'bi bi-heart-fill': !isHeartClicked }"></i>
+
+
+      </div>
       <div class="price-status">
         <p>{{ selectedProduct.price }}:-</p>
         <p><i class="bi bi-circle-fill" variant="success"></i> I lager</p>
       </div>
       <div class="buttons">
-        <input
-          class="quantityCounter"
-          min="1"
-          type="number"
-          v-model="productQuanity"
-        />
-        <b-button class="buyButton" size="lg"
-          >Lägg i varukorgen <i class="bi bi-cart"></i
-        ></b-button>
+        <input class="quantityCounter" min="1" type="number" v-model="productQuanity" />
+        <b-button class="buyButton" size="lg">Lägg i varukorgen <i class="bi bi-cart"></i></b-button>
         <router-link to="/payment"><button>Kassa-sidan</button></router-link>
       </div>
       <div class="productDetails">
@@ -89,6 +143,18 @@ img {
 
 .productContent {
   max-width: 375px;
+}
+
+.headlineHeartContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bi-heart,
+.bi-heart-fill {
+  align-self: flex-end;
+  cursor: pointer;
+  margin: 0 20px 3px 0;
 }
 
 .price-status {
