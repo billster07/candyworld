@@ -166,7 +166,25 @@ function navigateToNewPage() {
         </b-card>
       </b-collapse>
     </div>
-    <b-button type="submit" variant="primary" class="submit-shipping" v-on:click="navigateToNewPage">Genomför Köp</b-button
+
+  <div class="billingPriceContainer">
+    <div class="billingItem">
+      <p><b>Din order:</b></p>
+    </div>
+    <div class="billingItem">
+      <p>Produktkostnad:</p>
+      <p>26kr</p>
+    </div>
+    <div class="billingItem">
+      <p>Fraktkostnad:</p>
+      <p>59kr</p>
+    </div>
+    <div class="billingItem">
+      <p>Total:</p>
+      <p>26kr</p>
+    </div>
+  </div>
+  <b-button type="submit" variant="primary" class="submit-shipping" v-on:click="navigateToNewPage">Genomför Köp</b-button
     >
   </b-form>
 </template>
@@ -182,8 +200,6 @@ function navigateToNewPage() {
   margin-top: 3rem;
   margin-bottom: 0.5rem;
 }
-
-/* .form-control{} */
 
 .submit-shipping {
   margin-top: 3rem;
@@ -205,5 +221,23 @@ function navigateToNewPage() {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.billingPriceContainer{
+  display: flex;
+  flex-direction: column;
+  background-color: aqua;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+.billingItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.billingItem p {
+  margin: 0;
 }
 </style>
