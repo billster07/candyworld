@@ -137,9 +137,7 @@ function getStoredValue() {
         </div>
       </div>
 
-      <div
-        @click="store.matchProduct(product.id), $router.push(`/products/${filterCategory}/${store.selectedProduct.productName}`)"
-        v-else class="productCard"
+      <div @click="store.matchProduct(product.id)" v-else class="productCard"
         v-for="product in store.products.filter(product => product.category === props.filterCategory)">
 
         <div class="image" @click="$router.push(`/products/${product.category}/${product.id}`)">

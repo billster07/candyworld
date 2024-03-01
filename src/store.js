@@ -34,29 +34,32 @@ export const useCandyStore = defineStore("candy", {
         });
       }
     },
-  },
-  addProduct(product) {
-    this.checkIfIncluded = false;
-    this.shoppingCart.forEach((product_) => {
-      if (product_.id === product.id) {
-        this.checkIfIncluded = true;
-        product_.quantity++;
+    addProduct(product) {
+      this.checkIfIncluded = false;
+      this.shoppingCart.forEach((product_) => {
+        if (product_.id === product.id) {
+          this.checkIfIncluded = true;
+          product_.quantity++;
+          sessionStorage.setItem(
+            "shoppingCart",
+            JSON.stringify(this.shoppingCart)
+          );
+        }
+      });
+      if (this.checkIfIncluded === false) {
+        product.quantity = 1;
+        this.shoppingCart.push(product);
         sessionStorage.setItem(
           "shoppingCart",
           JSON.stringify(this.shoppingCart)
         );
       }
-    });
-    if (this.checkIfIncluded === false) {
-      product.quantity = 1;
-      this.shoppingCart.push(product);
-      sessionStorage.setItem("shoppingCart", JSON.stringify(this.shoppingCart));
-    }
-  },
-  updateShoppingCart() {
-    if (sessionStorage.getItem("shoppingCart")) {
-      this.shoppingCart = JSON.parse(sessionStorage.getItem("shoppingCart"));
-    }
+    },
+    updateShoppingCart() {
+      if (sessionStorage.getItem("shoppingCart")) {
+        this.shoppingCart = JSON.parse(sessionStorage.getItem("shoppingCart"));
+      }
+    },
   },
   state: () => ({
     products: [],
