@@ -6,12 +6,9 @@ import ProductView from "./views/ProductView.vue";
 import ShoppingCartView from "./views/ShoppingCartView.vue";
 import FlagLinks from "./components/FlagLinks.vue";
 import PaymentView from "./views/PaymentView.vue";
-<<<<<<< HEAD
 import FavouritesView from "./views/FavouritesView.vue";
 // import FlagLinks from "./components/FlagLinks.vue";
-=======
 import Confirmation from "./components/Confirmation.vue"
->>>>>>> paymentView
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -34,16 +31,6 @@ export default createRouter({
       component: PaymentView,
       path: "/payment",
     },
-<<<<<<< HEAD
-    {
-      component: FavouritesView,
-      path: "/favourites",
-    },
-    {
-      component: ShoppingCartView,
-      path: "/shoppingCart",
-    },
-=======
 
     {
       component: Confirmation, // routersökväg till den nya sidan efter klick?
@@ -55,6 +42,5 @@ export default createRouter({
     //   component: ShoppingcartView,
     //   path: '/shoppingcart'
     // },
->>>>>>> paymentView
   ],
 });
