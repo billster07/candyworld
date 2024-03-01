@@ -20,6 +20,18 @@ export const useCandyStore = defineStore("candy", {
         }
       });
     },
+    matchStoredProduct(storedId) {
+      console.log('bbb', this.products)
+      const alreadyAdded = this.favouriteProduct.some(product => product.id === storedId )
+      if(!alreadyAdded) {
+        this.products.forEach((product) => {
+        if(storedId === product.id ) {
+          this.favouriteProduct.push(product)
+        console.log('hej', this.favouriteProduct)
+      }
+        })
+      }
+    },
   },
-  state: () => ({ products: [], selectedProduct: {} }),
+  state: () => ({ products: [], selectedProduct: {}, favouriteProduct: [] }),
 });

@@ -5,42 +5,96 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 const store = useCandyStore();
 const productQuanity = ref(1);
+const isHeartClicked = ref('false')
+fetchData()
+
+async function fetchData() {
+  await store.fetchProducts();
+  getStoredValue();
+
+}
+
+// const toggleHeart = (selectedProduct) => {
+//   selectedProduct.isHeartClicked = !selectedProduct.isHeartClicked
+
+// }
+
+function storeProduct(productId) {
+  if (localStorage.getItem('storeId') === null) {
+    localStorage.setItem('storeId', '[]')
+    let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
+    favouriteProducts.push(productId)
+    localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
+  } else {
+    let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
+
+    if (favouriteProducts.includes(productId)) {
+      favouriteProducts = favouriteProducts.filter((id) => id !== productId)
+      store.favouriteProduct = store.favouriteProduct.filter((product) => product.id !== productId)
+    } else {
+      favouriteProducts.push(productId)
+
+
+
+    }
+    localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
+
+  }
+  getStoredValue()
+
+}
+function getStoredValue() {
+  let storedFavouriteProducts = localStorage.getItem('storeId')
+  if (storedFavouriteProducts) {
+
+    const getFavouriteProducts = JSON.parse(storedFavouriteProducts)
+    console.log(getFavouriteProducts)
+    if (Array.isArray(getFavouriteProducts)) {
+      getFavouriteProducts.forEach(product => {
+        store.matchStoredProduct(product)
+
+      })
+
+    } else {
+      console.error('inte en array')
+    }
+
+  } else {
+    console.warn('inga produkter hittades')
+  }
+}
 
 </script>
 
 <template>
   <div class="product">
     <div class="image">
-      <img
-        :src="
-          'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
-          store.selectedProduct.id +
-          '/' +
-          store.selectedProduct.image
-        "
-      />
+      <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
+        store.selectedProduct.id +
+        '/' +
+        store.selectedProduct.image
+        " />
     </div>
     <div class="productContent">
-      <h1>{{ store.selectedProduct.productName }}</h1>
+      <div class="headlineHeartContainer">
+        <h1>{{ store.selectedProduct.productName }}</h1>
+        <i @click="storeProduct(store.selectedProduct.id), isHeartClicked = !isHeartClicked"
+          :class="{ 'bi bi-heart': isHeartClicked, 'bi bi-heart-fill': !isHeartClicked }"></i>
+
+
+      </div>
       <div class="price-status">
         <p>{{ store.selectedProduct.price }}:-</p>
         <p><i class="bi bi-circle-fill" variant="success"></i> I lager</p>
       </div>
       <div class="buttons">
-        <input
-          class="quantityCounter"
-          min="1"
-          type="number"
-          v-model="productQuanity"
-        />
-        <b-button class="buyButton" size="lg"
-          >Lägg i varukorgen <i class="bi bi-cart"></i
-        ></b-button>
+        <input class="quantityCounter" min="1" type="number" v-model="productQuanity" />
+        <b-button class="buyButton" size="lg">Lägg i varukorgen <i class="bi bi-cart"></i></b-button>
       </div>
       <div class="productDetails">
         <details>
-            <summary>Beskrivning</summary>
-            <p class="productDescription">{{ store.selectedProduct.description }}</p>
+          <summary>Beskrivning</summary>
+          <p class="productDescription">{{ store.selectedProduct.description }}</p>
         </details>
         <details>
           <summary>Näringsinnehåll</summary>
@@ -68,7 +122,19 @@ img {
 }
 
 .productContent {
-    max-width: 375px;
+  max-width: 375px;
+}
+
+.headlineHeartContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bi-heart,
+.bi-heart-fill {
+  align-self: flex-end;
+  cursor: pointer;
+  margin: 0 20px 3px 0;
 }
 
 .price-status {
@@ -76,6 +142,7 @@ img {
   justify-content: space-between;
   align-items: center;
 }
+
 .price-status p {
   margin: 20px;
 }
@@ -84,6 +151,7 @@ img {
   font-size: x-large;
   margin-left: 22px;
 }
+
 .price-status p:nth-child(2) {
   font-size: small;
   margin-right: 30px;
@@ -93,6 +161,7 @@ h1 {
   margin: 30px 20px 0px 20px;
   align-self: flex-start;
 }
+
 .productDescription {
   margin: 20px;
 }
@@ -119,6 +188,7 @@ details p {
   width: 15%;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
+
 .buyButton {
   width: 85%;
   background-color: #e7b6e2;
@@ -137,22 +207,25 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .bi-circle-fill {
-    color: rgb(5, 171, 5);
+  color: rgb(5, 171, 5);
 }
 
 .buyButton:hover {
   background-color: rgba(255, 164, 85, 0.8);
 }
+
 @media (min-width: 700px) {
   .product {
     flex-direction: row;
     justify-content: center;
   }
+
   .image {
     margin-right: 50px;
     margin-top: 50px;
     align-self: flex-start;
   }
+
   details {
     max-width: 355px;
   }
