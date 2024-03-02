@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch, computed } from 'vue'
 import { useCandyStore } from "/src/store.js";
+import ButtonComponent from './ButtonComponent.vue';
 const store = useCandyStore();
 
 watch(
@@ -51,6 +52,7 @@ const onClickSubtract = (product, key) => {
       </div>
     </div>
   </div>
+  <ButtonComponent button-text="Till kassan" button-size="lg" />
 </template>
 
 <style scoped>
