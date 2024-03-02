@@ -75,7 +75,7 @@ const matchProduct = (key) => {
     }
   });
 };
-store.fetchProducts().then((respone) => matchProduct(route.params.productId));
+store.fetchProducts().then(() => matchProduct(route.params.productId));
 
 watch(
   () => route.params.productId,
@@ -105,14 +105,14 @@ const onAddToShoppingCart = (product) => {
   <div class="product">
     <div class="image">
       <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
-        store.selectedProduct.id +
+        selectedProduct.id +
         '/' +
-        store.selectedProduct.image
+        selectedProduct.image
         " />
     </div>
     <div class="productContent">
       <div class="headlineHeartContainer">
-        <h1>{{ store.selectedProduct.productName }}</h1>
+        <h1>{{ selectedProduct.productName }}</h1>
         <i @click="storeProduct(store.selectedProduct.id), isHeartClicked = !isHeartClicked"
           :class="{ 'bi bi-heart': isHeartClicked, 'bi bi-heart-fill': !isHeartClicked }"></i>
 
