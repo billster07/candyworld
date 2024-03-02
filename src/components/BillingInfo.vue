@@ -61,7 +61,7 @@ function navigateToNewPage() {
                 <b-form-input
                   :id="`type-${index}`"
                   :type="styleList[index]"
-                ></b-form-input>
+                  class="form-control"></b-form-input>
               </b-col>
             </b-row>
           </b-form-group>
@@ -113,6 +113,9 @@ function navigateToNewPage() {
               <b>Leverans till ombud</b> Torsdag - Fredag
               (14.00-16.00)</b-form-radio
             >
+            <div v-if="!selectedPayment" class="alert alert-danger mt-2" role="alert">
+            Vänligen välj en leveransmetod.
+            </div>
           </b-form-group>
         </b-card>
       </b-collapse>
@@ -162,11 +165,14 @@ function navigateToNewPage() {
             >
               Presentkort</b-form-radio
             >
+            <div v-if="!selectedPayment" class="alert alert-danger mt-2" role="alert">
+            Vänligen välj en betalningsmetod.
+            </div>
           </b-form-group>
         </b-card>
       </b-collapse>
     </div>
-
+    <!-- "Din Order-boxen" -->
   <div class="billingPriceContainer">
     <div class="billingItem">
       <p><b>Din order:</b></p>
@@ -190,6 +196,11 @@ function navigateToNewPage() {
 </template>
 
 <style scoped>
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  color: #000;
+}
 .collapsebutton {
   width: 80%;
   height: 9rem;
@@ -226,8 +237,9 @@ function navigateToNewPage() {
 .billingPriceContainer{
   display: flex;
   flex-direction: column;
-  background-color: aqua;
-  max-width: 800px;
+  background-color: #e7b6e269;
+  width: 80%;
+  margin-top: 3rem;
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
@@ -240,4 +252,5 @@ function navigateToNewPage() {
 .billingItem p {
   margin: 0;
 }
+
 </style>
