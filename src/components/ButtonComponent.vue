@@ -8,10 +8,10 @@ const props = defineProps({
 </script>
 
 <template>
-  <RouterLink to="/payment">
-    <b-button class="button" :size="props.buttonSize">
+  <b-button class="button" :size="props.buttonSize"
+    ><RouterLink to="/payment">
       {{ buttonText }}
-    </b-button></RouterLink
+    </RouterLink></b-button
   >
 </template>
 
@@ -31,5 +31,10 @@ const props = defineProps({
 
 .button:active {
   background-color: #ffe67b;
+}
+
+a {
+  text-decoration: none;
+  color: white;
 }
 </style>
