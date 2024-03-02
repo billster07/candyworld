@@ -28,6 +28,14 @@ export default createRouter({
       // adressparameter
     },
     {
+      component: ShoppingCartView,
+      path: "/shoppingcart"
+    },
+    {
+      component: FavouritesView,
+      path: "/favourites"
+    },
+    {
       component: PaymentView,
       path: "/payment",
     },
