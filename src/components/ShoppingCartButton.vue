@@ -8,7 +8,7 @@ const counter = ref(0)
 // const amountOfProducts = ref(store.shoppingCart.length)
 const amountOfProducts = computed(() => {
   counter.value = 0;
-  store.shoppingCart.map((product) => counter.value = counter.value + product.quantity) 
+  store.shoppingCart.map((product) => counter.value += product.quantity) 
   return counter.value
 })
 // watch(

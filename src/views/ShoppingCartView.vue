@@ -1,7 +1,7 @@
 <script setup>
 import { useCandyStore } from "/src/store.js";
 import Header from '../components/Header.vue';
-import Button from '../components/Button.vue';
+import ButtonComponent from '../components/ButtonComponent.vue';
 import ShoppingCartProducts from '../components/ShoppingCartProducts.vue'
 
 
@@ -14,7 +14,7 @@ const store = useCandyStore();
     <ShoppingCartProducts v-if="store.shoppingCart.length > 0" />
     <div v-else class="emptyCart">
       <p>Din varukorg är tom</p>
-      <Button @click="$router.push('/products/Alla')" class="button" button-text="Fortsätt handla" button-size="lg" />
+      <ButtonComponent @click="$router.push('/products/Alla')" class="button" button-text="Fortsätt handla" button-size="lg" />
     </div>
   </div>
 </template>

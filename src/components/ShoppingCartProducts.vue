@@ -10,6 +10,12 @@ watch(
   }
 )
 
+const total = computed(() => {
+  let sum = 0;
+  store.shoppingCart.map((product) => sum+= Math.round((product.price * product.quantity) * 100) / 100)
+  return Math.round(sum)
+})
+
 const onClickPlus = (product) => {
   store.shoppingCart.forEach((product_) => {
     if (product_.id === product.id) {
@@ -52,7 +58,11 @@ const onClickSubtract = (product, key) => {
       </div>
     </div>
   </div>
-  <ButtonComponent button-text="Till kassan" button-size="lg" />
+  <div class="total">
+    <p>Att betala:</p>
+    <p>{{ total }}:-</p>
+  </div>
+  <ButtonComponent class="button" button-text="Till kassan" button-size="lg" />
 </template>
 
 <style scoped>
@@ -110,5 +120,15 @@ img {
   font-size: large;
   width: 70px;
   text-align: end;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  width: 80vw;
+}
+.button {
+  margin: 0;
+  width: 80vw;
 }
 </style>
