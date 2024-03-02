@@ -1,14 +1,12 @@
 <script setup>
-import { ref, watch, computed } from 'vue'
+import { ref, watch, computed } from "vue";
 import { useCandyStore } from "/src/store.js";
-import ButtonComponent from './ButtonComponent.vue';
+import ButtonComponent from "./ButtonComponent.vue";
 const store = useCandyStore();
 
-watch(
-  store.shoppingCart, (shoppingCart) => {
-    sessionStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
-  }
-)
+watch(store.shoppingCart, (shoppingCart) => {
+  sessionStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+});
 
 const total = computed(() => {
   let sum = 0;
@@ -19,42 +17,54 @@ const total = computed(() => {
 const onClickPlus = (product) => {
   store.shoppingCart.forEach((product_) => {
     if (product_.id === product.id) {
-      product_.quantity++
+      product_.quantity++;
     }
-  })
-}
+  });
+};
 const onClickSubtract = (product, key) => {
   if (key === 0 && product.quantity === 1) {
-    store.shoppingCart.shift()
+    store.shoppingCart.shift();
   } else if (product.quantity === 1) {
-    store.shoppingCart.splice(key, key)
+    store.shoppingCart.splice(key, key);
   } else {
     store.shoppingCart.forEach((product_) => {
       if (product_.id === product.id) {
-        product_.quantity--
+        product_.quantity--;
       }
-    })
+    });
   }
-}
+};
+
 </script>
 
 <template>
   <div v-for="(product, key) in store.shoppingCart" class="productCard">
-    <div class="image" @click="$router.push(`/products/${product.category}/${product.id}`)">
-      <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
-        product.id +
-        '/' +
-        product.image
-        " />
+    <div
+      class="image"
+      @click="$router.push(`/products/${product.category}/${product.id}`)"
+    >
+      <img
+        :src="
+          'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
+          product.id +
+          '/' +
+          product.image
+        "
+      />
     </div>
     <div class="productInformation">
-      <h3 @click="$router.push(`/products/${product.category}/${product.id}`)">{{ product.productName }}</h3>
+      <h3 @click="$router.push(`/products/${product.category}/${product.id}`)">
+        {{ product.productName }}
+      </h3>
 
       <div class="priceButtonDesign">
         <i @click="onClickSubtract(product, key)" class="bi bi-dash-circle"></i>
         <p class="productQuantity">{{ product.quantity }}</p>
         <i @click="onClickPlus(product)" class="bi bi-plus-circle"></i>
-        <p class="price">{{ (Math.round((product.price * product.quantity) * 100) / 100) }}:-</p>
+
+        <p class="price">
+          {{ Math.round(product.price * product.quantity * 100) / 100 }}:-
+        </p>
       </div>
     </div>
   </div>

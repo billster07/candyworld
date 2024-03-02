@@ -3,6 +3,7 @@ import { ref } from "vue";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useRouter } from "vue-router";
 
+
 const router = useRouter();
 //Skapa egen funktion för visible
 let visibleAdress = ref(false);
@@ -29,9 +30,8 @@ function onSubmit(event) {
 }
 
 function navigateToNewPage() {
-  router.push('/Confirmation')
+  router.push("/Confirmation");
 }
-
 </script>
 
 <template>
@@ -44,7 +44,7 @@ function navigateToNewPage() {
       aria-controls="collapse-1"
       @click="visibleAdress = !visibleAdress"
     >
-    <i class="bi bi-geo-alt"></i> Leveransadress
+      <i class="bi bi-geo-alt"></i> Leveransadress
     </b-button>
     <b-collapse id="collapse-1" v-model="visibleAdress" class="mt-2">
       <b-container fluid class="adress-info card">
@@ -78,18 +78,17 @@ function navigateToNewPage() {
         aria-controls="collapse-2"
         @click="visibleShipping = !visibleShipping"
       >
-      <i class="bi bi-truck"></i> Leveransmetod
+        <i class="bi bi-truck"></i> Leveransmetod
         <div class="mt-3">
           {{ selected }}
         </div>
       </b-button>
       <b-collapse id="collapse-2" v-model="visibleShipping" class="mt-2">
         <b-card>
-          <b-form-group v-slot="{ ariaDescribedby }">
+          <b-form-group name="shipping-radio">
             <b-form-radio
               v-model="selected"
-              :aria-describedby="ariaDescribedby"
-              name="some-radios"
+              name="shipping-radio"
               value="Levereras till paketbox"
             >
               <b>Levereras till paketbox</b> Onsdag - Torsdag</b-form-radio
@@ -97,8 +96,7 @@ function navigateToNewPage() {
             <hr />
             <b-form-radio
               v-model="selected"
-              :aria-describedby="ariaDescribedby"
-              name="some-radios"
+              name="shipping-radio"
               value="Hemleverans till brevlåda"
             >
               <b>Hemleverans brevlåda</b> Onsdag - Torsdag
@@ -106,8 +104,7 @@ function navigateToNewPage() {
             <hr />
             <b-form-radio
               v-model="selected"
-              :aria-describedby="ariaDescribedby"
-              name="some-radios"
+              name="shipping-radio"
               value="Leverans till ombud"
             >
               <b>Leverans till ombud</b> Torsdag - Fredag
@@ -128,18 +125,17 @@ function navigateToNewPage() {
         aria-controls="collapse-3"
         @click="visiblePayment = !visiblePayment"
       >
-      <i class="bi bi-credit-card"></i> Betalsätt
+        <i class="bi bi-credit-card"></i> Betalsätt
         <div class="mt-3">
           {{ selectedPayment }}
         </div>
       </b-button>
       <b-collapse id="collapse-3" v-model="visiblePayment" class="mt-2">
         <b-card>
-          <b-form-group v-slot="{ ariaDescribedby }">
+          <b-form-group name="payment-radio">
             <b-form-radio
               v-model="selectedPayment"
-              :aria-describedby="ariaDescribedby"
-              name="some-radios"
+              name="payment-radio"
               value="Swish"
             >
               Swish</b-form-radio
@@ -147,8 +143,7 @@ function navigateToNewPage() {
             <hr />
             <b-form-radio
               v-model="selectedPayment"
-              :aria-describedby="ariaDescribedby"
-              name="some-radios"
+              name="payment-radio"
               value="Kortbetalning"
             >
               Kortbetalning
@@ -156,8 +151,7 @@ function navigateToNewPage() {
             <hr />
             <b-form-radio
               v-model="selectedPayment"
-              :aria-describedby="ariaDescribedby"
-              name="some-radios"
+              name="payment-radio"
               value="Presentkort"
             >
               Presentkort</b-form-radio
@@ -167,24 +161,29 @@ function navigateToNewPage() {
       </b-collapse>
     </div>
 
-  <div class="billingPriceContainer">
-    <div class="billingItem">
-      <p><b>Din order:</b></p>
+    <div class="billingPriceContainer">
+      <div class="billingItem">
+        <p><b>Din order:</b></p>
+      </div>
+      <div class="billingItem">
+        <p>Produktkostnad:</p>
+        <p>26kr</p>
+      </div>
+      <div class="billingItem">
+        <p>Fraktkostnad:</p>
+        <p>59kr</p>
+      </div>
+      <div class="billingItem">
+        <p>Total:</p>
+        <p>26kr</p>
+      </div>
     </div>
-    <div class="billingItem">
-      <p>Produktkostnad:</p>
-      <p>26kr</p>
-    </div>
-    <div class="billingItem">
-      <p>Fraktkostnad:</p>
-      <p>59kr</p>
-    </div>
-    <div class="billingItem">
-      <p>Total:</p>
-      <p>26kr</p>
-    </div>
-  </div>
-  <b-button type="submit" variant="primary" class="submit-shipping" v-on:click="navigateToNewPage">Genomför Köp</b-button
+    <b-button
+      type="submit"
+      variant="primary"
+      class="submit-shipping"
+      v-on:click="navigateToNewPage"
+      >Genomför Köp</b-button
     >
   </b-form>
 </template>
@@ -208,8 +207,9 @@ function navigateToNewPage() {
   color: #000;
   border-color: #000;
 }
-.submit-shipping:hover, .collapsebutton:hover{
-  background-color:rgba(255, 164, 85, 0.8);
+.submit-shipping:hover,
+.collapsebutton:hover {
+  background-color: rgba(255, 164, 85, 0.8);
 }
 
 .adress-info {
@@ -223,7 +223,7 @@ function navigateToNewPage() {
   margin-right: auto;
 }
 
-.billingPriceContainer{
+.billingPriceContainer {
   display: flex;
   flex-direction: column;
   background-color: aqua;

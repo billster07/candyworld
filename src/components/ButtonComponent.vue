@@ -1,11 +1,18 @@
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps } from "vue";
 
-const props = defineProps({ buttonText: { type: String }, buttonSize: { type: String, default: "sm" } })
+const props = defineProps({
+  buttonText: { type: String },
+  buttonSize: { type: String, default: "sm" },
+});
 </script>
 
 <template>
-    <b-button class="button" :size="props.buttonSize"> {{ buttonText }} </b-button>
+  <RouterLink to="/payment">
+    <b-button class="button" :size="props.buttonSize">
+      {{ buttonText }}
+    </b-button></RouterLink
+  >
 </template>
 
 <style scoped>
@@ -23,6 +30,6 @@ const props = defineProps({ buttonText: { type: String }, buttonSize: { type: St
 }
 
 .button:active {
-  background-color: #FFE67B;
+  background-color: #ffe67b;
 }
 </style>
