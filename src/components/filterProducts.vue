@@ -112,7 +112,7 @@ function getStoredValue() {
       <div v-if="props.filterCategory === 'Alla'" class="productCard" v-for="product in store.products" :key="product.id">
 
         <div class="image"
-          @click="store.matchProduct(product.id), $router.push(`/products/${filterCategory}/${store.selectedProduct.productName}`)">
+          @click="store.matchProduct(product.id), $router.push(`/products/${product.category}/${product.id}`)">
           <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
             product.id +
             '/' +
@@ -122,7 +122,7 @@ function getStoredValue() {
         <div class="productInformation">
           <div class="headlineHeartContainer">
             <h3
-              @click="store.matchProduct(product.id), $router.push(`/products/${product.category}/${store.selectedProduct.productName}`)">
+              @click="store.matchProduct(product.id), $router.push(`/products/${product.category}/${product.id}`)">
               {{ product.productName }}</h3>
             <i @click="storeProduct(product.id), toggleHeart(product)"
               :class="{ 'bi bi-heart': !product.isHeartClicked, 'bi bi-heart-fill': product.isHeartClicked }"></i>
