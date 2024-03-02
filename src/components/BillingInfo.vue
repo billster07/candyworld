@@ -44,6 +44,7 @@ function navigateToNewPage() {
       aria-controls="collapse-1"
       @click="visibleAdress = !visibleAdress"
     >
+    <!-- Ska be om handledning på måndag. Hur löser man BFormInput/BFormInvalidFeedback när v-for används? -->
     <i class="bi bi-geo-alt"></i> Leveransadress
     </b-button>
     <b-collapse id="collapse-1" v-model="visibleAdress" class="mt-2">
@@ -193,6 +194,7 @@ function navigateToNewPage() {
   <b-button type="submit" variant="primary" class="submit-shipping" v-on:click="navigateToNewPage">Genomför Köp</b-button
     >
   </b-form>
+
 </template>
 
 <style scoped>
