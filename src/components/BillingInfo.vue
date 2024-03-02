@@ -3,6 +3,7 @@ import { ref } from "vue";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useRouter } from "vue-router";
 
+
 const router = useRouter();
 //Skapa egen funktion för visible
 let visibleAdress = ref(false);

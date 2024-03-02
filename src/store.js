@@ -40,6 +40,7 @@ export const useCandyStore = defineStore("candy", {
         if (product_.id === product.id) {
           this.checkIfIncluded = true;
           product_.quantity++;
+
           sessionStorage.setItem(
             "shoppingCart",
             JSON.stringify(this.shoppingCart)
@@ -48,6 +49,7 @@ export const useCandyStore = defineStore("candy", {
       });
       if (this.checkIfIncluded === false) {
         product.quantity = 1;
+
         this.shoppingCart.push(product);
         sessionStorage.setItem(
           "shoppingCart",
@@ -61,6 +63,7 @@ export const useCandyStore = defineStore("candy", {
       }
     },
   },
+
   state: () => ({
     products: [],
     selectedProduct: {},
