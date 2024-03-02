@@ -48,7 +48,7 @@ function navigateToNewPage() {
     </b-button>
     <b-collapse id="collapse-1" v-model="visibleAdress" class="mt-2">
       <b-container fluid class="adress-info card">
-        <div>
+        <div  >
           <b-form-group>
             <b-row class="my-1" v-for="(name, index) in nameList" :key="index">
               <b-col sm="3">
@@ -61,7 +61,7 @@ function navigateToNewPage() {
                 <b-form-input
                   :id="`type-${index}`"
                   :type="styleList[index]"
-                  class="form-control"></b-form-input>
+                  ></b-form-input>
               </b-col>
             </b-row>
           </b-form-group>
@@ -113,7 +113,7 @@ function navigateToNewPage() {
               <b>Leverans till ombud</b> Torsdag - Fredag
               (14.00-16.00)</b-form-radio
             >
-            <div v-if="!selectedPayment" class="alert alert-danger mt-2" role="alert">
+            <div v-if="!selected" class="alert alert-danger mt-2" role="alert">
             Vänligen välj en leveransmetod.
             </div>
           </b-form-group>
@@ -197,9 +197,11 @@ function navigateToNewPage() {
 
 <style scoped>
 
-body{
-  font-family: Arial, Helvetica, sans-serif;
-  color: #000;
+code{
+  color: black;
+  font-family: roboto, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
 }
 .collapsebutton {
   width: 80%;
@@ -225,6 +227,7 @@ body{
 
 .adress-info {
   max-width: 800px;
+  color: #000;
 }
 
 .card {
