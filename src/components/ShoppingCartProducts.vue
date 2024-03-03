@@ -8,11 +8,9 @@ watch(store.shoppingCart, (shoppingCart) => {
   sessionStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
 });
 
-const total = computed(() => {
-  let sum = 0;
-  store.shoppingCart.map((product) => sum+= Math.round((product.price * product.quantity) * 100) / 100)
-  return Math.round(sum)
-})
+//Hämtar totalSum funktionen från Pinia och använder computed för att se om värdet ändras.
+const totalProductSum = computed(() => store.totalSum())
+
 
 const onClickPlus = (product) => {
   store.shoppingCart.forEach((product_) => {
@@ -70,7 +68,7 @@ const onClickSubtract = (product, key) => {
   </div>
   <div class="total">
     <p>Att betala:</p>
-    <p>{{ total }}:-</p>
+    <p>{{ totalProductSum }}:-</p>
   </div>
   <ButtonComponent class="button" button-text="Till kassan" button-size="lg" />
 </template>

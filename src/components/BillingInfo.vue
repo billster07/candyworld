@@ -2,9 +2,16 @@
 import { ref } from "vue";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useRouter } from "vue-router";
+import { useCandyStore } from "/src/store.js";
 
+
+//Hämtar totalSum funktionen från pinia
+const store = useCandyStore();
+const totalProductSum = store.totalSum()
+const totalSum = totalProductSum + 59;
 
 const router = useRouter();
+
 //Skapa egen funktion för visible
 let visibleAdress = ref(false);
 let visibleShipping = ref(false);
@@ -167,24 +174,26 @@ function navigateToNewPage() {
         </b-card>
       </b-collapse>
     </div>
-    <!-- "Din Order-boxen" -->
-  <div class="billingPriceContainer">
-    <div class="billingItem">
-      <p><b>Din order:</b></p>
+
+    <div class="billingPriceContainer">
+      <div class="billingItem">
+        <p><b>Din order:</b></p>
+      </div>
+      <div class="billingItem">
+        <p>Produktkostnad:</p>
+        <p>{{totalProductSum}}</p>
+      </div>
+      <div class="billingItem">
+        <p>Fraktkostnad:</p>
+        <p>59kr</p>
+      </div>
+      <div class="billingItem">
+        <p>Total:</p>
+        <p>{{ totalSum }}</p>
+      </div>
     </div>
-    <div class="billingItem">
-      <p>Produktkostnad:</p>
-      <p>26kr</p>
-    </div>
-    <div class="billingItem">
-      <p>Fraktkostnad:</p>
-      <p>59kr</p>
-    </div>
-    <div class="billingItem">
-      <p>Total:</p>
-      <p>26kr</p>
-    </div>
-  </div>
+
+  
   <b-button type="submit" variant="primary" class="submit-shipping" v-on:click="navigateToNewPage">Genomför Köp</b-button
     >
   </b-form>

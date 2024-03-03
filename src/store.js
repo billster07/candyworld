@@ -62,6 +62,13 @@ export const useCandyStore = defineStore("candy", {
         this.shoppingCart = JSON.parse(sessionStorage.getItem("shoppingCart"));
       }
     },
+   totalSum(){
+      let sum = 0;
+      this.shoppingCart.forEach((product) => {
+        sum += Math.round((product.price * product.quantity) * 100) / 100;
+      });
+      return Math.round(sum)
+    }
   },
 
   state: () => ({
