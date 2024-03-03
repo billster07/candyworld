@@ -2,9 +2,16 @@
 import { ref } from "vue";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useRouter } from "vue-router";
+import { useCandyStore } from "/src/store.js";
 
+
+//Hämtar totalSum funktionen från pinia
+const store = useCandyStore();
+const totalProductSum = store.totalSum()
+const totalSum = totalProductSum + 59;
 
 const router = useRouter();
+
 //Skapa egen funktion för visible
 let visibleAdress = ref(false);
 let visibleShipping = ref(false);
@@ -167,7 +174,7 @@ function navigateToNewPage() {
       </div>
       <div class="billingItem">
         <p>Produktkostnad:</p>
-        <p>26kr</p>
+        <p>{{totalProductSum}}</p>
       </div>
       <div class="billingItem">
         <p>Fraktkostnad:</p>
@@ -175,7 +182,7 @@ function navigateToNewPage() {
       </div>
       <div class="billingItem">
         <p>Total:</p>
-        <p>26kr</p>
+        <p>{{ totalSum }}</p>
       </div>
     </div>
     <b-button
