@@ -26,6 +26,7 @@ const props = defineProps({ headline: { type: String } })
 }
 
 .iconArrow {
+  cursor: pointer;
   left: 0;
   margin-left: 1em;
   position: absolute;

@@ -3,28 +3,101 @@ import { ref, watch } from "vue";
 import { useCandyStore } from "/src/store.js";
 import { useRouter, useRoute } from "vue-router";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import BuyButton from "./BuyButton.vue";
 
 const store = useCandyStore();
 const productQuanity = ref(1);
-const selectedProduct = ref([])
-const route = useRoute()
+const selectedProduct = ref([]);
+const route = useRoute();
+const isHeartClicked = ref('false')
+fetchData()
+
+async function fetchData() {
+  await store.fetchProducts();
+  getStoredValue();
+
+}
+
+// const toggleHeart = (selectedProduct) => {
+//   selectedProduct.isHeartClicked = !selectedProduct.isHeartClicked
+
+// }
+
+function storeProduct(productId) {
+  if (localStorage.getItem('storeId') === null) {
+    localStorage.setItem('storeId', '[]')
+    let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
+    favouriteProducts.push(productId)
+    localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
+  } else {
+    let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
+
+    if (favouriteProducts.includes(productId)) {
+      favouriteProducts = favouriteProducts.filter((id) => id !== productId)
+      store.favouriteProduct = store.favouriteProduct.filter((product) => product.id !== productId)
+    } else {
+      favouriteProducts.push(productId)
+
+
+
+    }
+    localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
+
+  }
+  getStoredValue()
+
+}
+function getStoredValue() {
+  let storedFavouriteProducts = localStorage.getItem('storeId')
+  if (storedFavouriteProducts) {
+
+    const getFavouriteProducts = JSON.parse(storedFavouriteProducts)
+    console.log(getFavouriteProducts)
+    if (Array.isArray(getFavouriteProducts)) {
+      getFavouriteProducts.forEach(product => {
+        store.matchStoredProduct(product)
+
+      })
+
+    } else {
+      console.error('inte en array')
+    }
+
+  } else {
+    console.warn('inga produkter hittades')
+  }
+}
 
 const matchProduct = (key) => {
   store.products.forEach((product) => {
     if (key === product.id) {
-      selectedProduct.value = product
+      selectedProduct.value = product;
     }
-  })
-}
-store.fetchProducts().then((respone) => matchProduct(route.params.productId))
+  });
+};
+store.fetchProducts().then(() => matchProduct(route.params.productId));
 
 watch(
   () => route.params.productId,
   (newValue) => {
     store.fetchProducts();
-    matchProduct(newValue)
+    matchProduct(newValue);
   }
 );
+
+const onAddToShoppingCart = (product) => {
+  const checkIfincluded = false
+  store.shoppingCart.forEach((product_) => {
+    if (product_.id === product.id) {
+      if (product_.quantity) {
+        product_.quantity += productQuanity.value
+      } else {
+        product_.quantity = productQuanity.value
+      }
+      sessionStorage.setItem("shoppingCart", JSON.stringify(store.shoppingCart))
+    }
+  })
+}
 
 </script>
 
@@ -38,14 +111,22 @@ watch(
         " />
     </div>
     <div class="productContent">
-      <h1>{{ selectedProduct.productName }}</h1>
+      <div class="headlineHeartContainer">
+        <h1>{{ selectedProduct.productName }}</h1>
+        <i @click="storeProduct(store.selectedProduct.id), isHeartClicked = !isHeartClicked"
+          :class="{ 'bi bi-heart': isHeartClicked, 'bi bi-heart-fill': !isHeartClicked }"></i>
+
+
+      </div>
       <div class="price-status">
         <p>{{ selectedProduct.price }}:-</p>
         <p><i class="bi bi-circle-fill" variant="success"></i> I lager</p>
       </div>
       <div class="buttons">
         <input class="quantityCounter" min="1" type="number" v-model="productQuanity" />
-        <b-button class="buyButton" size="lg">Lägg i varukorgen <i class="bi bi-cart"></i></b-button>
+        <router-link to="/payment"><button>Kassa-sidan</button></router-link>
+        <BuyButton @click="onAddToShoppingCart(selectedProduct)" class="buyButton" button-size="lg"
+          button-text="Lägg i varukorgen" />
       </div>
       <div class="productDetails">
         <details>
@@ -83,6 +164,18 @@ img {
 
 .productContent {
   max-width: 375px;
+}
+
+.headlineHeartContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bi-heart,
+.bi-heart-fill {
+  align-self: flex-end;
+  cursor: pointer;
+  margin: 0 20px 3px 0;
 }
 
 .price-status {
@@ -139,11 +232,6 @@ details p {
 
 .buyButton {
   width: 85%;
-  background-color: #e7b6e2;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 0.75rem;
-  border: 0;
-  padding: 5px 15px 5px 15px;
   margin: 0 20px 0 10px;
   height: 40px;
   font-size: medium;

@@ -1,7 +1,10 @@
 <script setup>
 import myfooter from './components/Footer.vue'
 import dropDownMenu from './components/dropDownMenu.vue';
+import { useCandyStore } from "/src/store.js";
 
+const store = useCandyStore()
+store.updateShoppingCart();
 const menuIsClicked = (isOpen) => {
   console.log('User clicked on menu!', isOpen);
 };
