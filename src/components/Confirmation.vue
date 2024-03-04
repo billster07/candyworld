@@ -2,10 +2,13 @@
 
 import { useRouter } from "vue-router";
 const router = useRouter();
+import moment from 'moment';
 
-// function navigateToHome() {
-//   router.push('./views/HomeView')
-// } gjorde med router-link istället? Detta är onödigt komplicerat?
+function addDays() {
+let currentDate = moment();
+return currentDate.add(6, 'days').format('dddd D MMMM YYYY')
+}
+const deliveryDate = addDays();
 
 
 </script>
@@ -17,7 +20,7 @@ const router = useRouter();
   <div class="confirmationText">
     <h2> Tack för ditt köp!</h2>
     <p>Ditt ordernummer är <b>2348526</b>.</p>
-    <p>Beräknad leveranstid <b> Måndag 17 Februari (moments). </b></p>
+    <p>Bekräknat leveransdatum: <b>{{ deliveryDate }} </b></p>
     <p>Din orderbekräftelse skickas till <b>sara@gmail.com</b> textinterpolering</p>
     <p>För att ändra i din order, följ instruktionerna i orderbekräftelse.</p>
   </div>
