@@ -26,9 +26,6 @@ const candyPicture1 = ref("candyPicture500.png"),
       <img class="candyPhoto" alt="Candy Photo" :src="candyPicture1">
     </div>
   </div>
-
-  <!-- karusell med bilder läggs in här -->
-
   <div class="wrapPAndImage2">
     <div class="yellowBox">
       <p class="yellowBoxDescription">
@@ -46,15 +43,10 @@ const candyPicture1 = ref("candyPicture500.png"),
   <div class="footerContainer">
     <myFooter />
   </div>
-  <!-- karusell med bilder läggs in här -->
 </template>
 
 <style scoped>
-.wrapPAndImage1 {
-  background-color: #ffe67b;
-}
-
-.wrapPAndImage2 {
+.wrapPAndImage1, .wrapPAndImage2, .footerContainer {
   background-color: #ffe67b;
 }
 
@@ -86,18 +78,18 @@ const candyPicture1 = ref("candyPicture500.png"),
   width: 8em;
 }
 
+.button:hover {
+  background-color: rgba(255, 164, 85, 0.8);
+}
+
 .photoContainer {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .candyPhoto {
   width: 300px;
-}
-
-.footerContainer {
-  background-color: #ffe67b;
 }
 
 @media (min-width: 670px) {
@@ -121,7 +113,5 @@ const candyPicture1 = ref("candyPicture500.png"),
     max-height: 300px;
     max-width: 300px;
   }
-
-
 }
 </style>

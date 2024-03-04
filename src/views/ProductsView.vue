@@ -94,14 +94,6 @@ countryFlags();
 </script>
 
 <template>
-  <!-- <div class="header">
-    <div class="iconArrow">
-      <i @click="$router.go(-1)" class="bi bi-arrow-left-short" scale="1.5"></i>
-    </div>
-    <div class="headline">
-      <h1>PRODUKTER</h1>
-    </div>
-  </div> -->
   <myHeader headline="PRODUKTER" />
   <b-container>
     <b-row align-h="center">
