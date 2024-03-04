@@ -5,90 +5,6 @@ import { useCandyStore } from "/src/store.js";
 import BuyButton from "./BuyButton.vue";
 
 const store = useCandyStore();
-<<<<<<< HEAD
-// store.fetchProducts();
-// getStoredValue()
-
-fetchData();
-
-async function fetchData() {
-  await store.fetchProducts();
-  getStoredValue();
-  checkHeartStatus();
-}
-
-// checkProducts()
-const props = defineProps({ filterCategory: { type: String } });
-
-// const isHeartClicked = ref({})
-
-const toggleHeart = (product) => {
-  product.isHeartClicked = !product.isHeartClicked;
-  saveHeartStatus(product);
-};
-const saveHeartStatus = (product) => {
-  localStorage.setItem(`heartClicked_${product.id}`, product.isHeartClicked);
-};
-
-const loadHeartStatus = (product) => {
-  const heartClicked = localStorage.getItem(`heartClicked_${product.id}`);
-  if (heartClicked !== null) {
-    product.isHeartClicked = JSON.parse(heartClicked);
-  } else {
-    console.log("tom array");
-  }
-};
-
-function checkHeartStatus() {
-  store.products.forEach((product) => {
-    loadHeartStatus(product);
-  });
-}
-
-function storeProduct(productId) {
-  if (localStorage.getItem("storeId") === null) {
-    localStorage.setItem("storeId", "[]");
-    let favouriteProducts = JSON.parse(localStorage.getItem("storeId"));
-    favouriteProducts.push(productId);
-    localStorage.setItem("storeId", JSON.stringify(favouriteProducts));
-  } else {
-    let favouriteProducts = JSON.parse(localStorage.getItem("storeId"));
-
-    if (favouriteProducts.includes(productId)) {
-      favouriteProducts = favouriteProducts.filter((id) => id !== productId);
-      store.favouriteProduct = store.favouriteProduct.filter(
-        (product) => product.id !== productId
-      );
-    } else {
-      favouriteProducts.push(productId);
-    }
-    localStorage.setItem("storeId", JSON.stringify(favouriteProducts));
-  }
-  getStoredValue();
-}
-function getStoredValue() {
-  let storedFavouriteProducts = localStorage.getItem("storeId");
-  if (storedFavouriteProducts) {
-    const getFavouriteProducts = JSON.parse(storedFavouriteProducts);
-    console.log(getFavouriteProducts);
-    if (Array.isArray(getFavouriteProducts)) {
-      getFavouriteProducts.forEach((product) => {
-        store.matchStoredProduct(product);
-      });
-    } else {
-      console.error("inte en array");
-    }
-  } else {
-    console.warn("inga produkter hittades");
-  }
-}
-
-// onMounted(() => {
-//   store.products.forEach((product) => {
-//     loadHeartStatus(product);
-//   });
-// });
-=======
 fetchData()
 
 async function fetchData() {
@@ -100,7 +16,6 @@ async function fetchData() {
 
 const props = defineProps({ filterCategory: { type: String } })
 
->>>>>>> 80c405c63de55a50fa6825a71f921f59c22dc3cb
 </script>
 
 <template>
@@ -131,27 +46,10 @@ const props = defineProps({ filterCategory: { type: String } })
         <div class="productInformation">
           <div class="headlineHeartContainer">
             <h3
-<<<<<<< HEAD
-              @click="
-                store.matchProduct(product.id),
-                  $router.push(`/products/${product.category}/${product.id}`)
-              "
-            >
-              {{ product.productName }}
-            </h3>
-            <i
-              @click="storeProduct(product.id), toggleHeart(product)"
-              :class="{
-                'bi bi-heart': !product.isHeartClicked,
-                'bi bi-heart-fill': product.isHeartClicked,
-              }"
-            ></i>
-=======
               @click="store.matchProduct(product.id), $router.push(`/products/${product.category}/${product.id}`)">
               {{ product.productName }}</h3>
             <i @click="store.storeProduct(product.id), store.toggleHeart(product)"
               :class="{ 'bi bi-heart': !product.isHeartClicked, 'bi bi-heart-fill': product.isHeartClicked }"></i>
->>>>>>> 80c405c63de55a50fa6825a71f921f59c22dc3cb
             <!--  -->
           </div>
           <p>{{ product.description_sum.slice(0, 50) }}...</p>
@@ -189,21 +87,12 @@ const props = defineProps({ filterCategory: { type: String } })
           />
         </div>
         <div class="productInformation">
-<<<<<<< HEAD
-          <h3
-            @click="$router.push(`/products/${product.category}/${product.id}`)"
-          >
-            {{ product.productName }}
-          </h3>
-          <p>{{ product.description_sum.slice(0, 50) }}...</p>
-=======
           <div class="headlineHeartContainer">
             <h3 @click="$router.push(`/products/${product.category}/${product.id}`)">{{ product.productName }}</h3>
             <i @click="store.storeProduct(product.id), store.toggleHeart(product)"
               :class="{ 'bi bi-heart': !product.isHeartClicked, 'bi bi-heart-fill': product.isHeartClicked }"></i>
           </div>
           <p> {{ product.description_sum.slice(0, 50) }}...</p>
->>>>>>> 80c405c63de55a50fa6825a71f921f59c22dc3cb
           <div class="priceButtonDesign">
             <p>{{ product.price }}:-</p>
             <BuyButton
@@ -264,11 +153,8 @@ h3, .bi-heart, .bi-heart-fill {
 img {
   cursor: pointer;
   max-height: 100px;
-<<<<<<< HEAD
-=======
   width: 100px;
 
->>>>>>> 80c405c63de55a50fa6825a71f921f59c22dc3cb
 }
 
 .image {
