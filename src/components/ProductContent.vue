@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from "vue";
 import { useCandyStore } from "/src/store.js";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import BuyButton from "./BuyButton.vue";
 
@@ -9,64 +9,14 @@ const store = useCandyStore();
 const productQuanity = ref(1);
 const selectedProduct = ref([]);
 const route = useRoute();
-const isHeartClicked = ref('false')
 fetchData()
 
 async function fetchData() {
   await store.fetchProducts();
-  getStoredValue();
-
+  store.getStoredValue();
+  store.checkHeartStatus()
 }
 
-// const toggleHeart = (selectedProduct) => {
-//   selectedProduct.isHeartClicked = !selectedProduct.isHeartClicked
-
-// }
-
-function storeProduct(productId) {
-  if (localStorage.getItem('storeId') === null) {
-    localStorage.setItem('storeId', '[]')
-    let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
-    favouriteProducts.push(productId)
-    localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
-  } else {
-    let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
-
-    if (favouriteProducts.includes(productId)) {
-      favouriteProducts = favouriteProducts.filter((id) => id !== productId)
-      store.favouriteProduct = store.favouriteProduct.filter((product) => product.id !== productId)
-    } else {
-      favouriteProducts.push(productId)
-
-
-
-    }
-    localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
-
-  }
-  getStoredValue()
-
-}
-function getStoredValue() {
-  let storedFavouriteProducts = localStorage.getItem('storeId')
-  if (storedFavouriteProducts) {
-
-    const getFavouriteProducts = JSON.parse(storedFavouriteProducts)
-    console.log(getFavouriteProducts)
-    if (Array.isArray(getFavouriteProducts)) {
-      getFavouriteProducts.forEach(product => {
-        store.matchStoredProduct(product)
-
-      })
-
-    } else {
-      console.error('inte en array')
-    }
-
-  } else {
-    console.warn('inga produkter hittades')
-  }
-}
 
 const matchProduct = (key) => {
   store.products.forEach((product) => {
@@ -112,11 +62,9 @@ const onAddToShoppingCart = (product) => {
     </div>
     <div class="productContent">
       <div class="headlineHeartContainer">
-        <h1>{{ selectedProduct.productName }}</h1>
-        <i @click="storeProduct(store.selectedProduct.id), isHeartClicked = !isHeartClicked"
-          :class="{ 'bi bi-heart': isHeartClicked, 'bi bi-heart-fill': !isHeartClicked }"></i>
-
-
+        <h1>{{ store.selectedProduct.productName }}</h1>
+        <i @click="store.storeProduct(store.selectedProduct.id), store.toggleHeart(store.selectedProduct)"
+          :class="{ 'bi bi-heart': !store.selectedProduct.isHeartClicked, 'bi bi-heart-fill': store.selectedProduct.isHeartClicked }"></i>
       </div>
       <div class="price-status">
         <p>{{ selectedProduct.price }}:-</p>
