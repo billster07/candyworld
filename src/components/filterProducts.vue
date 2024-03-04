@@ -8,25 +8,23 @@ const store = useCandyStore();
 // store.fetchProducts();
 // getStoredValue()
 
-fetchData()
+fetchData();
 
 async function fetchData() {
   await store.fetchProducts();
   getStoredValue();
-  checkHeartStatus()
+  checkHeartStatus();
 }
 
-
 // checkProducts()
-const props = defineProps({ filterCategory: { type: String } })
+const props = defineProps({ filterCategory: { type: String } });
 
 // const isHeartClicked = ref({})
 
 const toggleHeart = (product) => {
-  product.isHeartClicked = !product.isHeartClicked
+  product.isHeartClicked = !product.isHeartClicked;
   saveHeartStatus(product);
-
-}
+};
 const saveHeartStatus = (product) => {
   localStorage.setItem(`heartClicked_${product.id}`, product.isHeartClicked);
 };
@@ -36,127 +34,155 @@ const loadHeartStatus = (product) => {
   if (heartClicked !== null) {
     product.isHeartClicked = JSON.parse(heartClicked);
   } else {
-    console.log('tom array')
+    console.log("tom array");
   }
 };
 
 function checkHeartStatus() {
   store.products.forEach((product) => {
-    loadHeartStatus(product)
-  })
+    loadHeartStatus(product);
+  });
 }
-
-
 
 function storeProduct(productId) {
-  if (localStorage.getItem('storeId') === null) {
-    localStorage.setItem('storeId', '[]')
-    let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
-    favouriteProducts.push(productId)
-    localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
+  if (localStorage.getItem("storeId") === null) {
+    localStorage.setItem("storeId", "[]");
+    let favouriteProducts = JSON.parse(localStorage.getItem("storeId"));
+    favouriteProducts.push(productId);
+    localStorage.setItem("storeId", JSON.stringify(favouriteProducts));
   } else {
-    let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
+    let favouriteProducts = JSON.parse(localStorage.getItem("storeId"));
 
     if (favouriteProducts.includes(productId)) {
-      favouriteProducts = favouriteProducts.filter((id) => id !== productId)
-      store.favouriteProduct = store.favouriteProduct.filter((product) => product.id !== productId)
+      favouriteProducts = favouriteProducts.filter((id) => id !== productId);
+      store.favouriteProduct = store.favouriteProduct.filter(
+        (product) => product.id !== productId
+      );
     } else {
-      favouriteProducts.push(productId)
-
-
-
+      favouriteProducts.push(productId);
     }
-    localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
-
+    localStorage.setItem("storeId", JSON.stringify(favouriteProducts));
   }
-  getStoredValue()
-
+  getStoredValue();
 }
 function getStoredValue() {
-  let storedFavouriteProducts = localStorage.getItem('storeId')
+  let storedFavouriteProducts = localStorage.getItem("storeId");
   if (storedFavouriteProducts) {
-
-    const getFavouriteProducts = JSON.parse(storedFavouriteProducts)
-    console.log(getFavouriteProducts)
+    const getFavouriteProducts = JSON.parse(storedFavouriteProducts);
+    console.log(getFavouriteProducts);
     if (Array.isArray(getFavouriteProducts)) {
-      getFavouriteProducts.forEach(product => {
-        store.matchStoredProduct(product)
-
-      })
-
+      getFavouriteProducts.forEach((product) => {
+        store.matchStoredProduct(product);
+      });
     } else {
-      console.error('inte en array')
+      console.error("inte en array");
     }
-
   } else {
-    console.warn('inga produkter hittades')
+    console.warn("inga produkter hittades");
   }
 }
-
-
-
-
 
 // onMounted(() => {
 //   store.products.forEach((product) => {
 //     loadHeartStatus(product);
 //   });
 // });
-
-
 </script>
 
 <template>
   <div class="mainContainer">
     <div class="productContainer">
-      <div v-if="props.filterCategory === 'Alla'" class="productCard" v-for="product in store.products" :key="product.id">
-
-        <div class="image"
-          @click="store.matchProduct(product.id), $router.push(`/products/${product.category}/${product.id}`)">
-          <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
-            product.id +
-            '/' +
-            product.image
-            " />
+      <div
+        v-if="props.filterCategory === 'Alla'"
+        class="productCard"
+        v-for="product in store.products"
+        :key="product.id"
+      >
+        <div
+          class="image"
+          @click="
+            store.matchProduct(product.id),
+              $router.push(`/products/${product.category}/${product.id}`)
+          "
+        >
+          <img
+            :src="
+              'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
+              product.id +
+              '/' +
+              product.image
+            "
+          />
         </div>
         <div class="productInformation">
           <div class="headlineHeartContainer">
             <h3
-              @click="store.matchProduct(product.id), $router.push(`/products/${product.category}/${product.id}`)">
-              {{ product.productName }}</h3>
-            <i @click="storeProduct(product.id), toggleHeart(product)"
-              :class="{ 'bi bi-heart': !product.isHeartClicked, 'bi bi-heart-fill': product.isHeartClicked }"></i>
+              @click="
+                store.matchProduct(product.id),
+                  $router.push(`/products/${product.category}/${product.id}`)
+              "
+            >
+              {{ product.productName }}
+            </h3>
+            <i
+              @click="storeProduct(product.id), toggleHeart(product)"
+              :class="{
+                'bi bi-heart': !product.isHeartClicked,
+                'bi bi-heart-fill': product.isHeartClicked,
+              }"
+            ></i>
             <!--  -->
           </div>
-          <p> {{ product.description_sum.slice(0, 50) }}...</p>
+          <p>{{ product.description_sum.slice(0, 50) }}...</p>
 
           <div class="priceButtonDesign">
             <p>{{ product.price }}:-</p>
-            <BuyButton @click="store.addProduct(product)" button-text="Köp" button-size="sm" />
+            <BuyButton
+              @click="store.addProduct(product)"
+              button-text="Köp"
+              button-size="sm"
+            />
           </div>
         </div>
       </div>
 
-      <div @click="store.matchProduct(product.id)" v-else class="productCard"
-        v-for="product in store.products.filter(product => product.category === props.filterCategory)">
-
-        <div class="image" @click="$router.push(`/products/${product.category}/${product.id}`)">
-          <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
-            product.id +
-            '/' +
-            product.image
-            " />
+      <div
+        @click="store.matchProduct(product.id)"
+        v-else
+        class="productCard"
+        v-for="product in store.products.filter(
+          (product) => product.category === props.filterCategory
+        )"
+      >
+        <div
+          class="image"
+          @click="$router.push(`/products/${product.category}/${product.id}`)"
+        >
+          <img
+            :src="
+              'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
+              product.id +
+              '/' +
+              product.image
+            "
+          />
         </div>
         <div class="productInformation">
-          <h3 @click="$router.push(`/products/${product.category}/${product.id}`)">{{ product.productName }}</h3>
-          <p> {{ product.description_sum.slice(0, 50) }}...</p>
+          <h3
+            @click="$router.push(`/products/${product.category}/${product.id}`)"
+          >
+            {{ product.productName }}
+          </h3>
+          <p>{{ product.description_sum.slice(0, 50) }}...</p>
           <div class="priceButtonDesign">
             <p>{{ product.price }}:-</p>
-            <BuyButton @click="store.addProduct(product)" button-text="Köp" button-size="sm" />
+            <BuyButton
+              @click="store.addProduct(product)"
+              button-text="Köp"
+              button-size="sm"
+            />
           </div>
         </div>
-
-
       </div>
     </div>
   </div>
@@ -217,7 +243,6 @@ img {
   cursor: pointer;
   width: 100px;
   max-height: 100px;
-
 }
 
 .image {
@@ -229,9 +254,7 @@ img {
   width: 30%;
 }
 
-
 @media (min-width: 700px) {
-
   .mainContainer {
     display: flex;
     justify-content: center;
@@ -267,6 +290,5 @@ img {
   h3 {
     font-size: large;
   }
-
 }
 </style>

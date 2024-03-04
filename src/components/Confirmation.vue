@@ -3,6 +3,9 @@
 import { useRouter } from "vue-router";
 const router = useRouter();
 import moment from 'moment';
+import 'moment/locale/sv';
+
+moment.locale('sv')
 
 function addDays() {
 let currentDate = moment();
@@ -57,7 +60,5 @@ const deliveryDate = addDays();
   padding: 10px;
   background-color: #e7b6e269;
 }
-
-
 
 </style>
