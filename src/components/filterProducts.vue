@@ -5,104 +5,16 @@ import { useCandyStore } from "/src/store.js";
 import BuyButton from "./BuyButton.vue";
 
 const store = useCandyStore();
-// store.fetchProducts();
-// getStoredValue()
-
 fetchData()
 
 async function fetchData() {
   await store.fetchProducts();
-  getStoredValue();
-  checkHeartStatus()
+  store.getStoredValue();
+  store.checkHeartStatus()
 }
 
 
-// checkProducts()
 const props = defineProps({ filterCategory: { type: String } })
-
-// const isHeartClicked = ref({})
-
-const toggleHeart = (product) => {
-  product.isHeartClicked = !product.isHeartClicked
-  saveHeartStatus(product);
-
-}
-const saveHeartStatus = (product) => {
-  localStorage.setItem(`heartClicked_${product.id}`, product.isHeartClicked);
-};
-
-const loadHeartStatus = (product) => {
-  const heartClicked = localStorage.getItem(`heartClicked_${product.id}`);
-  if (heartClicked !== null) {
-    product.isHeartClicked = JSON.parse(heartClicked);
-  } else {
-    console.log('tom array')
-  }
-};
-
-function checkHeartStatus() {
-  store.products.forEach((product) => {
-    loadHeartStatus(product)
-  })
-}
-
-
-
-function storeProduct(productId) {
-  if (localStorage.getItem('storeId') === null) {
-    localStorage.setItem('storeId', '[]')
-    let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
-    favouriteProducts.push(productId)
-    localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
-  } else {
-    let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
-
-    if (favouriteProducts.includes(productId)) {
-      favouriteProducts = favouriteProducts.filter((id) => id !== productId)
-      store.favouriteProduct = store.favouriteProduct.filter((product) => product.id !== productId)
-    } else {
-      favouriteProducts.push(productId)
-
-
-
-    }
-    localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
-
-  }
-  getStoredValue()
-
-}
-function getStoredValue() {
-  let storedFavouriteProducts = localStorage.getItem('storeId')
-  if (storedFavouriteProducts) {
-
-    const getFavouriteProducts = JSON.parse(storedFavouriteProducts)
-    console.log(getFavouriteProducts)
-    if (Array.isArray(getFavouriteProducts)) {
-      getFavouriteProducts.forEach(product => {
-        store.matchStoredProduct(product)
-
-      })
-
-    } else {
-      console.error('inte en array')
-    }
-
-  } else {
-    console.warn('inga produkter hittades')
-  }
-}
-
-
-
-
-
-// onMounted(() => {
-//   store.products.forEach((product) => {
-//     loadHeartStatus(product);
-//   });
-// });
-
 
 </script>
 
@@ -124,7 +36,7 @@ function getStoredValue() {
             <h3
               @click="store.matchProduct(product.id), $router.push(`/products/${product.category}/${store.selectedProduct.productName}`)">
               {{ product.productName }}</h3>
-            <i @click="storeProduct(product.id), toggleHeart(product)"
+            <i @click="store.storeProduct(product.id), store.toggleHeart(product)"
               :class="{ 'bi bi-heart': !product.isHeartClicked, 'bi bi-heart-fill': product.isHeartClicked }"></i>
             <!--  -->
           </div>
@@ -148,33 +60,35 @@ function getStoredValue() {
             " />
         </div>
         <div class="productInformation">
-          <h3 @click="$router.push(`/products/${product.category}/${product.id}`)">{{ product.productName }}</h3>
+          <div class="headlineHeartContainer">
+            <h3 @click="$router.push(`/products/${product.category}/${product.id}`)">{{ product.productName }}</h3>
+            <i @click="store.storeProduct(product.id), store.toggleHeart(product)"
+              :class="{ 'bi bi-heart': !product.isHeartClicked, 'bi bi-heart-fill': product.isHeartClicked }"></i>
+          </div>
           <p> {{ product.description_sum.slice(0, 50) }}...</p>
           <div class="priceButtonDesign">
             <p>{{ product.price }}:-</p>
             <BuyButton @click="store.addProduct(product)" button-text="Köp" button-size="sm" />
           </div>
         </div>
-
-
       </div>
     </div>
   </div>
 </template>
 <style scoped>
 .productContainer {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .productCard {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   display: flex;
+  font-size: 14px;
   justify-content: center;
   margin-top: 15px;
   padding-top: 10px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  font-size: 14px;
   width: 90%;
 }
 
@@ -182,15 +96,7 @@ function getStoredValue() {
   background-color: #fdebfb;
 }
 
-h3 {
-  cursor: pointer;
-}
-
-.bi-heart {
-  cursor: pointer;
-}
-
-.bi-heart-fill {
+h3, .bi-heart, .bi-heart-fill {
   cursor: pointer;
 }
 
@@ -201,28 +107,28 @@ h3 {
 }
 
 .productInformation {
-  width: 100vw;
-  margin-right: 10px;
   height: 100%;
+  margin-right: 10px;
+  width: 100vw;
 }
 
 .priceButtonDesign {
+  align-items: baseline;
   display: flex;
   justify-content: flex-end;
-  align-items: baseline;
   margin-right: 20px;
 }
 
 img {
   cursor: pointer;
-  width: 100px;
   max-height: 100px;
+  width: 100px;
 
 }
 
 .image {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
   margin-left: 20px;
   margin-right: 10px;
@@ -247,21 +153,21 @@ img {
 
   .productCard {
     background-color: #fdebfb;
-    max-width: 320px;
     height: 200px;
     margin: 15px 20px 0 20px;
+    max-width: 320px;
   }
 
   .productInformation {
-    margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    margin-top: 10px;
   }
 
   .priceButtonDesign {
-    margin-top: auto;
     margin-bottom: 20px;
+    margin-top: auto;
   }
 
   h3 {

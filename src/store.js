@@ -21,7 +21,6 @@ export const useCandyStore = defineStore("candy", {
       });
     },
     matchStoredProduct(storedId) {
-      console.log("bbb", this.products);
       const alreadyAdded = this.favouriteProduct.some(
         (product) => product.id === storedId
       );
@@ -29,7 +28,6 @@ export const useCandyStore = defineStore("candy", {
         this.products.forEach((product) => {
           if (storedId === product.id) {
             this.favouriteProduct.push(product);
-            console.log("hej", this.favouriteProduct);
           }
         });
       }
@@ -60,12 +58,72 @@ export const useCandyStore = defineStore("candy", {
         this.shoppingCart = JSON.parse(sessionStorage.getItem("shoppingCart"));
       }
     },
-  },
-  state: () => ({
-    products: [],
-    selectedProduct: {},
-    favouriteProduct: [],
-    shoppingCart: [],
-    checkIfIncluded: false,
-  }),
-});
+    storeProduct(productId) {
+      if (localStorage.getItem('storeId') === null) {
+        localStorage.setItem('storeId', '[]')
+        let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
+        favouriteProducts.push(productId)
+        localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
+      } else {
+        let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
+
+        if (favouriteProducts.includes(productId)) {
+          favouriteProducts = favouriteProducts.filter((id) => id !== productId)
+          this.favouriteProduct = this.favouriteProduct.filter((product) => product.id !== productId)
+        } else {
+          favouriteProducts.push(productId)
+        }
+        localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
+
+      }
+      this.getStoredValue()
+
+    },
+    getStoredValue() {
+      let storedFavouriteProducts = localStorage.getItem('storeId')
+      if (storedFavouriteProducts) {
+
+        const getFavouriteProducts = JSON.parse(storedFavouriteProducts)
+        if (Array.isArray(getFavouriteProducts)) {
+          getFavouriteProducts.forEach(product => {
+            this.matchStoredProduct(product)
+
+          })
+
+        } else {
+          console.error('inte en array')
+        }
+
+      } else {
+        console.warn('inga produkter hittades')
+      }
+    },
+    toggleHeart(product) {
+      product.isHeartClicked = !product.isHeartClicked
+      this.saveHeartStatus(product);
+
+    },
+    saveHeartStatus(product) {
+      localStorage.setItem(`heartClicked_${product.id}`, product.isHeartClicked);
+    },
+
+    loadHeartStatus(product) {
+      const heartClicked = localStorage.getItem(`heartClicked_${product.id}`);
+      if (heartClicked !== null) {
+        product.isHeartClicked = JSON.parse(heartClicked);
+      }
+    },
+    checkHeartStatus() {
+      this.products.forEach((product) => {
+        this.loadHeartStatus(product)
+      })
+    }
+      },
+      state: () => ({
+        products: [],
+        selectedProduct: {},
+        favouriteProduct: [],
+        shoppingCart: [],
+        checkIfIncluded: false,
+      }),
+    });
