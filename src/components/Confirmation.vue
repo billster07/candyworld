@@ -1,27 +1,31 @@
 <script setup>
 import { useRouter } from "vue-router";
 const router = useRouter();
-import moment from 'moment';
+import moment from "moment";
 
 function addDays() {
-let currentDate = moment();
-return currentDate.add(6, 'days').format('dddd D MMMM YYYY')
+  let currentDate = moment();
+  return currentDate.add(6, "days").format("dddd D MMMM YYYY");
 }
 const deliveryDate = addDays();
-
-
 </script>
 
 <template>
-<div class="confirmationContainer">
-  <h1>Ditt köp har genomförts! <i class="bi bi-check-circle"></i></h1>
+  <div class="confirmationContainer">
+    <h1>Ditt köp har genomförts! <i class="bi bi-check-circle"></i></h1>
 
-  <div class="confirmationText">
-    <h2> Tack för ditt köp!</h2>
-    <p>Ditt ordernummer är <b>2348526</b>.</p>
-    <p>Bekräknat leveransdatum: <b>{{ deliveryDate }} </b></p>
-    <p>Din orderbekräftelse skickas till <b>sara@gmail.com</b> textinterpolering</p>
-    <p>För att ändra i din order, följ instruktionerna i orderbekräftelse.</p>
+    <div class="confirmationText">
+      <h2>Tack för ditt köp!</h2>
+      <p>Ditt ordernummer är <b>2348526</b>.</p>
+      <p>
+        Bekräknat leveransdatum: <b>{{ deliveryDate }} </b>
+      </p>
+      <p>
+        Din orderbekräftelse skickas till
+        <b>sara@gmail.com</b> textinterpolering
+      </p>
+      <p>För att ändra i din order, följ instruktionerna i orderbekräftelse.</p>
+    </div>
   </div>
 </template>
 
