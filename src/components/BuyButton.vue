@@ -15,12 +15,14 @@ const props = defineProps({ buttonText: { type: String }, buttonSize: { type: St
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 0.75rem;
   border: 0;
+  color: black;
   padding: 5px 15px 5px 15px;
   margin-left: 30px;
 }
 
 .button:hover {
   background-color: rgba(255, 164, 85, 0.8);
+  color: black;
 }
 
 .button:active {

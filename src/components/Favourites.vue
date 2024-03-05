@@ -130,6 +130,7 @@ h3, .bi-heart-fill {
   border-radius: 0.75rem;
   border: 0;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: black;
   margin-left: 30px;
   padding: 5px 15px 5px 15px;
 }
@@ -139,11 +140,13 @@ h3, .bi-heart-fill {
   border-radius: 0.75rem;
   border: 0;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: black;
   padding: 5px 15px 5px 15px;
 }
 
 .button:hover {
   background-color: rgba(255, 164, 85, 0.8);
+  color: black;
 }
 
 img {
