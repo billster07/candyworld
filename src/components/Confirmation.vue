@@ -49,6 +49,7 @@ const deliveryDate = addDays();
 
 .homeButton:hover {
   background-color: rgba(255, 164, 85, 0.8);
+  color: #000;
 }
 
 .confirmationContainer {

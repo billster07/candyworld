@@ -439,6 +439,7 @@ code {
 .submit-shipping:hover,
 .collapsebutton:hover {
   background-color: rgba(255, 164, 85, 0.8);
+  color: #000;
 }
 
 .adress-info {

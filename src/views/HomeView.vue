@@ -71,6 +71,7 @@ const candyPicture1 = ref("candyPicture500.png"),
   border: 0;
   border-radius: 0.75rem;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: black;
   margin-bottom: 2em;
   padding: 5px 15px 5px 15px;
   width: 8em;
@@ -78,6 +79,7 @@ const candyPicture1 = ref("candyPicture500.png"),
 
 .button:hover {
   background-color: rgba(255, 164, 85, 0.8);
+  color: black;
 }
 
 .photoContainer {
