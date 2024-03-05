@@ -9,6 +9,8 @@ import PaymentView from "./views/PaymentView.vue";
 import FavouritesView from "./views/FavouritesView.vue";
 // import FlagLinks from "./components/FlagLinks.vue";
 import Confirmation from "./components/Confirmation.vue"
+import LoginView from "./views/LoginView.vue"
+import SignUpView from "./views/SignUpView.vue"
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -43,6 +45,17 @@ export default createRouter({
     {
       component: Confirmation, // routersökväg till den nya sidan efter klick?
       path: "/Confirmation",
+    },
+
+
+    {
+      component: LoginView,
+      path: "/login",
+    },
+
+    {
+      component: SignUpView,
+      path: "/SignUp",
     },
 
 

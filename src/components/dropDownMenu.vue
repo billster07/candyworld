@@ -199,6 +199,9 @@ ul {
                     <li><router-link @click="toggleMenu" to="/">Hem</router-link></li>
                     <li><router-link @click="toggleMenu" to="/products/Alla">Produkter</router-link></li>
                     <li><router-link @click="toggleMenu" to="/favourites">Mina favoriter</router-link> </li>
+                    <li><router-link @click="toggleMenu" to="/SignUp">Skapa konto</router-link> </li>
+                    <li><router-link @click="toggleMenu" to="/login">Logga in</router-link> </li>
+                    
                 </ul>
 
             </div>
@@ -210,6 +213,8 @@ ul {
                     <li><router-link @click="toggleMenu" to="/products/Alla">Produkter</router-link></li>
                     <li><router-link @click="toggleMenu" to="/favourites">Mina
                             favoriter</router-link> </li>
+                     <li><router-link @click="toggleMenu" to="/SignUp">Skapa konto</router-link> </li>
+                     <li><router-link @click="toggleMenu" to="/login">Logga in</router-link> </li>
                 </ul>
             </div>
         </div>

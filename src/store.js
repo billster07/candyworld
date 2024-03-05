@@ -79,3 +79,13 @@ export const useCandyStore = defineStore("candy", {
     checkIfIncluded: false,
   }),
 });
+
+export const useAccountStore = defineStore('accounts', {
+  actions: {
+    newAccount(account) {
+      this.accounts.push(account)
+    }
+  },
+  persist: true,
+  state: () => ({ accounts: []})
+})
