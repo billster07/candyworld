@@ -60,61 +60,65 @@ export const useCandyStore = defineStore("candy", {
         this.shoppingCart = JSON.parse(sessionStorage.getItem("shoppingCart"));
       }
     },
-   totalSum(){
+    totalSum() {
       let sum = 0;
       this.shoppingCart.forEach((product) => {
-        sum += Math.round((product.price * product.quantity) * 100) / 100;
+        sum += Math.round(product.price * product.quantity * 100) / 100;
       });
-      return Math.round(sum)
+      return Math.round(sum);
     },
-
+    // amountOfProducts() {
+    //   let counter = 0;
+    //   this.shoppingCart.map((product) => (counter += product.quantity));
+    //   return counter;
+    // },
     storeProduct(productId) {
-      if (localStorage.getItem('storeId') === null) {
-        localStorage.setItem('storeId', '[]')
-        let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
-        favouriteProducts.push(productId)
-        localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
+      if (localStorage.getItem("storeId") === null) {
+        localStorage.setItem("storeId", "[]");
+        let favouriteProducts = JSON.parse(localStorage.getItem("storeId"));
+        favouriteProducts.push(productId);
+        localStorage.setItem("storeId", JSON.stringify(favouriteProducts));
       } else {
-        let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
+        let favouriteProducts = JSON.parse(localStorage.getItem("storeId"));
 
         if (favouriteProducts.includes(productId)) {
-          favouriteProducts = favouriteProducts.filter((id) => id !== productId)
-          this.favouriteProduct = this.favouriteProduct.filter((product) => product.id !== productId)
+          favouriteProducts = favouriteProducts.filter(
+            (id) => id !== productId
+          );
+          this.favouriteProduct = this.favouriteProduct.filter(
+            (product) => product.id !== productId
+          );
         } else {
-          favouriteProducts.push(productId)
+          favouriteProducts.push(productId);
         }
-        localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
-
+        localStorage.setItem("storeId", JSON.stringify(favouriteProducts));
       }
-      this.getStoredValue()
-
+      this.getStoredValue();
     },
     getStoredValue() {
-      let storedFavouriteProducts = localStorage.getItem('storeId')
+      let storedFavouriteProducts = localStorage.getItem("storeId");
       if (storedFavouriteProducts) {
-
-        const getFavouriteProducts = JSON.parse(storedFavouriteProducts)
+        const getFavouriteProducts = JSON.parse(storedFavouriteProducts);
         if (Array.isArray(getFavouriteProducts)) {
-          getFavouriteProducts.forEach(product => {
-            this.matchStoredProduct(product)
-
-          })
-
+          getFavouriteProducts.forEach((product) => {
+            this.matchStoredProduct(product);
+          });
         } else {
-          console.error('inte en array')
+          console.error("inte en array");
         }
-
       } else {
-        console.warn('inga produkter hittades')
+        console.warn("inga produkter hittades");
       }
     },
     toggleHeart(product) {
-      product.isHeartClicked = !product.isHeartClicked
+      product.isHeartClicked = !product.isHeartClicked;
       this.saveHeartStatus(product);
-
     },
     saveHeartStatus(product) {
-      localStorage.setItem(`heartClicked_${product.id}`, product.isHeartClicked);
+      localStorage.setItem(
+        `heartClicked_${product.id}`,
+        product.isHeartClicked
+      );
     },
 
     loadHeartStatus(product) {
@@ -125,16 +129,16 @@ export const useCandyStore = defineStore("candy", {
     },
     checkHeartStatus() {
       this.products.forEach((product) => {
-        this.loadHeartStatus(product)
-      })
+        this.loadHeartStatus(product);
+      });
     },
   },
 
-    state: () => ({
-      products: [],
-      selectedProduct: {},
-      favouriteProduct: [],
-      shoppingCart: [],
-      checkIfIncluded: false,
-    }),
-  })
+  state: () => ({
+    products: [],
+    selectedProduct: {},
+    favouriteProduct: [],
+    shoppingCart: [],
+    checkIfIncluded: false,
+  }),
+});

@@ -1,30 +1,21 @@
 <script setup>
-import { ref, watch, computed } from "vue";
+import { ref, computed } from "vue";
 import { useCandyStore } from "/src/store.js";
-import { storeToRefs } from 'pinia'
-const store = useCandyStore()
-// const { counter } = storeToRefs(store)
-const counter = ref(0)
-// const amountOfProducts = ref(store.shoppingCart.length)
+
+const store = useCandyStore();
+
 const amountOfProducts = computed(() => {
-  counter.value = 0;
-  store.shoppingCart.map((product) => counter.value += product.quantity)
-  return counter.value
-})
+  let counter = 0;
+  store.shoppingCart.map((product) => (counter += product.quantity));
+  return counter;
+});
 
-
-
-// watch(
-//   () => store.shoppingCart.length, (newValue) => {
-//     amountOfProducts.value = newValue
-//   }
-// )
 </script>
 
 <template>
   <div class="shoppingCartButton">
     <div class="amountOfProducts" v-if="store.shoppingCart.length > 0">
-      <p> {{ amountOfProducts }} </p>
+      <p>{{ amountOfProducts }}</p>
     </div>
     <i class="bi bi-cart" size="lg"></i>
   </div>
@@ -32,6 +23,7 @@ const amountOfProducts = computed(() => {
 
 <style scoped>
 .shoppingCartButton {
+  cursor: pointer;
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -57,13 +49,17 @@ const amountOfProducts = computed(() => {
 }
 
 .shoppingCartButton:hover {
-  /* background-color: #e7b6e2; */
   background-color: rgba(255, 164, 85, 0.8);
-  color: black;
 }
 
 i {
   padding: 30px;
   font-size: x-large;
+}
+
+@media (min-width: 830px) {
+  .shoppingCartButton {
+    background-color: rgba(255, 164, 85, 0.4);
+  }
 }
 </style>
