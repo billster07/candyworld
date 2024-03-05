@@ -429,7 +429,6 @@ function cardPayment() {
       v-on:click="completePayment"
       >Slutför beställning</b-button>
   </b-form>
-
 </template>
 
 <style scoped>
