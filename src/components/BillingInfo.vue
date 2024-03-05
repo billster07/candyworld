@@ -24,6 +24,9 @@ const selectedPayment = ref("");
 const loading = ref(false);
 const loadingSwish = ref(false);
 
+const showError1 = ref(true);
+const showError2 = ref(true);
+
 const nameList = [
   "Förnamn",
   "Efternamn",
@@ -37,12 +40,30 @@ const nameList = [
 const styleList = ["text", "text", "tel", "email", "text", "number", "text"];
 let type = ref("");
 
+function completePayment (){
+  if(handleSubmit()) {navigateToNewPage()}
+}
+
 function onSubmit(event) {
   event.preventDefault();
 }
-
+//Leder vidare till bekräftelsesida
 function navigateToNewPage() {
   router.push("/Confirmation");
+}
+//Hanterar icke ifyllt formulär
+function handleSubmit() {
+  console.log("Testar funktionen");
+    if (!selected.value) {
+        showError1.value = true;
+        return false;
+      }
+
+      if (!selectedPayment.value) {
+        showError2.value = true;
+        return false;
+      }
+      return true;
 }
 
 //Kontrollerar längden på vissa input fält
@@ -187,6 +208,9 @@ function cardPayment() {
               Leverans till ombud
               <div class="shippingText">Torsdag - Fredag (14.00-16.00)</div>
             </b-form-radio>
+            <!-- <div v-if="!selected" class="alert alert-danger mt-2" role="alert">
+              Vänligen välj en leveransmetod.
+            </div> -->
             <div v-if="!selected" class="alert alert-danger mt-2" role="alert">
               Vänligen välj en leveransmetod.
             </div>
@@ -347,11 +371,14 @@ function cardPayment() {
                 Ogiltigt presentkort!
               </div>
             </div>
-            <div
+            <!-- <div
               v-if="!selectedPayment"
               class="alert alert-danger mt-2"
               role="alert"
             >
+              Vänligen välj en betalningsmetod.
+            </div> -->
+            <div v-if="!selectedPayment" class="alert alert-danger mt-2" role="alert">
               Vänligen välj en betalningsmetod.
             </div>
           </b-form-group>
@@ -381,9 +408,10 @@ function cardPayment() {
     <b-button
       variant="primary"
       class="submit-shipping"
-      v-on:click="navigateToNewPage"
-      >Slutför beställning</b-button
-    >
+      v-on:click="completePayment"
+      >Slutför beställning</b-button>
+      <!-- // console.log(this.validFormPart1); console.log(this.validFormPart2)
+      // ;if(this.validFormPart1 === true && this.validFormPart2===true) -->
   </b-form>
 </template>
 
@@ -452,11 +480,13 @@ code {
   margin-right: auto;
 }
 
+/* "Din order"-boxen */
 .billingPriceContainer {
   display: flex;
   flex-direction: column;
   background-color: #e7b6e269;
   width: 80%;
+  max-width: 800px;
   margin-top: 3rem;
   margin-left: auto;
   margin-right: auto;
