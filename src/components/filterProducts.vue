@@ -21,32 +21,21 @@ const props = defineProps({ filterCategory: { type: String } })
 <template>
   <div class="mainContainer">
     <div class="productContainer">
-      <div
-        v-if="props.filterCategory === 'Alla'"
-        class="productCard"
-        v-for="product in store.products"
-        :key="product.id"
-      >
-        <div
-          class="image"
-          @click="
-            store.matchProduct(product.id),
-              $router.push(`/products/${product.category}/${product.id}`)
-          "
-        >
-          <img
-            :src="
-              'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
-              product.id +
-              '/' +
-              product.image
-            "
-          />
+      <div v-if="props.filterCategory === 'Alla'" class="productCard" v-for="product in store.products"
+        :key="product.id">
+        <div class="image" @click="
+        store.matchProduct(product.id),
+        $router.push(`/products/${product.category}/${product.id}`)
+        ">
+          <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
+        product.id +
+        '/' +
+        product.image
+        " />
         </div>
         <div class="productInformation">
           <div class="headlineHeartContainer">
-            <h3
-              @click="store.matchProduct(product.id), $router.push(`/products/${product.category}/${product.id}`)">
+            <h3 @click="store.matchProduct(product.id), $router.push(`/products/${product.category}/${product.id}`)">
               {{ product.productName }}</h3>
             <i @click="store.storeProduct(product.id), store.toggleHeart(product)"
               :class="{ 'bi bi-heart': !product.isHeartClicked, 'bi bi-heart-fill': product.isHeartClicked }"></i>
@@ -56,35 +45,20 @@ const props = defineProps({ filterCategory: { type: String } })
 
           <div class="priceButtonDesign">
             <p>{{ product.price }}:-</p>
-            <BuyButton
-              @click="store.addProduct(product)"
-              button-text="Köp"
-              button-size="sm"
-            />
+            <BuyButton @click="store.addProduct(product)" button-text="Köp" button-size="sm" />
           </div>
         </div>
       </div>
 
-      <div
-        @click="store.matchProduct(product.id)"
-        v-else
-        class="productCard"
-        v-for="product in store.products.filter(
-          (product) => product.category === props.filterCategory
-        )"
-      >
-        <div
-          class="image"
-          @click="$router.push(`/products/${product.category}/${product.id}`)"
-        >
-          <img
-            :src="
-              'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
-              product.id +
-              '/' +
-              product.image
-            "
-          />
+      <div @click="store.matchProduct(product.id)" v-else class="productCard" v-for="product in store.products.filter(
+        (product) => product.category === props.filterCategory
+      )">
+        <div class="image" @click="$router.push(`/products/${product.category}/${product.id}`)">
+          <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
+        product.id +
+        '/' +
+        product.image
+        " />
         </div>
         <div class="productInformation">
           <div class="headlineHeartContainer">
@@ -95,17 +69,14 @@ const props = defineProps({ filterCategory: { type: String } })
           <p> {{ product.description_sum.slice(0, 50) }}...</p>
           <div class="priceButtonDesign">
             <p>{{ product.price }}:-</p>
-            <BuyButton
-              @click="store.addProduct(product)"
-              button-text="Köp"
-              button-size="sm"
-            />
+            <BuyButton @click="store.addProduct(product)" button-text="Köp" button-size="sm" />
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <style scoped>
 .productContainer {
   align-items: center;
@@ -127,7 +98,9 @@ const props = defineProps({ filterCategory: { type: String } })
   background-color: #fdebfb;
 }
 
-h3, .bi-heart, .bi-heart-fill {
+h3,
+.bi-heart,
+.bi-heart-fill {
   cursor: pointer;
 }
 
@@ -184,7 +157,7 @@ img {
     background-color: #fdebfb;
     height: 200px;
     margin: 15px 20px 0 20px;
-    max-width: 320px;
+    max-width: 350px;
   }
 
   .productInformation {

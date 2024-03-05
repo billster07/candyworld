@@ -1,8 +1,15 @@
 <script setup>
 
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useCandyStore } from "../store";
 
+const store = useCandyStore();
 
+const amountOfProducts = computed(() => {
+    let counter = 0;
+    store.shoppingCart.map((product) => (counter += product.quantity));
+    return counter;
+});
 const menuIsOpen = ref(false);
 
 const toggleMenu = () => {
@@ -93,6 +100,36 @@ ul {
     display: none;
 }
 
+#shoppingCartIcon {
+    z-index: 99;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: larger;
+}
+
+.shoppingCartDesign,
+.shoppingCart {
+    cursor: pointer;
+}
+
+#shoppingCartIconSmall {
+    font-size: larger;
+    margin-right: 30px;
+}
+
+.amountOfProducts {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 100%;
+    position: absolute;
+    background-color: #e7b6e2;
+    top: 12px;
+    right: 13px;
+    text-align: center;
+    font-size: small;
+    z-index: 100;
+}
 
 @media (min-width: 500px) {
     .dropDownMenuImg {
@@ -154,7 +191,8 @@ ul {
 
     .menuLinks {
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: space-between;
+        width: 100vw;
         margin-top: 15px;
         z-index: 99;
     }
@@ -169,6 +207,15 @@ ul {
     .menuLinks li {
         display: inline;
         border-bottom: none;
+    }
+
+    .shoppingCartDesign {
+        display: none;
+    }
+
+    .amountOfProducts {
+        top: 12px;
+        right: 22px;
     }
 }
 </style>
@@ -201,7 +248,8 @@ ul {
                     <li><router-link @click="toggleMenu" to="/favourites">Mina favoriter</router-link> </li>
                     <li><router-link @click="toggleMenu" to="/SignUp">Skapa konto</router-link> </li>
                     <li><router-link @click="toggleMenu" to="/login">Logga in</router-link> </li>
-                    
+
+                    <li><router-link @click="toggleMenu" to="/shoppingcart">Din varukorg</router-link></li>
                 </ul>
 
             </div>
@@ -213,12 +261,23 @@ ul {
                     <li><router-link @click="toggleMenu" to="/products/Alla">Produkter</router-link></li>
                     <li><router-link @click="toggleMenu" to="/favourites">Mina
                             favoriter</router-link> </li>
-                     <li><router-link @click="toggleMenu" to="/SignUp">Skapa konto</router-link> </li>
-                     <li><router-link @click="toggleMenu" to="/login">Logga in</router-link> </li>
+                    <li><router-link @click="toggleMenu" to="/SignUp">Skapa konto</router-link> </li>
+                    <li><router-link @click="toggleMenu" to="/login">Logga in</router-link> </li>
                 </ul>
+                <div class="shoppingCart" @click="$router.push('/shoppingcart')">
+                    <div class="amountOfProducts" v-if="store.shoppingCart.length > 0">
+                        <p> {{ amountOfProducts }}</p>
+                    </div>
+                    <i id="shoppingCartIconSmall" class="bi bi-cart" size="lg"></i>
+                </div>
             </div>
         </div>
         <img class="navBarLogo" src="/CANDYWORLD-2.png" alt="Candy World logo" />
-
+        <div class="shoppingCartDesign" @click="$router.push('/shoppingcart')">
+            <div class="amountOfProducts" v-if="store.shoppingCart.length > 0">
+                <p> {{ amountOfProducts }}</p>
+            </div>
+            <i @click="$router.push('/shoppingcart')" id="shoppingCartIcon" class="bi bi-cart" size="lg"></i>
+        </div>
     </div>
 </template>
