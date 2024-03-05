@@ -130,11 +130,21 @@ export const useCandyStore = defineStore("candy", {
     },
   },
 
-    state: () => ({
-      products: [],
-      selectedProduct: {},
-      favouriteProduct: [],
-      shoppingCart: [],
-      checkIfIncluded: false,
-    }),
-  })
+  state: () => ({
+    products: [],
+    selectedProduct: {},
+    favouriteProduct: [],
+    shoppingCart: [],
+    checkIfIncluded: false,
+  }),
+});
+
+export const useAccountStore = defineStore('accounts', {
+  actions: {
+    newAccount(account) {
+      this.accounts.push(account)
+    }
+  },
+  persist: true,
+  state: () => ({ accounts: []})
+})
