@@ -41,8 +41,11 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 
 <style scoped>
+
+
 footer {
     position: relative;
+    margin-top: 12rem;
 }
 
 svg {

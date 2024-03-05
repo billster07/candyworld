@@ -40,9 +40,7 @@ const candyPicture1 = ref("candyPicture500.png"),
       <img class="candyPhoto" alt="Candy Photo" :src="candyPicture2">
     </div>
   </div>
-  <div class="footerContainer">
-    <myFooter />
-  </div>
+  
 </template>
 
 <style scoped>

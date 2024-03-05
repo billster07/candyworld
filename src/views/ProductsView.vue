@@ -4,7 +4,6 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import filterProducts from "../components/filterProducts.vue";
 import { useRouter, useRoute } from "vue-router";
 import flagLinks from "../components/FlagLinks.vue";
-import myFooter from "../components/Footer.vue"
 import myHeader from "../components/Header.vue"
 import ShoppingCartButton from '../components/ShoppingCartButton.vue'
 
@@ -137,9 +136,7 @@ countryFlags();
 
   <filter-products :filter-category="filterCategory" />
   <ShoppingCartButton @click="$router.push(`/shoppingCart`)" />
-  <div class="footerContainer">
-    <myFooter />
-  </div>
+
 </template>
 
 <style scoped>

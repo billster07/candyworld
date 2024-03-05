@@ -21,6 +21,7 @@ const props = defineProps(['menuFirst']);
 
   <main>
     <RouterView />
+    <myfooter />
   </main>
 </template>
 

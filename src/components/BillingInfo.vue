@@ -385,6 +385,7 @@ function cardPayment() {
       >Slutför beställning</b-button
     >
   </b-form>
+  
 </template>
 
 <style scoped>
