@@ -59,6 +59,7 @@ const amountOfProducts = computed(() => {
 .shoppingCartButton:hover {
   /* background-color: #e7b6e2; */
   background-color: rgba(255, 164, 85, 0.8);
+  color: black;
 }
 
 i {

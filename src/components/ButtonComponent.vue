@@ -27,6 +27,7 @@ const props = defineProps({
 
 .button:hover {
   background-color: rgba(255, 164, 85, 0.8);
+  color: black;
 }
 
 .button:active {
@@ -35,6 +36,6 @@ const props = defineProps({
 
 a {
   text-decoration: none;
-  color: white;
+  color: black;
 }
 </style>

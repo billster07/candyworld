@@ -1,16 +1,16 @@
 <script setup>
-import { ref, defineProps } from "vue";
+// import { ref, defineProps } from "vue";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useCandyStore } from "/src/store.js";
 
 
 const store = useCandyStore();
-// const props = defineProps({ filterCategory: { type: String } })
+
 fetchData()
 
 async function fetchData() {
   await store.fetchProducts();
-  getStoredValue();
+  store.getStoredValue();
   checkHeartStatus()
 }
 
@@ -37,52 +37,12 @@ function checkHeartStatus() {
   })
 }
 
-function storeProduct(productId) {
-  if (localStorage.getItem('storeId') === null) {
-    localStorage.setItem('storeId', '[]')
-    let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
-    favouriteProducts.push(productId)
-    localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
-
-  } else {
-    let favouriteProducts = JSON.parse(localStorage.getItem('storeId'))
-
-    if (favouriteProducts.includes(productId)) {
-      favouriteProducts = favouriteProducts.filter((id) => id !== productId)
-      store.favouriteProduct = store.favouriteProduct.filter((product) => product.id !== productId)
-    } else {
-      favouriteProducts.push(productId)
-    }
-    localStorage.setItem('storeId', JSON.stringify(favouriteProducts))
-
-  }
-  getStoredValue()
-
-}
-function getStoredValue() {
-  let storedFavouriteProducts = localStorage.getItem('storeId')
-  if (storedFavouriteProducts) {
-    const getFavouriteProducts = JSON.parse(storedFavouriteProducts)
-    console.log(getFavouriteProducts)
-    if (Array.isArray(getFavouriteProducts)) {
-      getFavouriteProducts.forEach(product => {
-        store.matchStoredProduct(product)
-      })
-
-    } else {
-      console.error('inte en array')
-    }
-
-  } else {
-    console.warn('inga produkter hittades')
-  }
-}
 
 </script>
 <template>
   <div class="mainContainer">
     <div class="productContainer">
-      <div class="productCard" v-for="product in store.favouriteProduct">
+      <div class="productCard" v-for="product in store.favouriteProduct" v-if="store.favouriteProduct.length > 0" >
 
         <div class="image"
           @click="store.matchProduct(product.id), $router.push(`/products/${filterCategory}/${store.selectedProduct.productName}`)">
@@ -98,7 +58,7 @@ function getStoredValue() {
             <h3
               @click="store.matchProduct(product.id), $router.push(`/products/${filterCategory}/${store.selectedProduct.productName}`)">
               {{ product.productName }}</h3>
-            <i @click="storeProduct(product.id), toggleHeart(product)"
+            <i @click="store.storeProduct(product.id), toggleHeart(product)"
               :class="{ 'bi bi-heart': !product.isHeartClicked, 'bi bi-heart-fill': product.isHeartClicked }"></i>
           </div>
           <p> {{ product.description_sum.slice(0, 50) }}...</p>
@@ -109,6 +69,13 @@ function getStoredValue() {
           </div>
         </div>
       </div>
+      <div v-else class="emptyFavourites">
+
+<h3>SPARA DINA FAVORITARTIKLAR</h3>
+<p>Du har inte sparat något ännu. Oroa dig inte, det är lätt! Klicka bara på hjärtsymbolen vid önskade artiklar så
+  visas de här.</p>
+<b-button @click="$router.push('/products/Alla')" class="button2" size="lg">Utforska produkter</b-button>
+</div>
     </div>
   </div>
 </template>
@@ -117,15 +84,17 @@ function getStoredValue() {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 100vw;
+
 }
 
 .productCard {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   display: flex;
+  font-size: 14px;
   justify-content: center;
   margin-top: 15px;
   padding-top: 10px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  font-size: 14px;
   width: 90%;
 }
 
@@ -133,11 +102,7 @@ function getStoredValue() {
   background-color: #fdebfb;
 }
 
-h3 {
-  cursor: pointer;
-}
-
-.bi-heart-fill {
+h3, .bi-heart-fill {
   cursor: pointer;
 }
 
@@ -148,49 +113,94 @@ h3 {
 }
 
 .productInformation {
-  width: 100vh;
-  margin-right: 10px;
   height: 100%;
+  margin-right: 10px;
+  width: 100vh;
 }
 
 .priceButtonDesign {
+  align-items: baseline;
   display: flex;
   justify-content: flex-end;
-  align-items: baseline;
   margin-right: 20px;
 }
 
-
-
 .button {
   background-color: #e7b6e2;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 0.75rem;
   border: 0;
-  padding: 5px 15px 5px 15px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: black;
   margin-left: 30px;
+  padding: 5px 15px 5px 15px;
+}
+
+.button2 {
+  background-color: #e7b6e2;
+  border-radius: 0.75rem;
+  border: 0;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: black;
+  padding: 5px 15px 5px 15px;
 }
 
 .button:hover {
   background-color: rgba(255, 164, 85, 0.8);
+  color: black;
 }
 
 img {
-
   cursor: pointer;
-  width: 100px;
   max-height: 100px;
-
+  width: 100px;
 }
 
 .image {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
   margin-left: 20px;
   margin-right: 10px;
   width: 30%;
 }
+
+
+
+
+.emptyFavourites {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 60%;
+
+}
+
+.emptyFavourites h3,
+.emptyFavourites p {
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+
+/* .button {
+  background-color: #e7b6e2;
+  border: 0;
+  border-radius: 0.75rem;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-top: 10px;
+  padding: 5px 15px 5px 15px;
+
+} */
+
+/* .button:hover {
+  background-color: rgba(255, 164, 85, 0.8);
+} */
+
+.button:active {
+  background-color: #FFE67B;
+}
+
 
 
 @media (min-width: 700px) {
@@ -210,36 +220,37 @@ img {
 
   .productCard {
     background-color: #fdebfb;
-    max-width: 320px;
     height: 200px;
     margin: 15px 20px 0 20px;
+    max-width: 320px;
   }
 
   .productInformation {
-    margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    margin-top: 10px;
   }
 
   .priceButtonDesign {
-    margin-top: auto;
     margin-bottom: 20px;
+    margin-top: auto;
   }
 
   h3 {
     font-size: large;
   }
 
+  .emptyFavourites {
+  margin-bottom: 3em;
+  max-width: 40%;
+}
+
+.emptyFavourites h3,
+.emptyFavourites p {
+  margin-bottom: 20px;
+}
+
+
 }
 </style>
-<!--
-  skapa en view - klar
-  imporetra component -klar
-  lägga in header -klar
-  skapa länkar -klar
-  lägg in hjärta på alla produktkort -klar
-  lägga in footer -klar
-  ändra så man klickar på h3 eller bild för att komma till produkt - klar
-  @click på hjärta gör hjärtat ifyllt och tvärtom
- -->
