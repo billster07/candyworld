@@ -24,8 +24,12 @@ const selectedPayment = ref("");
 const loading = ref(false);
 const loadingSwish = ref(false);
 
-const showError1 = ref(true);
-const showError2 = ref(true);
+// Leveransadress
+const showError1 = ref(false);
+// Leveransmetod
+const showError2 = ref(false);
+// Betalsätt
+const showError3 = ref(false);
 
 const nameList = [
   "Förnamn",
@@ -36,31 +40,50 @@ const nameList = [
   "Postkod",
   "Stad",
 ];
-
-const styleList = ["text", "text", "tel", "email", "text", "number", "text"];
+//ändrade formatet på postkod till "tel", den där rutan där man kunde öka/minska antal dök upp annars.
+const styleList = ["text", "text", "tel", "email", "text", "tel", "text"];
 let type = ref("");
-
-function completePayment (){
-  if(handleSubmit()) {navigateToNewPage()}
-}
 
 function onSubmit(event) {
   event.preventDefault();
 }
+
+
 //Leder vidare till bekräftelsesida
 function navigateToNewPage() {
   router.push("/Confirmation");
 }
+
+const formValues = ref(Array(nameList.length).fill(''))
+
+//funktion som hanterar knappen. först körs handleSumbit, om den är true körs navigateToNewPage
+function completePayment (){
+  if (submitAdress() && handleSubmit())
+  {navigateToNewPage()}
+}
+
+function submitAdress() {
+  showError1.value = false;
+
+  for (let i = 0; i < formValues.value.length; i++) {
+    if (!formValues.value[i]) {
+      showError1.value = true;
+      return false;
+    }
+  }
+return true
+}
+
 //Hanterar icke ifyllt formulär
 function handleSubmit() {
-  console.log("Testar funktionen");
+  // console.log("Testar funktionen");
     if (!selected.value) {
-        showError1.value = true;
+        showError2.value = true;
         return false;
       }
 
       if (!selectedPayment.value) {
-        showError2.value = true;
+        showError3.value = true;
         return false;
       }
       return true;
@@ -157,6 +180,7 @@ function cardPayment() {
                 <b-form-input
                   :id="`type-${index}`"
                   :type="styleList[index]"
+                  v-model="formValues[index]"
                 ></b-form-input>
               </b-col>
             </b-row>
@@ -164,6 +188,9 @@ function cardPayment() {
         </div>
       </b-container>
     </b-collapse>
+    <div v-if="showError1" class="alert alert-danger mt-2" role="alert">
+      Vänligen fyll i alla obligatoriska fält.
+  </div>
 
     <!--Leveransmetod-->
     <div>
@@ -208,16 +235,14 @@ function cardPayment() {
               Leverans till ombud
               <div class="shippingText">Torsdag - Fredag (14.00-16.00)</div>
             </b-form-radio>
-            <!-- <div v-if="!selected" class="alert alert-danger mt-2" role="alert">
-              Vänligen välj en leveransmetod.
-            </div> -->
-            <div v-if="!selected" class="alert alert-danger mt-2" role="alert">
-              Vänligen välj en leveransmetod.
-            </div>
           </b-form-group>
         </b-card>
       </b-collapse>
     </div>
+      <div v-if="!selected" class="alert alert-danger mt-2" role="alert">
+      Vänligen välj en leveransmetod.
+      </div>
+
 
     <!--Betalningsmetod-->
 
@@ -371,19 +396,12 @@ function cardPayment() {
                 Ogiltigt presentkort!
               </div>
             </div>
-            <!-- <div
-              v-if="!selectedPayment"
-              class="alert alert-danger mt-2"
-              role="alert"
-            >
-              Vänligen välj en betalningsmetod.
-            </div> -->
-            <div v-if="!selectedPayment" class="alert alert-danger mt-2" role="alert">
-              Vänligen välj en betalningsmetod.
-            </div>
           </b-form-group>
         </b-card>
       </b-collapse>
+    </div>
+    <div v-if="!selectedPayment" class="alert alert-danger mt-2" role="alert">
+      Vänligen välj en betalningsmetod.
     </div>
 
     <div class="billingPriceContainer">
@@ -410,9 +428,8 @@ function cardPayment() {
       class="submit-shipping"
       v-on:click="completePayment"
       >Slutför beställning</b-button>
-      <!-- // console.log(this.validFormPart1); console.log(this.validFormPart2)
-      // ;if(this.validFormPart1 === true && this.validFormPart2===true) -->
   </b-form>
+
 </template>
 
 <style scoped>
