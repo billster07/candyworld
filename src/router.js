@@ -8,9 +8,10 @@ import FlagLinks from "./components/FlagLinks.vue";
 import PaymentView from "./views/PaymentView.vue";
 import FavouritesView from "./views/FavouritesView.vue";
 // import FlagLinks from "./components/FlagLinks.vue";
-import Confirmation from "./components/Confirmation.vue"
-import LoginView from "./views/LoginView.vue"
-import SignUpView from "./views/SignUpView.vue"
+import Confirmation from "./components/Confirmation.vue";
+import LoginView from "./views/LoginView.vue";
+import SignUpView from "./views/SignUpView.vue";
+import RandomProductsView from "./views/RandomProductsView.vue";
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -58,6 +59,10 @@ export default createRouter({
       path: "/SignUp",
     },
 
+    {
+      component: RandomProductsView,
+      path: "/RandomProducts",
+    },
 
     // {
     //   component: ShoppingcartView,

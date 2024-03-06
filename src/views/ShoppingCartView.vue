@@ -1,11 +1,13 @@
 <script setup>
 import { useCandyStore } from "/src/store.js";
+import { computed } from "vue";
 import Header from '../components/Header.vue';
 import ButtonComponent from '../components/ButtonComponent.vue';
 import ShoppingCartProducts from '../components/ShoppingCartProducts.vue'
 
 
 const store = useCandyStore();
+const totalProductSum = computed(() => store.totalSum());
 </script>
 
 <template>

@@ -127,6 +127,37 @@ export const useCandyStore = defineStore("candy", {
         this.loadHeartStatus(product);
       });
     },
+   
+    addMultipleProducts(products) {
+      products.forEach((product) => {
+        this.addProduct(product);
+      });
+    },
+
+    addMultipleProducts(products) {
+      if (Array.isArray(products)) {
+        products.forEach((product) => {
+          this.addProduct(product);
+        });
+      } else {
+        console.error("addMultipleProducts: Input is not an array");
+      }
+    },
+
+    addMultipleProducts(products) {
+      if (Array.isArray(products)) {
+        products.forEach((product) => {
+          this.addProduct(product);
+        });
+      } else {
+        console.error("addMultipleProducts: Input is not an array");
+      }
+    },
+    
+    addRandomCandies(products) {
+      this.addMultipleProducts(products);
+    },
+  
   },
 
   state: () => ({
