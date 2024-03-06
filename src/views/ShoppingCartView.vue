@@ -10,19 +10,16 @@ const store = useCandyStore();
 
 <template>
   <Header headline="DIN VARUKORG" />
-  <div class="productContainer">
-    <ShoppingCartProducts v-if="store.shoppingCart.length > 0" />
-    <div v-else class="emptyCart">
-      <p>Din varukorg är tom</p>
-      <ButtonComponent
-        @click="$router.push('/products/Alla')"
-        class="button"
-        button-text="Fortsätt handla"
-        button-size="lg"
-      />
+  <main>
+    <div class="productContainer">
+      <ShoppingCartProducts v-if="store.shoppingCart.length > 0" />
+      <div v-else class="emptyCart">
+        <p>Din varukorg är tom</p>
+        <ButtonComponent @click="$router.push('/products/Alla')" class="button" button-text="Fortsätt handla"
+          button-size="lg" />
+      </div>
     </div>
-  </div>
-
+  </main>
   <myFooter />
 </template>
 

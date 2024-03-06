@@ -7,7 +7,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 
 <template>
-    <footer >
+    <footer>
         <div class="contactInfoDiv">
             <p><u>KONTAKTA OSS</u></p>
             <p> <i class="bi bi-telephone-inbound-fill"></i> Telefon: <a href="#">031-726 123</a></p>
@@ -44,11 +44,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 
 <style scoped>
-
-
 footer {
     position: relative;
-    /* margin-top: 12rem; */
 }
 
 svg {
@@ -69,7 +66,7 @@ svg {
     position: absolute;
     bottom: 4px;
     left: 1em;
-    width: 100%;
+    width: 350px;
     font-size: 10px;
 }
 
@@ -208,5 +205,4 @@ svg {
         font-size: 19px;
     }
 }
-
 </style>

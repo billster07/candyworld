@@ -58,7 +58,7 @@ svg {
     margin-bottom: 25px;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 100vw;
     text-align: center;
 }
 

@@ -63,7 +63,7 @@ const onAddToShoppingCart = (product) => {
     </div>
     <div class="productContent">
       <div class="headlineHeartContainer">
-        <h1>{{ store.selectedProduct.productName }}</h1>
+        <h1>{{ selectedProduct.productName }}</h1>
         <i @click="store.storeProduct(store.selectedProduct.id), store.toggleHeart(store.selectedProduct)"
           :class="{ 'bi bi-heart': !store.selectedProduct.isHeartClicked, 'bi bi-heart-fill': store.selectedProduct.isHeartClicked }"></i>
       </div>
