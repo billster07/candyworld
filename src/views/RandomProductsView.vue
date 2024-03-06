@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import { useCandyStore } from '/src/store.js';
+import myFooter from '../components/Footer.vue'
 
 const store = useCandyStore();
 const router = useRouter();
@@ -35,6 +36,7 @@ const addRandomCandies = async () => {
 
 
 <template>
+  <main>
 <div class="candyContainer">
  <span><i class="bi bi-patch-question"></i></span>
 <h1 class="title">Beslutsångest?</h1>
@@ -45,6 +47,8 @@ const addRandomCandies = async () => {
 </p>
 <button @click="addRandomCandies" class="candyButton">Ge mig överraskningsgodis <strong>NU!</strong></button>
 </div>
+</main>
+<myFooter/>
 </template>
 
 
