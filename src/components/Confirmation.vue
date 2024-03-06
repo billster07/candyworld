@@ -3,6 +3,8 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 import moment from "moment";
 import 'moment/locale/sv';
+import myFooter from '../components/Footer.vue'
+
 
 moment.locale('sv')
 
@@ -30,6 +32,7 @@ const deliveryDate = addDays();
       <p>För att ändra i din order, följ instruktionerna i orderbekräftelse.</p>
     </div>
   </div>
+  <myFooter />
 </template>
 
 <style scoped>

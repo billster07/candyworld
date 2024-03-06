@@ -1,5 +1,5 @@
 <script setup>
-import myfooter from './components/Footer.vue'
+
 import dropDownMenu from './components/dropDownMenu.vue';
 import { useCandyStore } from "/src/store.js";
 
@@ -10,9 +10,11 @@ const menuIsClicked = (isOpen) => {
 };
 
 const props = defineProps(['menuFirst']);
+
+
 </script>
 
-<template>
+<template >
   <nav>
     <dropDownMenu :menu-first="menuFirst" @menuIsClicked="menuIsClicked"></dropDownMenu>
   </nav>
@@ -21,9 +23,10 @@ const props = defineProps(['menuFirst']);
 
   <main>
     <RouterView />
-    <myfooter />
   </main>
+
 </template>
 
 <style scoped>
+
 </style>

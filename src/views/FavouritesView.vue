@@ -2,6 +2,8 @@
 import { useCandyStore } from "/src/store.js";
 import myHeader from "../components/Header.vue"
 import Favourites from "../components/Favourites.vue"
+import myFooter from '../components/Footer.vue'
+
 
 
 const store = useCandyStore();
@@ -12,9 +14,8 @@ const store = useCandyStore();
     <Favourites />
 
   </main>
-
+<myFooter />
 </template>
-
 <style scoped>
 
 

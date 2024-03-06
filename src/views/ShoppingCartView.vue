@@ -3,6 +3,7 @@ import { useCandyStore } from "/src/store.js";
 import Header from '../components/Header.vue';
 import ButtonComponent from '../components/ButtonComponent.vue';
 import ShoppingCartProducts from '../components/ShoppingCartProducts.vue'
+import myFooter from '../components/Footer.vue'
 
 
 const store = useCandyStore();
@@ -17,6 +18,7 @@ const store = useCandyStore();
       <ButtonComponent @click="$router.push('/products/Alla')" class="button" button-text="Fortsätt handla" button-size="lg" />
     </div>
   </div>
+  <myFooter />
 </template>
 
 <style scoped>

@@ -12,7 +12,7 @@ const props = defineProps({ headline: { type: String } })
     </div>
     <div class="headline">
       <h1> {{ props.headline }}</h1>
-    </div>
+   </div>
   </div>
 </template>
 

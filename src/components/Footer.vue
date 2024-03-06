@@ -1,10 +1,13 @@
 <script setup>
+
 import "bootstrap-icons/font/bootstrap-icons.css";
+
+
 </script>
 
 
 <template>
-    <footer>
+    <footer >
         <div class="contactInfoDiv">
             <p><u>KONTAKTA OSS</u></p>
             <p> <i class="bi bi-telephone-inbound-fill"></i> Telefon: <a href="#">031-726 123</a></p>
@@ -45,7 +48,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 footer {
     position: relative;
-    margin-top: 12rem;
+    /* margin-top: 12rem; */
 }
 
 svg {
