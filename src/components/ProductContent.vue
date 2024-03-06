@@ -72,7 +72,6 @@ const onAddToShoppingCart = (product) => {
       </div>
       <div class="buttons">
         <input class="quantityCounter" min="1" type="number" v-model="productQuanity" />
-        <router-link to="/payment"><button>Kassa-sidan</button></router-link>
         <BuyButton @click="onAddToShoppingCart(selectedProduct)" class="buyButton" button-size="lg"
           button-text="Lägg i varukorgen" />
       </div>
