@@ -248,8 +248,8 @@ ul {
                     <li><router-link @click="toggleMenu" to="/favourites">Mina favoriter</router-link> </li>
                     <li><router-link @click="toggleMenu" to="/SignUp">Skapa konto</router-link> </li>
                     <li><router-link @click="toggleMenu" to="/login">Logga in</router-link> </li>
-                    <li><router-link @click="toggleMenu" to="/RandomProducts">Beslutsångest</router-link></li>
-                    <li><router-link @click="toggleMenu" to="/shoppingcart">Överraskningspåsen</router-link></li>
+                    <li><router-link @click="toggleMenu" to="/RandomProducts">Överraskningspåsen</router-link></li>
+                    <li><router-link @click="toggleMenu" to="/shoppingcart">Din varukorg</router-link></li>
                 </ul>
 
             </div>
