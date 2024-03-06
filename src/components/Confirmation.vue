@@ -27,7 +27,7 @@ const deliveryDate = addDays();
       </p>
       <p>
         Din orderbekräftelse skickas till
-        <b>sara@gmail.com</b> textinterpolering
+        <b>dinmail@gmail.com</b>
       </p>
       <p>För att ändra i din order, följ instruktionerna i orderbekräftelse.</p>
     </div>

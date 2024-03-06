@@ -422,7 +422,7 @@ function cardPayment() {
       </div>
     </div>
 
-    <!--Tagit bort type="submit"-->
+  
     <b-button
       variant="primary"
       class="submit-shipping"
