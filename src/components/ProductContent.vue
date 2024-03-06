@@ -39,14 +39,15 @@ const onAddToShoppingCart = (product) => {
   const checkIfincluded = false
   store.shoppingCart.forEach((product_) => {
     if (product_.id === product.id) {
-      if (product_.quantity) {
-        product_.quantity += productQuanity.value
-      } else {
-        product_.quantity = productQuanity.value
-      }
-      sessionStorage.setItem("shoppingCart", JSON.stringify(store.shoppingCart))
+      product_.quantity += productQuanity.value
+      checkIfincluded = true
     }
   })
+  if (!checkIfincluded) {
+    product.quantity = productQuanity.value
+    store.shoppingCart.push(product)
+  }
+  sessionStorage.setItem("shoppingCart", JSON.stringify(store.shoppingCart))
 }
 
 </script>
@@ -94,10 +95,10 @@ const onAddToShoppingCart = (product) => {
 </template>
 
 <style scoped>
-
 .bi-circle-fill {
   color: rgb(3, 190, 3);
 }
+
 .product {
   display: flex;
   flex-direction: column;
