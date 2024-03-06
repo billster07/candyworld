@@ -4,13 +4,16 @@ import { useRouter, useRoute } from "vue-router";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import myFooter from "../components/Footer.vue";
 
+
 import flagLinks from "../components/FlagLinks.vue";
 
 
 const candyPicture1 = ref("candyPicture500.png"),
   candyPicture2 = ref("candyPicture2-500.png");
 </script>
+
 <template>
+  <main>
   <div class="flaglinks-home">
     <flagLinks />
   </div>
@@ -40,10 +43,12 @@ const candyPicture1 = ref("candyPicture500.png"),
       <img class="candyPhoto" alt="Candy Photo" :src="candyPicture2">
     </div>
   </div>
-  
+</main>
+<myFooter class="footerContainer"/>
 </template>
 
 <style scoped>
+
 .wrapPAndImage1, .wrapPAndImage2, .footerContainer {
   background-color: #ffe67b;
 }

@@ -1,5 +1,8 @@
 <script setup>
+
 import "bootstrap-icons/font/bootstrap-icons.css";
+
+
 </script>
 
 
@@ -41,11 +44,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 
 <style scoped>
-
-
 footer {
     position: relative;
-    margin-top: 12rem;
 }
 
 svg {
@@ -66,7 +66,7 @@ svg {
     position: absolute;
     bottom: 4px;
     left: 1em;
-    width: 100%;
+    width: 350px;
     font-size: 10px;
 }
 
@@ -205,5 +205,4 @@ svg {
         font-size: 19px;
     }
 }
-
 </style>

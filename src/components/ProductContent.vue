@@ -39,14 +39,15 @@ const onAddToShoppingCart = (product) => {
   const checkIfincluded = false
   store.shoppingCart.forEach((product_) => {
     if (product_.id === product.id) {
-      if (product_.quantity) {
-        product_.quantity += productQuanity.value
-      } else {
-        product_.quantity = productQuanity.value
-      }
-      sessionStorage.setItem("shoppingCart", JSON.stringify(store.shoppingCart))
+      product_.quantity += productQuanity.value
+      checkIfincluded = true
     }
   })
+  if (!checkIfincluded) {
+    product.quantity = productQuanity.value
+    store.shoppingCart.push(product)
+  }
+  sessionStorage.setItem("shoppingCart", JSON.stringify(store.shoppingCart))
 }
 
 </script>
@@ -62,7 +63,7 @@ const onAddToShoppingCart = (product) => {
     </div>
     <div class="productContent">
       <div class="headlineHeartContainer">
-        <h1>{{ store.selectedProduct.productName }}</h1>
+        <h1>{{ selectedProduct.productName }}</h1>
         <i @click="store.storeProduct(store.selectedProduct.id), store.toggleHeart(store.selectedProduct)"
           :class="{ 'bi bi-heart': !store.selectedProduct.isHeartClicked, 'bi bi-heart-fill': store.selectedProduct.isHeartClicked }"></i>
       </div>
@@ -72,7 +73,6 @@ const onAddToShoppingCart = (product) => {
       </div>
       <div class="buttons">
         <input class="quantityCounter" min="1" type="number" v-model="productQuanity" />
-        <router-link to="/payment"><button>Kassa-sidan</button></router-link>
         <BuyButton @click="onAddToShoppingCart(selectedProduct)" class="buyButton" button-size="lg"
           button-text="Lägg i varukorgen" />
       </div>
@@ -95,10 +95,10 @@ const onAddToShoppingCart = (product) => {
 </template>
 
 <style scoped>
-
 .bi-circle-fill {
   color: rgb(3, 190, 3);
 }
+
 .product {
   display: flex;
   flex-direction: column;

@@ -4,7 +4,7 @@ import { computed } from "vue";
 import Header from '../components/Header.vue';
 import ButtonComponent from '../components/ButtonComponent.vue';
 import ShoppingCartProducts from '../components/ShoppingCartProducts.vue'
-
+import myFooter from "../components/Footer.vue";
 
 const store = useCandyStore();
 const totalProductSum = computed(() => store.totalSum());
@@ -12,14 +12,17 @@ const totalProductSum = computed(() => store.totalSum());
 
 <template>
   <Header headline="DIN VARUKORG" />
-  <div class="productContainer">
-    <ShoppingCartProducts v-if="store.shoppingCart.length > 0" />
-    <div v-else class="emptyCart">
-      <p>Din varukorg är tom</p>
-      <ButtonComponent @click="$router.push('/products/Alla')" class="button" button-text="Fortsätt handla"
-        button-size="lg" />
+  <main>
+    <div class="productContainer">
+      <ShoppingCartProducts v-if="store.shoppingCart.length > 0" />
+      <div v-else class="emptyCart">
+        <p>Din varukorg är tom</p>
+        <ButtonComponent @click="$router.push('/products/Alla')" class="button" button-text="Fortsätt handla"
+          button-size="lg" />
+      </div>
     </div>
-  </div>
+  </main>
+  <myFooter />
 </template>
 
 <style scoped>

@@ -6,6 +6,8 @@ import { useRouter, useRoute } from "vue-router";
 import flagLinks from "../components/FlagLinks.vue";
 import myHeader from "../components/Header.vue"
 import ShoppingCartButton from '../components/ShoppingCartButton.vue'
+import myFooter from '../components/Footer.vue'
+
 
 
 // const headline = 'PRODUKTER'
@@ -136,7 +138,7 @@ countryFlags();
 
   <filter-products :filter-category="filterCategory" />
   <ShoppingCartButton @click="$router.push(`/shoppingCart`)" />
-
+<myFooter />
 </template>
 
 <style scoped>

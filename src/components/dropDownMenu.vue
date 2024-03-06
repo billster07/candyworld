@@ -58,7 +58,7 @@ svg {
     margin-bottom: 25px;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 100vw;
     text-align: center;
 }
 
@@ -257,13 +257,13 @@ ul {
         <div class="menuDesktop">
             <div class="menuLinks">
                 <ul>
-                    <li><router-link @click="toggleMenu" to="/">Hem</router-link></li>
-                    <li><router-link @click="toggleMenu" to="/products/Alla">Produkter</router-link></li>
-                    <li><router-link @click="toggleMenu" to="/favourites">Mina
+                    <li><router-link to="/">Hem</router-link></li>
+                    <li><router-link to="/products/Alla">Produkter</router-link></li>
+                    <li><router-link to="/favourites">Mina
                             favoriter</router-link> </li>
-                    <li><router-link @click="toggleMenu" to="/SignUp">Skapa konto</router-link> </li>
-                    <li><router-link @click="toggleMenu" to="/login">Logga in</router-link> </li>
-                    <li><router-link @click="toggleMenu" to="/RandomProducts">Överraskningspåsen</router-link></li>
+                    <li><router-link to="/SignUp">Skapa konto</router-link> </li>
+                    <li><router-link to="/login">Logga in</router-link> </li>
+                    <li><router-link to="/RandomProducts">Överraskningspåsen</router-link></li>
                 </ul>
                 <div class="shoppingCart" @click="$router.push('/shoppingcart')">
                     <div class="amountOfProducts" v-if="store.shoppingCart.length > 0">
@@ -278,7 +278,7 @@ ul {
             <div class="amountOfProducts" v-if="store.shoppingCart.length > 0">
                 <p> {{ amountOfProducts }}</p>
             </div>
-            <i @click="$router.push('/shoppingcart')" id="shoppingCartIcon" class="bi bi-cart" size="lg"></i>
+            <i id="shoppingCartIcon" class="bi bi-cart" size="lg"></i>
         </div>
     </div>
 </template>
