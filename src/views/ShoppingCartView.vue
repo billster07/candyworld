@@ -15,7 +15,8 @@ const store = useCandyStore();
     <ShoppingCartProducts v-if="store.shoppingCart.length > 0" />
     <div v-else class="emptyCart">
       <p>Din varukorg är tom</p>
-      <ButtonComponent @click="$router.push('/products/Alla')" class="button" button-text="Fortsätt handla" button-size="lg" />
+      <ButtonComponent @click="$router.push('/products/Alla')" class="button" button-text="Fortsätt handla"
+        button-size="lg" />
     </div>
   </div>
   <myFooter />
@@ -34,6 +35,6 @@ const store = useCandyStore();
 
 .button {
   margin: 0;
-  width: 80vw;
+  width: 350px;
 }
 </style>

@@ -89,6 +89,7 @@ function handleSubmit() {
       return true;
 }
 
+
 //Kontrollerar längden på vissa input fält
 function inputRules() {
   const maxCcvLength = 3;
@@ -162,7 +163,7 @@ function cardPayment() {
       aria-controls="collapse-1"
       @click="visibleAdress = !visibleAdress"
     >
-      <!-- Ska be om handledning på måndag. Hur löser man BFormInput/BFormInvalidFeedback när v-for används? -->
+
       <i class="bi bi-geo-alt"></i> Leveransadress
     </b-button>
     <b-collapse id="collapse-1" v-model="visibleAdress" class="mt-2">
@@ -185,12 +186,13 @@ function cardPayment() {
               </b-col>
             </b-row>
           </b-form-group>
+          <div v-if="showError1" class="alert alert-danger mt-2" role="alert">
+          Vänligen fyll i alla obligatoriska fält.
+          </div>
         </div>
       </b-container>
     </b-collapse>
-    <div v-if="showError1" class="alert alert-danger mt-2" role="alert">
-      Vänligen fyll i alla obligatoriska fält.
-  </div>
+
 
     <!--Leveransmetod-->
     <div>
@@ -236,13 +238,12 @@ function cardPayment() {
               <div class="shippingText">Torsdag - Fredag (14.00-16.00)</div>
             </b-form-radio>
           </b-form-group>
+          <div v-if="!selected" class="alert alert-danger mt-2" role="alert">
+          Vänligen välj en leveransmetod.
+        </div>
         </b-card>
       </b-collapse>
     </div>
-      <div v-if="!selected" class="alert alert-danger mt-2" role="alert">
-      Vänligen välj en leveransmetod.
-      </div>
-
 
     <!--Betalningsmetod-->
 
@@ -397,13 +398,12 @@ function cardPayment() {
               </div>
             </div>
           </b-form-group>
+            <div v-if="!selectedPayment" class="alert alert-danger mt-2" role="alert">
+            Vänligen välj en betalningsmetod.
+            </div>
         </b-card>
       </b-collapse>
     </div>
-    <div v-if="!selectedPayment" class="alert alert-danger mt-2" role="alert">
-      Vänligen välj en betalningsmetod.
-    </div>
-
     <div class="billingPriceContainer">
       <div class="billingItem">
         <p><b>Din order:</b></p>
@@ -429,7 +429,6 @@ function cardPayment() {
       v-on:click="completePayment"
       >Slutför beställning</b-button>
   </b-form>
-
 </template>
 
 <style scoped>

@@ -125,7 +125,7 @@ countryFlags();
         </b-col>
       </b-row>
 
-      <div class="d-flex justify-content-center align-items-center">
+      <div id="category" class="d-flex justify-content-center align-items-center">
         <h2 class="text-center countryName">
           {{ countryFlags().countryName }}
         </h2>
@@ -192,6 +192,9 @@ countryFlags();
   height: 5rem;
 }
 
+#category {
+  margin-top: 20px;
+}
 
 
 @media (min-width: 800px) {

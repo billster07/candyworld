@@ -95,6 +95,10 @@ const onAddToShoppingCart = (product) => {
 </template>
 
 <style scoped>
+
+.bi-circle-fill {
+  color: rgb(3, 190, 3);
+}
 .product {
   display: flex;
   flex-direction: column;

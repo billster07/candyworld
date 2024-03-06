@@ -8,11 +8,9 @@ const props = defineProps({
 </script>
 
 <template>
-  <b-button class="button" :size="props.buttonSize"
-    ><RouterLink to="/payment">
-      {{ buttonText }}
-    </RouterLink></b-button
-  >
+  <b-button class="button" :size="props.buttonSize">
+    {{ buttonText }}
+  </b-button>
 </template>
 
 <style scoped>
