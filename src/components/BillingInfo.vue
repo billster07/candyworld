@@ -56,7 +56,7 @@ function navigateToNewPage() {
 
 const formValues = ref(Array(nameList.length).fill(''))
 
-//funktion som hanterar knappen. först körs handleSumbit, om den är true körs navigateToNewPage
+//funktion som hanterar "slutför beställning". först körs handleSumbit, om den är true körs navigateToNewPage
 function completePayment (){
   if (submitAdress() && handleSubmit())
   {navigateToNewPage()}
