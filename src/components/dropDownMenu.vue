@@ -142,7 +142,7 @@ ul {
 }
 
 
-@media (min-width: 670px) {
+@media (min-width: 850px) {
 
     a,
     a:link,
