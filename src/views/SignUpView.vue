@@ -23,6 +23,7 @@ function onClick() {
         password: password1.value,
         userName: userName.value
     })
+    alert('Du har skapat ett konto hos oss nu. Välkommen ' + userName.value +'!');
 }
 </script>
 

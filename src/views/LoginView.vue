@@ -16,7 +16,7 @@ function onClick() {
     );
 
     if (user) {
-        alert('Du är inloggad som ' + userName.value);
+        alert('Du är inloggad som ' + userName.value +'!');
     } else {
         alert('Felaktigt användarnamn eller lösenord. Vänligen försök igen!');
     }
@@ -40,7 +40,7 @@ function onClick() {
                 <input id="password" type="password" v-model="password" placeholder="Lösenord" class="formInput" />
             </div>
             <div class="form-group">
-                <button type="button" class="btn btn-outline-secondary">Logga in</button>
+                <button type="submit" class="btn btn-outline-secondary">Logga in</button>
             </div>
         </form>
     </div>
