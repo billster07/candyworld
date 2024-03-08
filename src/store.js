@@ -126,20 +126,10 @@ export const useCandyStore = defineStore('candy', {
           this.addProduct(product);
         });
       } else {
-        console.error("addMultipleProducts: Input is not an array");
+        console.error("error");
       }
     },
 
-    addMultipleProducts(products) {
-      if (Array.isArray(products)) {
-        products.forEach((product) => {
-          this.addProduct(product);
-        });
-      } else {
-        console.error("addMultipleProducts: Input is not an array");
-      }
-    },
-    
     addRandomCandies(products) {
       this.addMultipleProducts(products);
     },
