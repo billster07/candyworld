@@ -36,7 +36,7 @@ watch(
 );
 
 const onAddToShoppingCart = (product) => {
-  const checkIfincluded = false
+  let checkIfincluded = false
   store.shoppingCart.forEach((product_) => {
     if (product_.id === product.id) {
       product_.quantity += productQuanity.value

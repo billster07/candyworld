@@ -45,7 +45,7 @@ function checkHeartStatus() {
       <div class="productCard" v-for="product in store.favouriteProduct" v-if="store.favouriteProduct.length > 0" >
 
         <div class="image"
-          @click="store.matchProduct(product.id), $router.push(`/products/${filterCategory}/${store.selectedProduct.productName}`)">
+          @click="store.matchProduct(product.id), $router.push(`/products/${product.category}/${product.productName}`)">
 
           <img :src="'https://pb.nopatan.com/api/files/02eld6u8qdz3cgq/' +
             product.id +
@@ -56,7 +56,7 @@ function checkHeartStatus() {
         <div class="productInformation">
           <div class="headlineHeartContainer">
             <h3
-              @click="store.matchProduct(product.id), $router.push(`/products/${filterCategory}/${store.selectedProduct.productName}`)">
+              @click="store.matchProduct(product.id), $router.push(`/products/${product.category}/${product.productName}`)">
               {{ product.productName }}</h3>
             <i @click="store.storeProduct(product.id), toggleHeart(product)"
               :class="{ 'bi bi-heart': !product.isHeartClicked, 'bi bi-heart-fill': product.isHeartClicked }"></i>
